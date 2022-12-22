@@ -2,8 +2,8 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Home from './pages/Home';
-import Product from './pages/Product';
-import Products from './pages/Products';
+import Product from './components/product/Product';
+import Products from './components/product/Products';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import Layout from './pages/Layout';
