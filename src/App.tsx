@@ -1,13 +1,14 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
+import "./App.css"
 import Home from './pages/Home';
 import Product from './components/product/Product';
 import Products from './components/product/Products';
-import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import Layout from './pages/Layout';
 import Cart from './pages/Cart';
+import Login from './components/user/Login';
+import SignUp from './components/user/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
         element: <Product />
       },
       {
-        path: 'profile',
-        element: <Profile />
+        path: 'login',
+        element: <Login />
+      },
+      {
+        path: 'signup',
+        element: <SignUp />
       },
       {
         path: 'cart',

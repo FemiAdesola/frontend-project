@@ -14,7 +14,7 @@ const ProductCard = ({title, price, images, description}: Product) => {
           maxWidth: 340,
           margin: '10px',
           display: 'flex',
-    
+          height: '450px',
       }}>
           <CardActionArea>
             <CardMedia
@@ -23,7 +23,7 @@ const ProductCard = ({title, price, images, description}: Product) => {
                     width: '100%',
                     height: 'auto',
                     maxWidth: '100%',
-                    objectFit: 'cover',
+                  objectFit: 'cover',
               }}
                   image={images[0]}
               />
