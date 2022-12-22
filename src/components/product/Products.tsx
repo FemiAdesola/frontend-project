@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react'
-
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { Container } from '@mui/material';
+import { Button, Container, Stack } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { getAllProducts, sortByName } from '../../redux/reducers/productReducer';
@@ -16,13 +12,20 @@ const Products = () => {
   const sortName = () => {
     dispatch(sortByName("asc"))
   }
+  // const sortDesc = () => {
+  //   dispatch(sortByName("desc"))
+  // }
   useEffect (() => {
     dispatch (getAllProducts())
     }, [])
 
   return (
-    <Container  maxWidth="xl">
-      <Grid container justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    <Container maxWidth="xl">
+      <Stack justifyContent="center" direction="row" alignItems="center" spacing={2}>
+        <Button onClick={() => { sortName()}} variant="contained" component="label">Sort by Name</Button>
+         <Button variant="contained" component="label">Sort by description</Button>
+       </Stack>
+      <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {products.map((product) => (
           <ProductCard
             key={product.id}
@@ -32,14 +35,7 @@ const Products = () => {
 
             // category={product.category.name}
             description={product.description}
-            id={1}     // <div key={product.id}>
-        //   <h2></h2>
-        //   <p></p>
-        //   <p></p>
-        //   <p>{</p>
-        //   {/* <p>{product.images[0]}</p> */}
-        // </div>
-
+            id={1}     
           />
         ))}
       </Grid>

@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Product } from '../../types/product';
+import { Category } from '../../types/category';
 
 const ProductCard = ({title, price, images, description}: Product) => {
   return (
@@ -24,13 +25,13 @@ const ProductCard = ({title, price, images, description}: Product) => {
                     maxWidth: '100%',
                     objectFit: 'cover',
               }}
-                  image={images[1]}
+                  image={images[0]}
               />
             <CardContent>
                   <Typography variant="h5" component="div">{title}</Typography>
                    <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
                   <Typography variant="body2" color="text.secondary">{description}</Typography>
-                  {/* <Typography variant="body2" color="text.secondary">{category.image}</Typography> */}
+                  {/* <Typography variant="body2" color="text.secondary">{Category.name}</Typography> */}
             </CardContent>
         </CardActionArea>
        </Card>

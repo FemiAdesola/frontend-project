@@ -19,7 +19,7 @@ export const getAllProducts = createAsyncThunk(
             } else {
                 console.log(error.message)
             }
-            console.log(error.config)
+            console.log(error.conf)
         }
     }
 )

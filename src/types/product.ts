@@ -5,6 +5,6 @@ export interface Product {
     title: string;
     price: number;
     description: string;
-    // category:Category
+    // category: Category;
     images: string[]
 }
