@@ -1,39 +1,22 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-import {  Product } from "../../types/product";
+import { Product } from "../../types/product";
+import {
+    getAllProducts,
+    sortByTitle,
+    createProduct
+} from "../methods/productMethod";
 
 const initialState: Product[] = []
-export const getAllProducts = createAsyncThunk(
-    "getAllProducts",
-    async () => {
-        try {
-            const jsondata = await axios.get("https://api.escuelajs.co/api/v1/products")
-            return jsondata.data
-        } catch (error: any) {
-            if (error.respons) {
-                console.log(error.response.status)
-                console.log(error.response.data)
-            }else if (error.request) {
-                console.log(error.request)  
-            } else {
-                console.log(error.message)
-            }
-            console.log(error.conf)
-        }
-    }
-)
+
+
+
 const productSlice = createSlice({
     name: "productSlice",
     initialState: initialState,
     reducers: {
-        sortByName: (state, action:PayloadAction<"asc"|"desc">) => {
-            if (action.payload === "asc") {
-                state.sort((a, b) => a.title.localeCompare(b.title))
-            } else {
-                state.sort((a, b) => b.title.localeCompare(a.title))
-            }
-        }
+        sortByName:sortByTitle,
     } /* manage sync process */,
     extraReducers: (build) => {
         build.addCase(getAllProducts.fulfilled, (state, action) => {
@@ -52,6 +35,13 @@ const productSlice = createSlice({
         build.addCase(getAllProducts.pending, (state, action) => {
             console.log("data is loading ...")
             return state
+        })
+        build.addCase(createProduct.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.push(action.payload)
+            } else {
+                return state
+            }
         })
     }
 

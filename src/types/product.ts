@@ -8,3 +8,11 @@ export interface Product {
     // category: Category;
     images: string[]
 }
+
+export interface CreateProduct {
+    title: string
+    decription: string
+    price: number
+    cateadry: Category
+    images: string[]
+}

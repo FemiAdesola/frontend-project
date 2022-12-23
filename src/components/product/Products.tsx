@@ -3,7 +3,8 @@ import Grid from '@mui/material/Grid';
 import { Button, Container, Stack } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { getAllProducts, sortByName } from '../../redux/reducers/productReducer';
+import { sortByName } from '../../redux/reducers/productReducer';
+import { getAllProducts } from '../../redux/methods/productMethod';
 import ProductCard from './ProductCard';
 
 const Products = () => {

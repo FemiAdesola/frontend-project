@@ -46,6 +46,11 @@ const Header = (props: Props) => {
                 <ListItemButton component={Link} to="login"  sx={{ textAlign: 'center' }}>
                     Login
                 </ListItemButton>
+                </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton component={Link} to="create" sx={{ textAlign: 'center' }}>
+                  CreateProduct
+                </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="cart" sx={{ textAlign: 'center' }}>
@@ -110,6 +115,19 @@ const Header = (props: Props) => {
                             
                         }}>
                     Products
+                    </Box>
+                    <Box
+                        component={Link}
+                            to="create"
+                            marginRight={5}
+                        sx={{
+                            textDecoration: 'none',
+                            display: { xs: 'none', sm: 'block' },
+                            color: (theme) => theme.palette.common.white,
+                            fontWeight: 'bold',
+                            
+                        }}>
+                        CreateProduct
                     </Box>
                     <Box
                         component={Link}
