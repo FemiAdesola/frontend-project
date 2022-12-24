@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   TextField,
   Box,
@@ -13,12 +13,22 @@ import { createProduct } from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
 
 const CreateProdduct = () => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const [item , setItem]= useState()
 
-    // const addHandler = (e) => {
-    //     e.preventDefault();
-    //     dispatch(createNote(todo));
-    // };
+
+  // const changeHandler = (e) => {
+  //   const { name, value } = e.target;
+
+  //   setItem((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
+  //   const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
+  //       e.preventDefault();
+  //       dispatch(createProduct(item));
+  //   };
 
   return (
     <Container maxWidth="sm">

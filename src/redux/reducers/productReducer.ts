@@ -1,11 +1,12 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios, { AxiosResponse } from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { Product } from "../../types/product";
 import {
     getAllProducts,
     sortByTitle,
-    createProduct
+    createProduct,
+    sortByCategoryName,
+   sortProductByPrice
 } from "../methods/productMethod";
 
 const initialState: Product[] = []
@@ -16,7 +17,9 @@ const productSlice = createSlice({
     name: "productSlice",
     initialState: initialState,
     reducers: {
-        sortByName:sortByTitle,
+        sortByName: sortByTitle,
+        sortByCategory: sortByCategoryName,
+        sortByPrice:sortProductByPrice
     } /* manage sync process */,
     extraReducers: (build) => {
         build.addCase(getAllProducts.fulfilled, (state, action) => {
@@ -48,5 +51,5 @@ const productSlice = createSlice({
 })
 const productReducer = productSlice.reducer
 
-export const {sortByName} = productSlice.actions
+export const {sortByName, sortByCategory, sortByPrice} = productSlice.actions
 export default productReducer

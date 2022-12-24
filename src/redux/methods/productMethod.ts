@@ -30,6 +30,22 @@ export const sortByTitle = (state:Product[], action:PayloadAction<"asc"|"desc">)
     }
 }
 
+export const sortByCategoryName = (state:Product[], action:PayloadAction<"asc"|"desc">) => {
+    if (action.payload === "asc") {
+        state.sort((a, b) => a.category.name.localeCompare(b.category.name))
+    } else {
+        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    }
+}
+
+export const sortProductByPrice = (state:Product[], action:PayloadAction<"asc"|"desc">) => {
+    if (action.payload === "asc") {
+        state.sort((a, b) => (a.price > b.price ? 1 : -1));
+    } else {
+        state.sort((a, b) => (a.price < b.price ? 1 : -1));
+    }
+}
+
 export const createProduct = createAsyncThunk(
     "createProduct",
     async (product: CreateProduct) => {

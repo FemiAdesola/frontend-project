@@ -8,7 +8,7 @@ import { CardActionArea } from '@mui/material';
 import { Product } from '../../types/product';
 import { Category } from '../../types/category';
 
-const ProductCard = ({title, price, images, description}: Product) => {
+const ProductCard = ({title, price, images, description, category}: Product) => {
   return (
       <Card sx={{
           maxWidth: 340,
@@ -28,10 +28,12 @@ const ProductCard = ({title, price, images, description}: Product) => {
                   image={images[0]}
               />
             <CardContent>
-                  <Typography variant="h5" component="div">{title}</Typography>
-                   <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
-                  <Typography variant="body2" color="text.secondary">{description}</Typography>
-                  {/* <Typography variant="body2" color="text.secondary">{Category.name}</Typography> */}
+              <Typography variant="h5" component="div">{title}</Typography>
+          <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
+                <Typography variant="subtitle1" color="lightcoral">Category: </Typography>{category.name}
+              </Typography>
+              <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
+              <Typography variant="body2" color="text.secondary">{description}</Typography> 
             </CardContent>
         </CardActionArea>
        </Card>
