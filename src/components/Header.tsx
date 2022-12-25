@@ -13,6 +13,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+// import Search from './features/Search';
+
+
+
 
 interface Props {
   window?: () => Window;
@@ -55,6 +59,11 @@ const Header = (props: Props) => {
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="cart" sx={{ textAlign: 'center' }}>
                     Cart
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton component={Link} to="search" sx={{ textAlign: 'center' }}>
+                   {/* <Search/> */}
                 </ListItemButton>
             </ListItem>
                 
@@ -144,7 +153,8 @@ const Header = (props: Props) => {
                     </Box>
                     <Box
                         component={Link}
-                        to="cart"
+                            to="cart"
+                            marginRight={5}
                         sx={{
                             textDecoration: 'none',
                             display: { xs: 'none', sm: 'block' },
@@ -153,6 +163,17 @@ const Header = (props: Props) => {
                             
                         }}>
                         Cart 
+                    </Box>
+                    <Box
+                        marginTop={-1}
+                        sx={{
+                            textDecoration: 'none',
+                            display: { xs: 'none', sm: 'block' },
+                            color: (theme) => theme.palette.common.white,
+                            fontWeight: 'bold',
+                            justifyContent:"center"
+                        }}>
+                       {/* <Search/>  */}
                     </Box>
                 </Box>
             </Toolbar>

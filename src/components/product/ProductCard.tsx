@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Product } from '../../types/product';
-import { Category } from '../../types/category';
 
 const ProductCard = ({title, price, images, description, category}: Product) => {
   return (
