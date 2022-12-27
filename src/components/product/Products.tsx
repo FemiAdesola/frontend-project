@@ -23,7 +23,7 @@ const Products = () => {
   }
 
   const sortCategory = () => {
-    dispatch(sortByCategory("asc"))
+    dispatch(sortByCategory("clothes"))
   }
 
   const sortByProductPriceN= () => {

@@ -30,11 +30,19 @@ export const sortByTitle = (state:Product[], action:PayloadAction<"asc"|"desc">)
     }
 }
 
-export const sortByCategoryName = (state:Product[], action:PayloadAction<"asc"|"desc">) => {
-    if (action.payload === "asc") {
+export const sortByCategoryName = (state:Product[], action:PayloadAction<"clothes"|"others"|"furniture"|"shoes"|"electronics">) => {
+    if (action.payload === "clothes") {
         state.sort((a, b) => a.category.name.localeCompare(b.category.name))
-    } else {
+    } else if (action.payload === "furniture") {
         state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    }else if (action.payload === "shoes") {
+        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    }else if (action.payload === "others") {
+        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    } else if (action.payload === "electronics") {
+        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    } else {
+         state.sort((a, b) => b.category.name.localeCompare(a.category.name))
     }
 }
 
