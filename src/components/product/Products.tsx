@@ -31,7 +31,7 @@ const Products = () => {
   }
 
   useEffect (() => {
-    dispatch (getAllProducts())
+    dispatch(getAllProducts())
     }, [])
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Product } from '../../types/product';
 
-const ProductCard = ({title, price, images, description, category}: Product) => {
+const ProductCard = ({ title, price, images, description, category }: Product) => {
   return (
       <Card sx={{
           maxWidth: 340,

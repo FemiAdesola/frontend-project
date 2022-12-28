@@ -6,7 +6,8 @@ import {
     sortByTitle,
     createProduct,
     sortByCategoryName,
-   sortProductByPrice
+    sortProductByPrice,
+   createImages
 } from "../methods/productMethod";
 
 const initialState: Product[] = []
@@ -46,6 +47,14 @@ const productSlice = createSlice({
                 return state
             }
         })
+        build.addCase(createImages.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.push(action.payload)
+            } else {
+                return state
+            }
+        })
+
     }
 
 })

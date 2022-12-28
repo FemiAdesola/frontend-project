@@ -13,6 +13,10 @@ export interface CreateProduct {
     title: string
     decription: string
     price: number
-    cateadry: Category
+    categoryId: number
     images: string[]
+}
+
+export interface CreateImage {
+   images: string[]
 }

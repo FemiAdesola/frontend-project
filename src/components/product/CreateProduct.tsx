@@ -11,24 +11,33 @@ import {
 
 import { createProduct } from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
+import { CreateProduct } from '../../types/product';
 
-const CreateProdduct = () => {
+
+const CreateProducts = ({title, decription, price, categoryId, images}:CreateProduct) => {
+  const [addProduct, setAddProduct]= useState({title:"", decription:"", price:0, categoryId:1, images:[]})
+  
   const dispatch = useAppDispatch();
-  const [item , setItem]= useState()
+ 
 
+  const changeHandler = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
 
-  // const changeHandler = (e) => {
-  //   const { name, value } = e.target;
-
-  //   setItem((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-  //   const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
-  //       e.preventDefault();
-  //       dispatch(createProduct(item));
-  //   };
+    setAddProduct((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+    const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+      dispatch(createProduct({
+          title: addProduct.title,
+          decription: addProduct.decription,
+          price: addProduct.price,
+          categoryId: addProduct.categoryId,
+          images: addProduct.images,
+        }));
+    };
 
   return (
     <Container maxWidth="sm">
@@ -49,7 +58,8 @@ const CreateProdduct = () => {
             padding:"0 60px"
           }}
           component="form"
-          // onSubmit={handleSubmit}
+          onSubmit={(e) => addHandler(e)}
+          
         >
           <Typography 
             component="span"
@@ -61,7 +71,8 @@ const CreateProdduct = () => {
                 required 
                 type="text" 
                 // onChange={(e) => setName(e.target.value)}
-                // value={name}
+              onChange={changeHandler}
+                value={title}
                 fullWidth
               />
           <Typography 
@@ -72,9 +83,10 @@ const CreateProdduct = () => {
           </Typography>
               <TextField
                 required 
-                type="number" 
+            type="number" 
+            onChange={changeHandler}
                 // onChange={(e) => setName(e.target.value)}
-                // value={name}
+                value={price}
                 fullWidth
               />
           <Typography 
@@ -86,7 +98,8 @@ const CreateProdduct = () => {
               <TextField
                 required
                 // onChange={(e) => setDetails(e.target.value)}
-                // value={details} 
+            onChange={changeHandler}
+                value={decription}
                 multiline
                 rows={4}
                 fullWidth
@@ -101,7 +114,7 @@ const CreateProdduct = () => {
                 required 
                 type="number" 
                 // onChange={(e) => setName(e.target.value)}
-                // value={name}
+               value={categoryId}
                 fullWidth
               />
           <Typography 
@@ -115,11 +128,13 @@ const CreateProdduct = () => {
                 name="file"
                 inputProps={{multiple: true}}
                 // onChange={(e) => setName(e.target.value)}
-                // value={name}
+            onChange={changeHandler}
+                value={images}
                 fullWidth
               />
           <Button 
             type="submit"
+         
             sx={{
                 width: "180px",
                 height: "50px",
@@ -156,4 +171,4 @@ const CreateProdduct = () => {
   )
 }
 
-export default CreateProdduct
+export default CreateProducts

@@ -76,14 +76,13 @@ const Header = (props: Props) => {
     <Box
         sx={{
           height: "92px",
-          display: "flex",
           justifyContent: "left",
           alignItems: "left",
           paddingLeft: "57px",
           paddingTop: "7px",
         }}
         >
-        <AppBar component="nav" sx={{ background:"gray"}}>
+            <AppBar component="nav" sx={{ background: "gray"}}>
             <Toolbar>
                 <IconButton
                     color="inherit"

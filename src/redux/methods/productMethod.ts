@@ -1,6 +1,6 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { CreateProduct, Product } from '../../types/product';
+import { CreateProduct, Product, CreateImage } from '../../types/product';
 
 export const getAllProducts = createAsyncThunk(
     "getAllProducts",
@@ -59,6 +59,25 @@ export const createProduct = createAsyncThunk(
     async (product: CreateProduct) => {
         try {
             const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+export const createImages = createAsyncThunk(
+    "createImages",
+    async (file: CreateImage) => {
+        try {
+            const response = await axios.post("https://api.escuelajs.co/api/v1/files/upload", {
+            file: file
+            }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+            )
             return response.data
         } catch (e) {
             console.log(e)
