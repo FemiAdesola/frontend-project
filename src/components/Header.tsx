@@ -47,8 +47,8 @@ const Header = (props: Props) => {
                 </ListItemButton>
                 </ListItem>
             <ListItem disablePadding>
-                <ListItemButton component={Link} to="login"  sx={{ textAlign: 'center' }}>
-                    Login
+                <ListItemButton component={Link} to="signup"  sx={{ textAlign: 'center' }}>
+                    Signup
                 </ListItemButton>
                 </ListItem>
             <ListItem disablePadding>
@@ -139,7 +139,7 @@ const Header = (props: Props) => {
                     </Box>
                     <Box
                         component={Link}
-                            to="login"
+                            to="signup"
                             marginRight={5}
                         sx={{
                             textDecoration: 'none',
@@ -148,7 +148,7 @@ const Header = (props: Props) => {
                             fontWeight: 'bold',
                             
                         }}>
-                        Login
+                        Signup
                     </Box>
                     <Box
                         component={Link}
