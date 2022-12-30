@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   TextField,
   Box,
@@ -9,29 +9,47 @@ import {
   Grid,
 } from '@mui/material';
 
-import { createProduct } from '../../redux/methods/productMethod';
+import { createProduct, createImages } from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { CreateProduct } from '../../types/product';
 
-const CreateProducts = ({title, decription, price, categoryId, images}:CreateProduct) => {
-  const [addProduct, setAddProduct]= useState({title:"", decription:"", price:0, categoryId:1, images:[]})
+
+const CreateProducts = ({ title, description, price, categoryId, images }: CreateProduct) => {
+  
+  const [productTitle, setProductTitle] = useState("")
+  const [productDescription, setProductDescription]= useState("")
+  const [productPrice, setProductPrice]= useState(0)
+  const [productCategoryId, setProductCategoryId] = useState(0)
+  const [productImages, setProductImages]= useState([])
   const dispatch = useAppDispatch();
-  const changeHandler = (e: { target: { name: any; value: any; }; }) => {
-    const { name, value } = e.target;
-    setAddProduct((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
+
+  // const imagesHandler = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
+  //   e.preventDefault();
+  //   dispatch(createImages({images:productImages}))
+  // }
+
+  useEffect(() => {
+    setProductTitle("")
+    setProductDescription("")
+    setProductPrice(0)
+    setProductCategoryId(0)
+    setProductImages([])
+  }, [])
+
+  const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createProduct({
-        title: addProduct.title,
-        decription: addProduct.decription,
-        price: addProduct.price,
-        categoryId: addProduct.categoryId,
-        images: addProduct.images,
+        title: productTitle,
+        description: productDescription,
+        price: productPrice,
+        categoryId:productCategoryId,
+        images:productImages,
     }));
+    setProductTitle("")
+    setProductDescription("")
+    setProductPrice(0)
+    setProductCategoryId(0)
+    setProductImages([])
 };
 
   return (
@@ -65,9 +83,9 @@ const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
               <TextField
                 required 
                 type="text" 
-                // onChange={(e) => setName(e.target.value)}
-              onChange={changeHandler}
-                value={title}
+                onChange={(e) => setProductTitle(e.target.value)}
+              // onChange={(e) =>changeHandler(e)}
+                value={productTitle}
                 fullWidth
               />
           <Typography 
@@ -78,10 +96,10 @@ const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
           </Typography>
               <TextField
                 required 
-            type="number" 
-            onChange={changeHandler}
-                // onChange={(e) => setName(e.target.value)}
-                value={price}
+                type="number" 
+            // onChange={changeHandler}
+                onChange={(e) => setProductPrice(parseInt(e.target.value))}
+                value={productPrice}
                 fullWidth
               />
           <Typography 
@@ -92,9 +110,9 @@ const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
           </Typography>
               <TextField
                 required
-                // onChange={(e) => setDetails(e.target.value)}
-            onChange={changeHandler}
-                value={decription}
+                onChange={(e) => setProductDescription(e.target.value)}
+            // onChange={changeHandler}
+                value={productDescription}
                 multiline
                 rows={4}
                 fullWidth
@@ -108,8 +126,8 @@ const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
               <TextField
                 required 
                 type="number" 
-                // onChange={(e) => setName(e.target.value)}
-               value={categoryId}
+                onChange={(e) => setProductCategoryId(parseInt(e.target.value))}
+               value={productCategoryId}
                 fullWidth
               />
           <Typography 
@@ -117,16 +135,15 @@ const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
             marginTop={2}
             >Upload images:
           </Typography>
-              <TextField
-                required 
-                type="file"
-                name="file"
-                inputProps={{multiple: true}}
-                // onChange={(e) => setName(e.target.value)}
-            onChange={changeHandler}
-                value={images}
-                fullWidth
-              />
+            <TextField
+                // required 
+              type="file"
+              name="file"
+              inputProps={{multiple: true}}
+              // onChange={(e)=>setProductImages(e.target.value)}
+              value={productImages}
+              fullWidth
+            /> 
           <Button 
             type="submit"
          
@@ -145,21 +162,6 @@ const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
                 },
             }}
           >Add Product</Button>
-          {/* {formError &&
-          <Typography 
-            component="p"
-            sx={{
-              color: "red",
-              background: "pink",
-              border: "1px solid red",
-              borderRadius: "4px",
-              padding: "8px",
-              margin: "10px 0",
-            }}
-          >
-            {formError}
-          </Typography>
-            }  */}
         </Box>
       </Grid>
     </Container>

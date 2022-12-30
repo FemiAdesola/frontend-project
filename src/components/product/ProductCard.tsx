@@ -28,8 +28,8 @@ const ProductCard = ({ title, price, images, description, category }: Product) =
               />
             <CardContent>
               <Typography variant="h5" component="div">{title}</Typography>
-          <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
-                <Typography variant="subtitle1" color="lightcoral">Category: </Typography>{category.name}
+              <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
+                <Typography  color="lightcoral">Category: {category.name} </Typography>
               </Typography>
               <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
               <Typography variant="body2" color="text.secondary">{description}</Typography> 

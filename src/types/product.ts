@@ -11,7 +11,7 @@ export interface Product {
 
 export interface CreateProduct {
     title: string
-    decription: string
+    description: string
     price: number
     categoryId: number
     images: string[]

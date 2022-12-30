@@ -9,7 +9,7 @@ export const getAllProducts = createAsyncThunk(
             const jsondata = await axios.get("https://api.escuelajs.co/api/v1/products")
             return jsondata.data
         } catch (error: any) {
-            if (error.respons) {
+            if (error.response) {
                 console.log(error.response.status)
                 console.log(error.response.data)
             }else if (error.request) {
@@ -17,7 +17,7 @@ export const getAllProducts = createAsyncThunk(
             } else {
                 console.log(error.message)
             }
-            console.log(error.conf)
+            console.log(error.config)
         }
     }
 )
@@ -61,7 +61,7 @@ export const createProduct = createAsyncThunk(
             const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
             return response.data
         } catch (error: any) {
-            if (error.respons) {
+            if (error.response) {
                 console.log(error.response.status)
                 console.log(error.response.data)
             }else if (error.request) {
@@ -69,17 +69,17 @@ export const createProduct = createAsyncThunk(
             } else {
                 console.log(error.message)
             }
-            console.log(error.conf)
+            console.log(error.config)
         }
     }
 )
 
 export const createImages = createAsyncThunk(
     "createImages",
-    async (file: CreateImage) => {
+    async (files: CreateImage) => {
         try {
-            const response = await axios.post("https://api.escuelajs.co/api/v1/files/upload", {
-            file: file
+            const response = files && await axios.post("https://api.escuelajs.co/api/v1/files/upload", {
+            file: files
             }, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -87,8 +87,16 @@ export const createImages = createAsyncThunk(
             }
             )
             return response.data
-        } catch (e) {
-            console.log(e)
+        } catch (error: any) {
+            if (error.response) {
+                console.log(error.response.status)
+                console.log(error.response.data)
+            }else if (error.request) {
+                console.log(error.request)  
+            } else {
+                console.log(error.message)
+            }
+            console.log(error.config)
         }
     }
 )
