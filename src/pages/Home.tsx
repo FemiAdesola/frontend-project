@@ -1,11 +1,14 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material';
+import { CssBaseline, Grid } from '@mui/material';
 import Categories from '../components/category/Categories';
+import { Container } from '@mui/system';
 
 const Home = () => {
   return (
+  <Container>
+    <CssBaseline />
     <Box>
       <Typography
         textAlign="center"
@@ -20,7 +23,8 @@ const Home = () => {
       >
         <Categories id={0} name={''} image={''}/>
       </Grid>
-  </Box>
+    </Box>
+  </Container>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid';
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button, Container, CssBaseline, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
@@ -34,7 +34,8 @@ const Products = () => {
     }, [])
 
   return (
-    <Container maxWidth="xl">
+      <Container maxWidth="xl">
+      <CssBaseline />
       <Box  justifyContent="center"  alignItems="center" textAlign="center"  sx={{ '& button': { m: 1 } }}>
         <div>
           <Button onClick={() => { sortName() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Name</Button>
@@ -67,6 +68,7 @@ const Products = () => {
         ))}
       </Grid>
     </Container>
+
   )
 }
 

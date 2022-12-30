@@ -13,23 +13,51 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
+import { toggleTheme } from '../redux/reducers/darkLightReducer';
+import { FormControlLabel, Stack, Switch } from '@mui/material';
+
+
 // import Search from './features/Search';
 
 interface Props {
   window?: () => Window;
 }
 const drawerWidth = 240;
+
 const Header = (props: Props) => {
+    const theme = useAppSelector(state=>state.darkLightReducer)
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-      const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-      };
-    
+    const handleDrawerToggle = () => {
+        setMobileOpen((prevState) => !prevState);
+    };
+    const colorToggle = (theme: { darkTheme: boolean; }) => {
+        return theme.darkTheme ? "#303b47" : "gray";
+    };
+    const ToggleSwitch = () => {
+        const dispatch = useAppDispatch();
+        return (
+        <Box>
+            <FormControlLabel
+                control={
+                <Switch
+                    onChange={() => dispatch(toggleTheme())}
+                    defaultChecked={theme.darkTheme ? false : true}
+                    color="default"
+                />
+                }
+                label={
+                theme.darkTheme ? <Typography style={{ color: "white" }}>light</Typography> : "dark"
+                }
+            />
+        </Box>
+        );
+    };
     const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
         <Typography variant="h6" sx={{ my: 2 }}>
-            MUI
+           Logo
         </Typography>
         <Divider />
         <List>
@@ -78,7 +106,7 @@ const Header = (props: Props) => {
           paddingTop: "7px",
         }}
         >
-            <AppBar component="nav" sx={{ background: "gray"}}>
+        <AppBar component="nav" sx={{backgroundColor: colorToggle(theme)}}>
             <Toolbar>
                 <IconButton
                     color="inherit"
@@ -103,7 +131,17 @@ const Header = (props: Props) => {
                 >
                 Home
                 </Typography>
-                <Box sx={{display:"flex", m:2, paddingRight:20}}> 
+                <Box sx={{ display: "flex", m: 3, paddingRight: 20 }}>
+                    <Box
+                        paddingRight={5}
+                            sx={{
+                            m:-1,
+                            color: (theme) => theme.palette.common.white,
+                            fontWeight: 'bold',
+                            "&:hover": {
+                                color: (theme) => theme.palette.common.black,
+                            }
+                        }}><ToggleSwitch /></Box> 
                     <Box
                         component={Link}
                             to="products"
@@ -114,7 +152,7 @@ const Header = (props: Props) => {
                             color: (theme) => theme.palette.common.white,
                             fontWeight: 'bold',
                             "&:hover": {
-                                color: (theme) => theme.palette.common.black,
+                                color: (theme) => theme.palette.common.white,
                             }
                             
                         }}>
