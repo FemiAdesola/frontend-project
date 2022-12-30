@@ -1,5 +1,5 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { Category } from "../../types/category";
 
 export const getAllCategories = createAsyncThunk(

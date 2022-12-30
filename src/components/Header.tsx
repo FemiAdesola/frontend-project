@@ -12,10 +12,12 @@ import ListItemButton from '@mui/material/ListItemButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
 import { toggleTheme } from '../redux/reducers/darkLightReducer';
-import { FormControlLabel, Stack, Switch } from '@mui/material';
+import { FormControlLabel, Switch } from '@mui/material';
 
 
 // import Search from './features/Search';
@@ -38,8 +40,12 @@ const Header = (props: Props) => {
     const ToggleSwitch = () => {
         const dispatch = useAppDispatch();
         return (
-        <Box>
-            <FormControlLabel
+            <Box>
+                {theme.darkTheme}
+                <IconButton sx={{ ml: 1 }} onClick={() => dispatch(toggleTheme())} color="inherit">
+                    {theme.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
+                </IconButton>
+            {/* <FormControlLabel
                 control={
                 <Switch
                     onChange={() => dispatch(toggleTheme())}
@@ -48,9 +54,9 @@ const Header = (props: Props) => {
                 />
                 }
                 label={
-                theme.darkTheme ? <Typography style={{ color: "white" }}>light</Typography> : "dark"
+                theme.darkTheme ? <Typography style={{ color: "white" }}><Brightness7Icon /></Typography> :  <Brightness4Icon />
                 }
-            />
+            /> */}
         </Box>
         );
     };

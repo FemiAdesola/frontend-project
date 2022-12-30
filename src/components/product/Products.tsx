@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid';
-import { Box, Button, Container, CssBaseline, Paper } from '@mui/material';
+import { Box, Button, Container, CssBaseline} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';

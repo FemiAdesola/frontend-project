@@ -9,10 +9,9 @@ import {
   Grid,
 } from '@mui/material';
 
-import { createProduct, createImages } from '../../redux/methods/productMethod';
+import { createProduct} from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { CreateProduct } from '../../types/product';
-
 
 const CreateProducts = ({ title, description, price, categoryId, images }: CreateProduct) => {
   
