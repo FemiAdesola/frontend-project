@@ -15,9 +15,6 @@ import Typography from '@mui/material/Typography';
 
 // import Search from './features/Search';
 
-
-
-
 interface Props {
   window?: () => Window;
 }
@@ -70,7 +67,6 @@ const Header = (props: Props) => {
         </List>
     </Box>
   );
-
     const container = window !== undefined ? () => window().document.body : undefined;
     return (
     <Box

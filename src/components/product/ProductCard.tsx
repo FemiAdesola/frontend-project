@@ -36,7 +36,6 @@ const ProductCard = ({ title, price, images, description, category }: Product) =
             </CardContent>
         </CardActionArea>
        </Card>
-      
   )
 }
 

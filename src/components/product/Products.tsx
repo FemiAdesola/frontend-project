@@ -9,7 +9,6 @@ import { getAllProducts, } from '../../redux/methods/productMethod';
 import ProductCard from './ProductCard';
 import { SearchIconWrapper, SearchMenu, StyledInputBase } from '../features/SearchInput';
 
-
 const Products = () => {
   const [search, setSearch]= useState("")
   const products = useAppSelector(state => state.productReducer.filter(item => {

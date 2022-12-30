@@ -13,7 +13,6 @@ import { createProduct } from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { CreateProduct } from '../../types/product';
 
-
 const CreateProducts = ({title, decription, price, categoryId, images}:CreateProduct) => {
   const [addProduct, setAddProduct]= useState({title:"", decription:"", price:0, categoryId:1, images:[]})
   const dispatch = useAppDispatch();
