@@ -60,8 +60,16 @@ export const createProduct = createAsyncThunk(
         try {
             const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
             return response.data
-        } catch (e) {
-            console.log(e)
+        } catch (error: any) {
+            if (error.respons) {
+                console.log(error.response.status)
+                console.log(error.response.data)
+            }else if (error.request) {
+                console.log(error.request)  
+            } else {
+                console.log(error.message)
+            }
+            console.log(error.conf)
         }
     }
 )

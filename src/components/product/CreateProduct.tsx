@@ -16,28 +16,24 @@ import { CreateProduct } from '../../types/product';
 
 const CreateProducts = ({title, decription, price, categoryId, images}:CreateProduct) => {
   const [addProduct, setAddProduct]= useState({title:"", decription:"", price:0, categoryId:1, images:[]})
-  
   const dispatch = useAppDispatch();
- 
-
   const changeHandler = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
-
     setAddProduct((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
-    const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-      dispatch(createProduct({
-          title: addProduct.title,
-          decription: addProduct.decription,
-          price: addProduct.price,
-          categoryId: addProduct.categoryId,
-          images: addProduct.images,
-        }));
-    };
+const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(createProduct({
+        title: addProduct.title,
+        decription: addProduct.decription,
+        price: addProduct.price,
+        categoryId: addProduct.categoryId,
+        images: addProduct.images,
+    }));
+};
 
   return (
     <Container maxWidth="sm">
