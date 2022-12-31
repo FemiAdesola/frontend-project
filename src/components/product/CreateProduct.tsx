@@ -34,7 +34,6 @@ const CreateProducts = ({ title, description, price, categoryId, images }: Creat
     setProductCategoryId(0)
     setProductImages([])
   }, [])
-
   const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(createProduct({
@@ -50,7 +49,6 @@ const CreateProducts = ({ title, description, price, categoryId, images }: Creat
     setProductCategoryId(0)
     setProductImages([])
 };
-
   return (
     <Container maxWidth="sm">
      <CssBaseline />
@@ -71,7 +69,6 @@ const CreateProducts = ({ title, description, price, categoryId, images }: Creat
           }}
           component="form"
           onSubmit={(e) => addHandler(e)}
-          
         >
           <Typography 
             component="span"
@@ -145,7 +142,6 @@ const CreateProducts = ({ title, description, price, categoryId, images }: Creat
             /> 
           <Button 
             type="submit"
-         
             sx={{
                 width: "180px",
                 height: "50px",

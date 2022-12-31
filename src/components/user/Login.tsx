@@ -14,6 +14,8 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log(email, password)
+    setEmail('')
+    setPassword('')
   }
   return (
     <Container component="main" maxWidth="xs">

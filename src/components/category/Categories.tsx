@@ -6,10 +6,7 @@ import CategoryCard from './CategoryCard';
 import { getAllCategories } from '../../redux/methods/categoryMethod';
 
 const Categories = ({ name, id, image }: Category) => {
-    const [search, setSearch]= useState("")
-    const categories = useAppSelector(state => state.categoryReducer.filter(item => {
-    return item.name.toLowerCase().includes(search.toLowerCase())
-    }))
+    const categories = useAppSelector(state => state.categoryReducer)
     const dispatch = useAppDispatch()
     useEffect (() => {
     dispatch(getAllCategories())

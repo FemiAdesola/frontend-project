@@ -36,8 +36,6 @@ const Products = () => {
   products.map(option=>(option.category.name.toLowerCase().includes(filteredValue)))
   }
 
-  
-
   return (
       <Container maxWidth="xl">
       <CssBaseline />

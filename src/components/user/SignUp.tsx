@@ -13,18 +13,22 @@ const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
-  const [thumbnail, setThumbnail] = useState(null)
+  const [roles, setRoles] = useState("")
   const [thumbnailError, setThumbnailError] = useState(null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     // signup(email, password, displayName, thumbnail)
-    // console.log(email, password, displayName, thumbnail)
+    console.log(email, password, displayName, roles)
+    setEmail('')
+    setPassword('')
+    setDisplayName('')
+    setRoles("")
   }
 
   // handle file
   const handleFileChange = (e: React.FormEvent<HTMLFormElement>) => {
-    setThumbnail(null)
+    
     // let selected = e.target.files[0]
     // console.log(selected)
     // if (!selected) {
@@ -121,8 +125,8 @@ const SignUp = () => {
           <TextField
             variant="outlined"
             InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            value={thumbnail}
-            onChange={(e) => setDisplayName(e.target.value)}
+            value={roles}
+            onChange={(e) => setRoles(e.target.value)}
             fullWidth
             margin="normal"
             type="text" 
