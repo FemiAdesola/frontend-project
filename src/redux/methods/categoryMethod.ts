@@ -1,6 +1,5 @@
-import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
+import { createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import { Category } from "../../types/category";
 
 export const getAllCategories = createAsyncThunk(
     "getAllCategories",
@@ -21,19 +20,3 @@ export const getAllCategories = createAsyncThunk(
         }
     }
 )
-
-export const sortByCategoryName = (state:Category[], action:PayloadAction<"clothes"|"others"|"furniture"|"shoes"|"electronics">) => {
-    if (action.payload === "clothes") {
-        state.sort((a, b) => a.name.localeCompare(b.name))
-    } else if (action.payload === "furniture") {
-        state.sort((a, b) => b.name.localeCompare(a.name))
-    }else if (action.payload === "shoes") {
-        state.sort((a, b) => b.name.localeCompare(a.name))
-    }else if (action.payload === "others") {
-        state.sort((a, b) => b.name.localeCompare(a.name))
-    } else if (action.payload === "electronics") {
-        state.sort((a, b) => b.name.localeCompare(a.name))
-    } else {
-         state.sort((a, b) => b.name.localeCompare(a.name))
-    }
-}

@@ -57,9 +57,7 @@ const SignUp = () => {
             padding: "40px",
             border: "1px solid #ddd",
             boxShadow: "3px 3px 5px rgba(0,0,0,0.05)",
-            background: "#fffFFF",
             alignItems: 'center' ,
-            
           }}
         >
           <Typography component="h2" variant="h2" marginBottom={3}>

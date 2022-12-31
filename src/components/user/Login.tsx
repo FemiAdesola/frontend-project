@@ -27,7 +27,6 @@ const Login = () => {
         padding: "40px",
         border: "1px solid #ddd",
         boxShadow: "3px 3px 5px rgba(0,0,0,0.05)",
-        background: "#fffFFF",
         alignItems: 'center' ,
         
       }}>
