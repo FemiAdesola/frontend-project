@@ -1,5 +1,14 @@
 
-
 li {
     text-decoration: 'none'!important;
 }
+
+select {
+  padding: 2px;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: #1664c0;
+  color: #FFFFFF;
+  outline: none;
+}
+

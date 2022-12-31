@@ -7,7 +7,8 @@ import {
     createProduct,
     sortByCategoryName,
     sortProductByPrice,
-   createImages
+   createImages,
+   sortProductCategories
 } from "../methods/productMethod";
 
 const initialState: Product[] = []
@@ -20,7 +21,8 @@ const productSlice = createSlice({
     reducers: {
         sortByName: sortByTitle,
         sortByCategory: sortByCategoryName,
-        sortByPrice:sortProductByPrice
+        sortByPrice: sortProductByPrice,
+        sortProductCategory:sortProductCategories
     } /* manage sync process */,
     extraReducers: (build) => {
         build.addCase(getAllProducts.fulfilled, (state, action) => {
@@ -60,5 +62,5 @@ const productSlice = createSlice({
 })
 const productReducer = productSlice.reducer
 
-export const {sortByName, sortByCategory, sortByPrice} = productSlice.actions
+export const {sortByName, sortByCategory, sortByPrice, sortProductCategory} = productSlice.actions
 export default productReducer

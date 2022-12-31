@@ -30,20 +30,21 @@ export const sortByTitle = (state:Product[], action:PayloadAction<"asc"|"desc">)
     }
 }
 
-export const sortByCategoryName = (state:Product[], action:PayloadAction<"clothes"|"others"|"furniture"|"shoes"|"electronics">) => {
+export const sortByCategoryName = (state:Product[], action:PayloadAction<"clothes"| "electronics">) => {
     if (action.payload === "clothes") {
         state.sort((a, b) => a.category.name.localeCompare(b.category.name))
-    } else if (action.payload === "furniture") {
-        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
-    }else if (action.payload === "shoes") {
-        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
-    }else if (action.payload === "others") {
-        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
-    } else if (action.payload === "electronics") {
-        state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    // } else if (action.payload === "furniture") {
+    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    // }else if (action.payload === "shoes") {
+    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    // }else if (action.payload === "others") {
+    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+    // } else if (action.payload === "electronics") {
+    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
     } else {
          state.sort((a, b) => b.category.name.localeCompare(a.category.name))
     }
+
 }
 
 export const sortProductByPrice = (state:Product[], action:PayloadAction<"asc"|"desc">) => {
@@ -100,3 +101,23 @@ export const createImages = createAsyncThunk(
         }
     }
 )
+
+
+    
+export const sortProductCategories= (state:Product[], action:PayloadAction<"others"|"clothes">) => {
+    if (action.payload === "others") {
+        state.sort((a, b) => (a.category.name > b.category.name ? 1 : -1));
+    } else {
+        state.sort((a, b) =>
+            (action.payload === "clothes")
+                ? a.category.name > b.category.name
+                        ? 1
+                        : -1
+                        : a.category.name > b.category.name
+                        ? -1
+                        : 1
+
+            );
+    }
+}
+
