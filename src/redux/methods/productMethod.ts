@@ -75,6 +75,27 @@ export const createProduct = createAsyncThunk(
     }
 )
 
+export const getSingleProduct = createAsyncThunk(
+    "getSingleProduct",
+    async () => {
+        try {
+            const jsondata = await axios.get("https://api.escuelajs.co/api/v1/products")
+            return jsondata.data
+        } catch (error: any) {
+            if (error.response) {
+                console.log(error.response.status)
+                console.log(error.response.data)
+            }else if (error.request) {
+                console.log(error.request)  
+            } else {
+                console.log(error.message)
+            }
+            console.log(error.config)
+        }
+    }
+)
+
+
 export const createImages = createAsyncThunk(
     "createImages",
     async (files: CreateImage) => {

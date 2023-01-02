@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import "./App.css"
 import Home from './pages/Home';
-import Product from './components/product/Product';
+import SingleProduct from './components/product/SingleProduct';
 import Products from './components/product/Products';
 import NotFound from './pages/NotFound';
 import Layout from './pages/Layout';
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'products/:id',
-        element: <Product />
+        element: <SingleProduct />
       },
       {
         path: 'login',

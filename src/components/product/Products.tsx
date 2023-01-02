@@ -8,9 +8,11 @@ import { sortByName, sortByPrice} from '../../redux/reducers/productReducer';
 import { getAllProducts, } from '../../redux/methods/productMethod';
 import ProductCard from './ProductCard';
 import { SearchIconWrapper, SearchMenu, StyledInputBase } from '../features/SearchInput';
+import Loading from '../loading/Loading';
 
 const Products = () => {
   const [search, setSearch] = useState("")
+  const [isLoading, setIsLoading] = useState(true);
   // const [filteredValue, setFilteredValue] = useState("All");
   let products = useAppSelector(state => state.productReducer.filter(item => {
     return item.title.toLowerCase().includes(search.toLowerCase())
@@ -26,6 +28,7 @@ const Products = () => {
   }
   useEffect(() => {
     dispatch(getAllProducts())
+    setIsLoading(false)
   }, [])
 
   if (filteredValue) {
@@ -66,7 +69,9 @@ const Products = () => {
           </Button>
         </div>
      </Box>
-      <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      {isLoading && <Loading/>}{
+        !isLoading && (
+          <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {products.map((product) => (
           <ProductCard
             key={product.id}
@@ -79,6 +84,8 @@ const Products = () => {
           />
         ))}
       </Grid>
+        )
+      }
     </Container>
 
   )
