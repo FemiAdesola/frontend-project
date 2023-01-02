@@ -8,29 +8,31 @@ import { CardActionArea } from '@mui/material';
 import { Product } from '../../types/product';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({id, title, price, images, description, category }: Product) => {
+const ProductCard = ({id, title, price, image, description, category }: Product) => {
   return (
       <Card sx={{
           maxWidth: 340,
           margin: '10px',
           display: 'flex',
-          height: '450px',
+          height: '600px',
       }}>
           <CardActionArea>
             <CardMedia
               component="img"
               sx={{
-                    width: '100%',
-                    height: 'auto',
-                    maxWidth: '100%',
+                  // width: '100%',
+                marginTop:"-100px",
+                  height: '250px',
+                  // maxWidth: '100%',
                   objectFit: 'cover',
               }}
-                  image={images[0]}
+          // image={images[0]}
+          image={image}
               />
             <CardContent>
               <Typography variant="h5" component="div">{title}</Typography>
               <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
-                <Typography  color="lightcoral">Category: {category.name} </Typography>
+                <Typography  color="lightcoral">Category: {category} </Typography>
               </Typography>
               <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
             <Typography variant="body2" color="text.secondary">{description}</Typography> 

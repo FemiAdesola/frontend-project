@@ -6,7 +6,9 @@ export const getAllProducts = createAsyncThunk(
     "getAllProducts",
     async () => {
         try {
-            const jsondata = await axios.get("https://api.escuelajs.co/api/v1/products")
+           
+            // const jsondata = await axios.get("https://api.escuelajs.co/api/v1/products")
+            const jsondata = await axios.get("https://fakestoreapi.com/products")
             return jsondata.data
         } catch (error: any) {
             if (error.response) {
@@ -32,7 +34,7 @@ export const sortByTitle = (state:Product[], action:PayloadAction<"asc"|"desc">)
 
 export const sortByCategoryName = (state:Product[], action:PayloadAction<"clothes"| "electronics">) => {
     if (action.payload === "clothes") {
-        state.sort((a, b) => a.category.name.localeCompare(b.category.name))
+        state.sort((a, b) => a.category.localeCompare(b.category))
     // } else if (action.payload === "furniture") {
     //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
     // }else if (action.payload === "shoes") {
@@ -42,7 +44,7 @@ export const sortByCategoryName = (state:Product[], action:PayloadAction<"clothe
     // } else if (action.payload === "electronics") {
     //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
     } else {
-         state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+         state.sort((a, b) => b.category.localeCompare(a.category))
     }
 
 }
@@ -127,14 +129,14 @@ export const createImages = createAsyncThunk(
     
 export const sortProductCategories= (state:Product[], action:PayloadAction<"others"|"clothes">) => {
     if (action.payload === "others") {
-        state.sort((a, b) => (a.category.name > b.category.name ? 1 : -1));
+        state.sort((a, b) => (a.category > b.category ? 1 : -1));
     } else {
         state.sort((a, b) =>
             (action.payload === "clothes")
-                ? a.category.name > b.category.name
+                ? a.category > b.category
                         ? 1
                         : -1
-                        : a.category.name > b.category.name
+                        : a.category > b.category
                         ? -1
                         : 1
 

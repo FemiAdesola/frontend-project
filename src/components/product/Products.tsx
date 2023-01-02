@@ -33,10 +33,10 @@ const Products = () => {
 
   if (filteredValue) {
     products = products.filter((item) => {
-      return item.category.name.toLowerCase().includes(filteredValue)
+      return item.category.toLowerCase().includes(filteredValue)
     })
   } else{
-  products.map(option=>(option.category.name.toLowerCase().includes(filteredValue)))
+  products.map(option=>(option.category.toLowerCase().includes(filteredValue)))
   }
 
   return (
@@ -75,11 +75,12 @@ const Products = () => {
         {products.map((product) => (
           <ProductCard
             key={product.id}
-            images={product.images}
+            image={product.image}
             title={product.title}
             price={product.price}
             category={product.category}
             description={product.description}
+            rating={product.rating}
             id={product.id}            
           />
         ))}

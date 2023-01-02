@@ -20,9 +20,9 @@ const SingleProduct = () => {
   // const product = useAppSelector(state => state.productReducer.find(categories => categories.id))
   const category = useAppSelector(state => state.categoryReducer.find(singlecCategory => singlecCategory.id === id))
   
-  useEffect(() => {
-      dispatch(getSingleCategory(category, )) 
-    }, [category, dispatch])
+  // useEffect(() => {
+  //     dispatch(getSingleCategory(category, )) 
+  //   }, [category, dispatch])
   return (
     // <div>
     //    {/* <div>{product? product?.title: "unknown"}</div>
