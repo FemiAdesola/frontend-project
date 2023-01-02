@@ -8,7 +8,8 @@ import {
     sortByCategoryName,
     sortProductByPrice,
    createImages,
-   sortProductCategories
+   sortProductCategories,
+   getSingleProduct
 } from "../methods/productMethod";
 
 const initialState: Product[] = []
@@ -55,6 +56,24 @@ const productSlice = createSlice({
             } else {
                 return state
             }
+        })
+
+         build.addCase(getSingleProduct.fulfilled, (state, action) => {
+            if (action.payload && "message" in action.payload) {
+                return state
+            } else if (!action.payload) {
+                return state
+            }
+            return action.payload
+            //setState(action.payload)
+        })
+        build.addCase(getSingleProduct.rejected, (state, action) => {
+            console.log("error in fetching data")
+            return state
+        })
+        build.addCase(getSingleProduct.pending, (state, action) => {
+            console.log("data is loading ...")
+            return state
         })
 
     }

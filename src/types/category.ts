@@ -3,3 +3,7 @@ export interface Category {
     name: string;
     image: string;
 }
+
+export type useParamsId = {
+    id: any;
+}

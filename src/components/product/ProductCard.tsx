@@ -6,8 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Product } from '../../types/product';
+import { Link } from 'react-router-dom';
 
-const ProductCard = ({ title, price, images, description, category }: Product) => {
+const ProductCard = ({id, title, price, images, description, category }: Product) => {
   return (
       <Card sx={{
           maxWidth: 340,
@@ -32,8 +33,22 @@ const ProductCard = ({ title, price, images, description, category }: Product) =
                 <Typography  color="lightcoral">Category: {category.name} </Typography>
               </Typography>
               <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
-              <Typography variant="body2" color="text.secondary">{description}</Typography> 
-            </CardContent>
+            <Typography variant="body2" color="text.secondary">{description}</Typography> 
+            <Typography
+              component={Link}
+              to={{ pathname: `/products/${id}` }}
+                // to="products"
+              marginRight={5}
+              sx={{
+                extDecoration: 'none',
+                display: { xs: 'none', sm: 'block' },
+                fontWeight: 'bold',
+                "&:hover": {
+                  color: "green",
+                }        
+            }}
+            >Get Details</Typography>
+          </CardContent>
         </CardActionArea>
        </Card>
   )

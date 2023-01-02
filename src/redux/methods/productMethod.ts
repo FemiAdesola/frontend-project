@@ -77,9 +77,9 @@ export const createProduct = createAsyncThunk(
 
 export const getSingleProduct = createAsyncThunk(
     "getSingleProduct",
-    async () => {
+    async (productId:string) => {
         try {
-            const jsondata = await axios.get("https://api.escuelajs.co/api/v1/products")
+            const jsondata = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`)
             return jsondata.data
         } catch (error: any) {
             if (error.response) {

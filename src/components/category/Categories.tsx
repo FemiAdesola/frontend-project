@@ -14,8 +14,6 @@ const Categories = ({ name, id, image }: Category) => {
       dispatch(getAllCategories())
       setIsLoading(false) 
     }, [])
-
-
   return (
       <Container maxWidth="lg">
         <Box sx={{ flexGrow: 1 }}>
@@ -27,7 +25,7 @@ const Categories = ({ name, id, image }: Category) => {
             key={category.id}
             image={category.image}
             name={category.name}
-            id={0}            
+            id={category.id}            
           />
           ))}
           </Grid>
