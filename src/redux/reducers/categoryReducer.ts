@@ -20,11 +20,9 @@ const categorySlice = createSlice({
             //setState(action.payload)
         })
         builder.addCase(getAllCategories.rejected, (state, action) => {
-            console.log("error in fetching data")
             return state
         })
         builder.addCase(getAllCategories.pending, (state, action) => {
-            console.log("data is loading ...")
             return state
         })
 
@@ -38,11 +36,9 @@ const categorySlice = createSlice({
             //setState(action.payload)
         })
         builder.addCase(getSingleCategory.rejected, (state, action) => {
-            console.log("error in fetching data")
             return state
         })
         builder.addCase(getSingleCategory.pending, (state, action) => {
-            console.log("data is loading ...")
             return state
         })
     }

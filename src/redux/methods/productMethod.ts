@@ -1,5 +1,5 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { CreateProductType, ProductType, CreateImageType } from '../../types/product';
 import axiosInstance from "../../common/axiosInstance";
 
@@ -53,16 +53,16 @@ export const createProduct = createAsyncThunk(
         try {
             const response: AxiosResponse<ProductType, ProductType> = await axiosInstance.post("products/", product)
             return response.data
-        } catch (error: any) {
+        } catch (err) {
+            const error = err as AxiosError
             if (error.response) {
-                console.log(error.response.status)
+                console.log(`Error from response: ${error.response.status}`)
                 console.log(error.response.data)
             }else if (error.request) {
-                console.log(error.request)  
+                console.log(`Error from request: ${error.request}`)
             } else {
-                console.log(error.message)
+                 console.log(error.config)
             }
-            console.log(error.config)
         }
     }
 )
@@ -73,16 +73,16 @@ export const getSingleProduct = createAsyncThunk(
         try {
             const jsondata = await axiosInstance.get(`products/${productId}`)
             return jsondata.data
-        } catch (error: any) {
+        } catch (err) {
+            const error = err as AxiosError
             if (error.response) {
-                console.log(error.response.status)
+                console.log(`Error from response: ${error.response.status}`)
                 console.log(error.response.data)
             }else if (error.request) {
-                console.log(error.request)  
+                console.log(`Error from request: ${error.request}`)
             } else {
-                console.log(error.message)
+                 console.log(error.config)
             }
-            console.log(error.config)
         }
     }
 )
@@ -101,16 +101,16 @@ export const createImages = createAsyncThunk(
             }
             )
             return response.data
-        } catch (error: any) {
+        } catch (err) {
+            const error = err as AxiosError
             if (error.response) {
-                console.log(error.response.status)
+                console.log(`Error from response: ${error.response.status}`)
                 console.log(error.response.data)
             }else if (error.request) {
-                console.log(error.request)  
+                console.log(`Error from request: ${error.request}`)
             } else {
-                console.log(error.message)
+                 console.log(error.config)
             }
-            console.log(error.config)
         }
     }
 )

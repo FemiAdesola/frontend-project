@@ -1,6 +1,6 @@
 import { createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import axios, { AxiosError } from "axios";
+
 import { useParamsId } from "../../types/category";
 import axiosInstance from "../../common/axiosInstance";
 
@@ -10,16 +10,16 @@ export const getAllCategories = createAsyncThunk(
         try {
             const jsondata = await axiosInstance.get("categories")
             return jsondata.data
-        } catch (error: any) {
+        } catch (err) {
+            const error = err as AxiosError
             if (error.response) {
-                console.log(error.response.status)
+                console.log(`Error from response: ${error.response.status}`)
                 console.log(error.response.data)
             }else if (error.request) {
-                console.log(error.request)  
+                console.log(`Error from request: ${error.request}`)
             } else {
-                console.log(error.message)
+                 console.log(error.config)
             }
-            console.log(error.conf)
         }
     }
 )
@@ -30,16 +30,16 @@ export const getSingleCategory = createAsyncThunk(
         try {
             const jsondata = await axiosInstance.get(`categories/${categoryId}`)
             return jsondata.data
-        } catch (error: any) {
+        } catch (err) {
+            const error = err as AxiosError
             if (error.response) {
-                console.log(error.response.status)
+                console.log(`Error from response: ${error.response.status}`)
                 console.log(error.response.data)
             }else if (error.request) {
-                console.log(error.request)  
+                console.log(`Error from request: ${error.request}`)
             } else {
-                console.log(error.message)
+                 console.log(error.config)
             }
-            console.log(error.conf)
         }
     }
 )

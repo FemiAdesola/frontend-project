@@ -2,11 +2,7 @@ import { rest } from "msw";
 import {setupServer} from "msw/node"
 import { CreateProductType } from "../../types/product";
 
-const handler = [
-    rest.get("https://api.escuelajs.co/api/v1/products", (req, res, next) => {
-        return res(
-            next.json(
-                [
+const productApi = [
                     {
                         id: 1,
                         title: "Adapter",
@@ -56,18 +52,24 @@ const handler = [
                         ]
                     }
                 ]
+
+const handler = [
+    rest.get("https://api.escuelajs.co/api/v1/products", (req, res, context) => {
+        return res(
+            context.json(
+                productApi
             )
         )
     }),
-    rest.post("https://api.escuelajs.co/api/v1/products/",async(req, res, next) => {
+    rest.post("https://api.escuelajs.co/api/v1/products/",async(req, res, context) => {
         const product:CreateProductType = await req.json()
         if (product.price < 1000) {
             return res(
-                next.status(400, "Data is invalid")
+                context.status(400, "Data is invalid")
             )
         }
         return res(
-            next.json(product)
+            context.json(product)
         )
     })
 ]
