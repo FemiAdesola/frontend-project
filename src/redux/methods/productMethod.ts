@@ -1,6 +1,6 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { CreateProductType, ProductType, CreateImageType } from '../../types/product';
+import { CreateProductType, ProductType, CreateProductWithImages } from '../../types/product';
 import axiosInstance from "../../common/axiosInstance";
 
 export const getAllProducts = createAsyncThunk(
@@ -88,19 +88,26 @@ export const getSingleProduct = createAsyncThunk(
 )
 
 
-export const createImages = createAsyncThunk(
-    "createImages",
-    async (files: CreateImageType) => {
+export const createProductWithImages = createAsyncThunk(
+    "createProductWithImages",
+    async ({ images, productCreate }: CreateProductWithImages) => {
+        let imageLocations:string[] = []
         try {
-            const response = files && await axiosInstance.post("files/upload", {
-            file: files
-            }, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            for (let i = 0; i < images.length; i++) {
+                const response = await axiosInstance.post("files/upload", images[i])
+                const data = response.data.location
+                imageLocations.push(data)
+                // headers: {
+                //     'Content-Type': 'multipart/form-data'
+                // }
+            
+            
             }
-            )
-            return response.data
+            const productResponse = await axiosInstance.post("products", {
+                ...productCreate,
+                images: [...productCreate.images, ...imageLocations]
+            })
+            return productResponse.data
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {

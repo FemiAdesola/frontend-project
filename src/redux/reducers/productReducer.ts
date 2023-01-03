@@ -7,7 +7,7 @@ import {
     createProduct,
     sortByCategoryName,
     sortProductByPrice,
-   createImages,
+   createProductWithImages,
    sortProductCategories,
    getSingleProduct
 } from "../methods/productMethod";
@@ -33,12 +33,12 @@ const productSlice = createSlice({
             return action.payload
             //setState(action.payload)
         })
-        build.addCase(getAllProducts.rejected, (state, action) => {
-            return state
-        })
-        build.addCase(getAllProducts.pending, (state, action) => {
-            return state
-        })
+            .addCase(getAllProducts.rejected, (state, action) => {
+                return state
+            })
+            .addCase(getAllProducts.pending, (state, action) => {
+                return state
+            })
         build.addCase(createProduct.fulfilled, (state, action) => {
             if (action.payload) {
                 state.push(action.payload)
@@ -46,13 +46,13 @@ const productSlice = createSlice({
                 return state
             }
         })
-        build.addCase(createImages.fulfilled, (state, action) => {
-            if (action.payload) {
-                state.push(action.payload)
-            } else {
-                return state
-            }
-        })
+            .addCase(createProductWithImages.fulfilled, (state, action) => {
+                if (action.payload) {
+                    state.push(action.payload)
+                } else {
+                    return state 
+                }
+            })
 
          build.addCase(getSingleProduct.fulfilled, (state, action) => {
             if (action.payload && "message" in action.payload) {

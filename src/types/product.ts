@@ -21,6 +21,7 @@ export interface CreateProductType {
     images: string[]
 }
 
-export interface CreateImageType {
-   images: string[]
+export interface CreateProductWithImages{
+    images: File[]
+    productCreate: CreateProductType
 }
