@@ -11,9 +11,9 @@ import {
 
 import { createProduct} from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
-import { CreateProduct } from '../../types/product';
+import { CreateProductType } from '../../types/product';
 
-const CreateProducts = ({ title, description, price, categoryId, images }: CreateProduct) => {
+const CreateProducts = ({ title, description, price, categoryId, images }: CreateProductType) => {
   
   const [productTitle, setProductTitle] = useState("")
   const [productDescription, setProductDescription]= useState("")

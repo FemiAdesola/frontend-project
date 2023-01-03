@@ -1,19 +1,19 @@
-import { Category, Rating } from './category';
+import { CategoryType, Rating } from './category';
 
-export interface Product {
+export interface ProductType {
     id: number;
     title: string;
     price: number;
     description: string;
-    // category: Category; 
-    //  images: string[]
-    category: string; 
-    image: string;
-    rating:Rating
+    category: CategoryType; 
+     images: string[]
+    // category: string; 
+    // image: string;
+    // rating:Rating
    
 }
 
-export interface CreateProduct {
+export interface CreateProductType {
     title: string
     description: string
     price: number
@@ -21,6 +21,6 @@ export interface CreateProduct {
     images: string[]
 }
 
-export interface CreateImage {
+export interface CreateImageType {
    images: string[]
 }

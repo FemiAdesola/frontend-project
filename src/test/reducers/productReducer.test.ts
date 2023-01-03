@@ -6,7 +6,7 @@ import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
 import {  sortByName } from "../../redux/reducers/productReducer"
 import { getAllProducts, createProduct } from "../../redux/methods/productMethod"
 import { createStore, RootState } from "../../redux/store"
-import { CreateProduct} from "../../types/product"
+import { CreateProductType} from "../../types/product"
 import server from "../shared/server"
 
 let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
@@ -32,7 +32,7 @@ describe("Test all the products actions", () => {
         expect(store.getState().productReducer.length).toBe(3)
     })
     test("should create a new product", async () => {
-        const newProduct: CreateProduct = {
+        const newProduct: CreateProductType = {
             title: "Book",
             price: 1000,
             description: "Test create product",
@@ -43,7 +43,7 @@ describe("Test all the products actions", () => {
         expect(store.getState().productReducer.length).toBe(1)
     })
     test("should not create a new product", async () => {
-        const newProduct: CreateProduct = {
+        const newProduct: CreateProductType = {
             title: "Electronics",
             price: -1000,
             description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",

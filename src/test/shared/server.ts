@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import {setupServer} from "msw/node"
-import { CreateProduct } from "../../types/product";
+import { CreateProductType } from "../../types/product";
 
 const handler = [
     rest.get("https://api.escuelajs.co/api/v1/products", (req, res, next) => {
@@ -60,7 +60,7 @@ const handler = [
         )
     }),
     rest.post("https://api.escuelajs.co/api/v1/products/",async(req, res, next) => {
-        const product:CreateProduct = await req.json()
+        const product:CreateProductType = await req.json()
         if (product.price < 1000) {
             return res(
                 next.status(400, "Data is invalid")

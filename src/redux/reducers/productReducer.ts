@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { Product } from "../../types/product";
+import { ProductType } from "../../types/product";
 import {
     getAllProducts,
     sortByTitle,
@@ -12,9 +12,7 @@ import {
    getSingleProduct
 } from "../methods/productMethod";
 
-const initialState: Product[] = []
-
-
+const initialState: ProductType[] = []
 
 const productSlice = createSlice({
     name: "productSlice",
@@ -36,11 +34,9 @@ const productSlice = createSlice({
             //setState(action.payload)
         })
         build.addCase(getAllProducts.rejected, (state, action) => {
-            console.log("error in fetching data")
             return state
         })
         build.addCase(getAllProducts.pending, (state, action) => {
-            console.log("data is loading ...")
             return state
         })
         build.addCase(createProduct.fulfilled, (state, action) => {
@@ -68,11 +64,9 @@ const productSlice = createSlice({
             //setState(action.payload)
         })
         build.addCase(getSingleProduct.rejected, (state, action) => {
-            console.log("error in fetching data")
             return state
         })
         build.addCase(getSingleProduct.pending, (state, action) => {
-            console.log("data is loading ...")
             return state
         })
 

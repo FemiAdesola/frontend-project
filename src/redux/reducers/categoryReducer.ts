@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { Category } from "../../types/category";
+import { CategoryType } from "../../types/category";
 import { getAllCategories, getSingleCategory } from '../methods/categoryMethod';
 
-const initialState: Category[] = []
+const initialState: CategoryType[] = []
 
 const categorySlice = createSlice({
     name: "categorySlice",
@@ -48,7 +48,6 @@ const categorySlice = createSlice({
     }
 
 });
-
 
 const categoryReducer = categorySlice.reducer
 

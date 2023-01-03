@@ -5,10 +5,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { Product } from '../../types/product';
+import { ProductType } from '../../types/product';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({id, title, price, image, description, category }: Product) => {
+const ProductCard = ({id, title, price, images, description, category }: ProductType) => {
   return (
       <Card sx={{
           maxWidth: 340,
@@ -26,13 +26,12 @@ const ProductCard = ({id, title, price, image, description, category }: Product)
                   // maxWidth: '100%',
                   objectFit: 'cover',
               }}
-          // image={images[0]}
-          image={image}
+          image={images[0]}
               />
             <CardContent>
               <Typography variant="h5" component="div">{title}</Typography>
               <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
-                <Typography  color="lightcoral">Category: {category} </Typography>
+                <Typography  color="lightcoral">Category: {category.name} </Typography>
               </Typography>
               <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
             <Typography variant="body2" color="text.secondary">{description}</Typography> 

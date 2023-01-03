@@ -1,12 +1,12 @@
 import { Box, Container, Grid } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
-import { Category } from '../../types/category'
+import { CategoryType } from '../../types/category'
 import CategoryCard from './CategoryCard';
 import { getAllCategories } from '../../redux/methods/categoryMethod';
 import Loading from '../loading/Loading';
 
-const Categories = ({ name, id, image }: Category) => {
+const Categories = ({ name, id, image }: CategoryType) => {
   const [isLoading, setIsLoading] = useState(true);
     const categories = useAppSelector(state => state.categoryReducer)
     const dispatch = useAppDispatch()

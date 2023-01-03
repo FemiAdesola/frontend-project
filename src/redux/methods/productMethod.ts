@@ -1,14 +1,13 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { CreateProduct, Product, CreateImage } from '../../types/product';
+import { CreateProductType, ProductType, CreateImageType } from '../../types/product';
+import axiosInstance from "../../common/axiosInstance";
 
 export const getAllProducts = createAsyncThunk(
     "getAllProducts",
     async () => {
         try {
-           
-            // const jsondata = await axios.get("https://api.escuelajs.co/api/v1/products")
-            const jsondata = await axios.get("https://fakestoreapi.com/products")
+            const jsondata = await axiosInstance.get("products")
             return jsondata.data
         } catch (error: any) {
             if (error.response) {
@@ -24,7 +23,7 @@ export const getAllProducts = createAsyncThunk(
     }
 )
 
-export const sortByTitle = (state:Product[], action:PayloadAction<"asc"|"desc">) => {
+export const sortByTitle = (state:ProductType[], action:PayloadAction<"asc"|"desc">) => {
     if (action.payload === "asc") {
         state.sort((a, b) => a.title.localeCompare(b.title))
     } else {
@@ -32,24 +31,15 @@ export const sortByTitle = (state:Product[], action:PayloadAction<"asc"|"desc">)
     }
 }
 
-export const sortByCategoryName = (state:Product[], action:PayloadAction<"clothes"| "electronics">) => {
+export const sortByCategoryName = (state:ProductType[], action:PayloadAction<"clothes"| "electronics">) => {
     if (action.payload === "clothes") {
-        state.sort((a, b) => a.category.localeCompare(b.category))
-    // } else if (action.payload === "furniture") {
-    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
-    // }else if (action.payload === "shoes") {
-    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
-    // }else if (action.payload === "others") {
-    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
-    // } else if (action.payload === "electronics") {
-    //     state.sort((a, b) => b.category.name.localeCompare(a.category.name))
+        state.sort((a, b) => a.category.name.localeCompare(b.category.name))
     } else {
-         state.sort((a, b) => b.category.localeCompare(a.category))
+         state.sort((a, b) => b.category.name.localeCompare(a.category.name))
     }
-
 }
 
-export const sortProductByPrice = (state:Product[], action:PayloadAction<"asc"|"desc">) => {
+export const sortProductByPrice = (state:ProductType[], action:PayloadAction<"asc"|"desc">) => {
     if (action.payload === "asc") {
         state.sort((a, b) => (a.price > b.price ? 1 : -1));
     } else {
@@ -59,9 +49,9 @@ export const sortProductByPrice = (state:Product[], action:PayloadAction<"asc"|"
 
 export const createProduct = createAsyncThunk(
     "createProduct",
-    async (product: CreateProduct) => {
+    async (product: CreateProductType) => {
         try {
-            const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
+            const response: AxiosResponse<ProductType, ProductType> = await axiosInstance.post("products/", product)
             return response.data
         } catch (error: any) {
             if (error.response) {
@@ -81,7 +71,7 @@ export const getSingleProduct = createAsyncThunk(
     "getSingleProduct",
     async (productId:string) => {
         try {
-            const jsondata = await axios.get(`https://api.escuelajs.co/api/v1/products/${productId}`)
+            const jsondata = await axiosInstance.get(`products/${productId}`)
             return jsondata.data
         } catch (error: any) {
             if (error.response) {
@@ -100,9 +90,9 @@ export const getSingleProduct = createAsyncThunk(
 
 export const createImages = createAsyncThunk(
     "createImages",
-    async (files: CreateImage) => {
+    async (files: CreateImageType) => {
         try {
-            const response = files && await axios.post("https://api.escuelajs.co/api/v1/files/upload", {
+            const response = files && await axiosInstance.post("files/upload", {
             file: files
             }, {
                 headers: {
@@ -124,10 +114,8 @@ export const createImages = createAsyncThunk(
         }
     }
 )
-
-
-    
-export const sortProductCategories= (state:Product[], action:PayloadAction<"others"|"clothes">) => {
+  
+export const sortProductCategories= (state:ProductType[], action:PayloadAction<"others"|"clothes">) => {
     if (action.payload === "others") {
         state.sort((a, b) => (a.category > b.category ? 1 : -1));
     } else {

@@ -2,15 +2,16 @@ import { createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useParamsId } from "../../types/category";
+import axiosInstance from "../../common/axiosInstance";
 
 export const getAllCategories = createAsyncThunk(
     "getAllCategories",
     async () => {
         try {
-            const jsondata = await axios.get("https://api.escuelajs.co/api/v1/categories")
+            const jsondata = await axiosInstance.get("categories")
             return jsondata.data
         } catch (error: any) {
-            if (error.respons) {
+            if (error.response) {
                 console.log(error.response.status)
                 console.log(error.response.data)
             }else if (error.request) {
@@ -27,10 +28,10 @@ export const getSingleCategory = createAsyncThunk(
     "getSingleCategory",
     async (categoryId:useParamsId ) => {
         try {
-            const jsondata = await axios.get(`https://api.escuelajs.co/api/v1/categories/${categoryId}`)
+            const jsondata = await axiosInstance.get(`categories/${categoryId}`)
             return jsondata.data
         } catch (error: any) {
-            if (error.respons) {
+            if (error.response) {
                 console.log(error.response.status)
                 console.log(error.response.data)
             }else if (error.request) {

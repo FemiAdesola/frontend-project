@@ -13,7 +13,6 @@ import Loading from '../loading/Loading';
 const Products = () => {
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(true);
-  // const [filteredValue, setFilteredValue] = useState("All");
   let products = useAppSelector(state => state.productReducer.filter(item => {
     return item.title.toLowerCase().includes(search.toLowerCase())
   }))
@@ -33,10 +32,10 @@ const Products = () => {
 
   if (filteredValue) {
     products = products.filter((item) => {
-      return item.category.toLowerCase().includes(filteredValue)
+      return item.category.name.toLowerCase().includes(filteredValue)
     })
   } else{
-  products.map(option=>(option.category.toLowerCase().includes(filteredValue)))
+  products.map(option=>(option.category.name.toLowerCase().includes(filteredValue)))
   }
 
   return (
@@ -75,12 +74,11 @@ const Products = () => {
         {products.map((product) => (
           <ProductCard
             key={product.id}
-            image={product.image}
+            images={product.images}
             title={product.title}
             price={product.price}
             category={product.category}
             description={product.description}
-            rating={product.rating}
             id={product.id}            
           />
         ))}
