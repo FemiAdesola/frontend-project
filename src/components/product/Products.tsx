@@ -44,7 +44,6 @@ const Products = () => {
       <Box  justifyContent="center"  alignItems="center" textAlign="center"  sx={{ '& button': { m: 1 } }}>
         <div>
           <Button onClick={() => { sortName() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Name</Button>
-          {/* <Button onClick={() => { sortCategory() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Category</Button> */}
           <Button onClick={() => { sortByProductPriceN() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Price</Button>
           <SearchMenu>
             <SearchIconWrapper>

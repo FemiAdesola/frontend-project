@@ -7,9 +7,7 @@ import {
     createProduct,
     sortByCategoryName,
     sortProductByPrice,
-   createProductWithImages,
-   sortProductCategories,
-   getSingleProduct
+    createProductWithImages,
 } from "../methods/productMethod";
 
 const initialState: ProductType[] = []
@@ -21,8 +19,7 @@ const productSlice = createSlice({
         sortByName: sortByTitle,
         sortByCategory: sortByCategoryName,
         sortByPrice: sortProductByPrice,
-        sortProductCategory:sortProductCategories
-    } /* manage sync process */,
+    },
     extraReducers: (build) => {
         build.addCase(getAllProducts.fulfilled, (state, action) => {
             if (action.payload && "message" in action.payload) {
@@ -31,7 +28,6 @@ const productSlice = createSlice({
                 return state
             }
             return action.payload
-            //setState(action.payload)
         })
             .addCase(getAllProducts.rejected, (state, action) => {
                 return state
@@ -45,7 +41,7 @@ const productSlice = createSlice({
             } else {
                 return state
             }
-        })
+            })
             .addCase(createProductWithImages.fulfilled, (state, action) => {
                 if (action.payload) {
                     state.push(action.payload)
@@ -53,27 +49,10 @@ const productSlice = createSlice({
                     return state 
                 }
             })
-
-         build.addCase(getSingleProduct.fulfilled, (state, action) => {
-            if (action.payload && "message" in action.payload) {
-                return state
-            } else if (!action.payload) {
-                return state
-            }
-            return action.payload
-            //setState(action.payload)
-        })
-        build.addCase(getSingleProduct.rejected, (state, action) => {
-            return state
-        })
-        build.addCase(getSingleProduct.pending, (state, action) => {
-            return state
-        })
-
     }
 
 })
 const productReducer = productSlice.reducer
 
-export const {sortByName, sortByCategory, sortByPrice, sortProductCategory} = productSlice.actions
+export const {sortByName, sortByCategory, sortByPrice} = productSlice.actions
 export default productReducer

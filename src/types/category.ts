@@ -3,12 +3,3 @@ export interface CategoryType {
     name: string;
     image: string;
 }
-
-export type useParamsId = {
-    id: any;
-}
-
-export interface Rating{
-    rate: number
-    count: number;
-}

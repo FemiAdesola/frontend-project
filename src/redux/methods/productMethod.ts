@@ -67,26 +67,6 @@ export const createProduct = createAsyncThunk(
     }
 )
 
-export const getSingleProduct = createAsyncThunk(
-    "getSingleProduct",
-    async (productId:string) => {
-        try {
-            const jsondata = await axiosInstance.get(`products/${productId}`)
-            return jsondata.data
-        } catch (err) {
-            const error = err as AxiosError
-            if (error.response) {
-                console.log(`Error from response: ${error.response.status}`)
-                console.log(error.response.data)
-            }else if (error.request) {
-                console.log(`Error from request: ${error.request}`)
-            } else {
-                 console.log(error.config)
-            }
-        }
-    }
-)
-
 
 export const createProductWithImages = createAsyncThunk(
     "createProductWithImages",
@@ -121,21 +101,3 @@ export const createProductWithImages = createAsyncThunk(
         }
     }
 )
-  
-export const sortProductCategories= (state:ProductType[], action:PayloadAction<"others"|"clothes">) => {
-    if (action.payload === "others") {
-        state.sort((a, b) => (a.category > b.category ? 1 : -1));
-    } else {
-        state.sort((a, b) =>
-            (action.payload === "clothes")
-                ? a.category > b.category
-                        ? 1
-                        : -1
-                        : a.category > b.category
-                        ? -1
-                        : 1
-
-            );
-    }
-}
-

@@ -19,7 +19,7 @@ const CategoryCard = ({ id,name,image}: CategoryType) => {
       }}>
       <CardActionArea
       component={Link}
-      to={{ pathname: `/${id}` }}>
+      to={{ pathname: `/products` }}>
         <CardMedia
           component="img"
           sx={{
@@ -31,20 +31,6 @@ const CategoryCard = ({ id,name,image}: CategoryType) => {
         />
         <CardContent>
           <Typography variant="h5" component="div">{name}</Typography>
-          <Typography
-            // component={Link}
-            // to={{ pathname: `/${id}` }}
-            // to="products"
-            marginRight={5}
-            sx={{
-              textDecoration: 'none',
-              display: { xs: 'none', sm: 'block' },
-              fontWeight: 'bold',
-              "&:hover": {
-                color: "green"
-              }
-            }}
-          >Get details</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

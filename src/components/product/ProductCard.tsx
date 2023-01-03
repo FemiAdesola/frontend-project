@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { Button, CardActionArea } from '@mui/material';
 import { ProductType } from '../../types/product';
 import { Link } from 'react-router-dom';
 
@@ -14,44 +14,31 @@ const ProductCard = ({id, title, price, images, description, category }: Product
           maxWidth: 340,
           margin: '10px',
           display: 'flex',
-          height: '600px',
+          height: '400px',
       }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              sx={{
-                  // width: '100%',
-                marginTop:"-100px",
-                  height: '250px',
-                  // maxWidth: '100%',
-                  objectFit: 'cover',
-              }}
+      <CardActionArea
+        component={Link}
+        to={{ pathname: `/products/${id}`}}>
+        <CardMedia
+          component="img"
+          sx={{
+            width:"100%",
+            height: 'auto',
+            maxWidth: '100%',
+            objectFit: 'cover',
+          }}
           image={images[0]}
-              />
-            <CardContent>
-              <Typography variant="h5" component="div">{title}</Typography>
-              <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
-                <Typography  color="lightcoral">Category: {category.name} </Typography>
-              </Typography>
-              <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
-            <Typography variant="body2" color="text.secondary">{description}</Typography> 
-            <Typography
-              component={Link}
-              to={{ pathname: `/products/${id}` }}
-                // to="products"
-              marginRight={5}
-              sx={{
-                extDecoration: 'none',
-                display: { xs: 'none', sm: 'block' },
-                fontWeight: 'bold',
-                "&:hover": {
-                  color: "green",
-                }        
-            }}
-            >Get Details</Typography>
-          </CardContent>
-        </CardActionArea>
-       </Card>
+        />
+        <CardContent>
+          <Typography variant="h6" component="div">{title}</Typography>
+          <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
+            <Typography  color="lightcoral">Category: {category.name} </Typography>
+          </Typography>
+          <Typography color ="blue" variant="body1" component="div">Price: {price}€</Typography>
+          <Button variant="outlined" sx={{ml:10, mt:0.5}} component={Link}to={{ pathname: `/products/${id}`}}>Get Details</Button>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   )
 }
 

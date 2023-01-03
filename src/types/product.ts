@@ -1,4 +1,4 @@
-import { CategoryType, Rating } from './category';
+import { CategoryType} from './category';
 
 export interface ProductType {
     id: number;
@@ -6,11 +6,7 @@ export interface ProductType {
     price: number;
     description: string;
     category: CategoryType; 
-     images: string[]
-    // category: string; 
-    // image: string;
-    // rating:Rating
-   
+    images: string[]
 }
 
 export interface CreateProductType {
