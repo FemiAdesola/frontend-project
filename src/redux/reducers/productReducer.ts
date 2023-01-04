@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { ProductType } from "../../types/product";
+import { updateProduct } from '../methods/productMethod';
 import {
     getAllProducts,
     sortByTitle,
@@ -48,6 +49,20 @@ const productSlice = createSlice({
                 } else {
                     return state 
                 }
+            })
+        build.addCase(updateProduct.fulfilled, (state, action) => {
+            return state.map(product => {
+                if (product.id === action.payload?.id) {
+                    return action.payload
+                }
+                return product
+                })
+            })
+            .addCase(updateProduct.rejected, (state, action) => {
+                return state
+            })
+            .addCase(updateProduct.pending, (state, action) => {
+                return state
             })
     }
 

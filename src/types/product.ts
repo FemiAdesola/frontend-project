@@ -26,3 +26,7 @@ export interface UpdateProductType{
     id: number
     update:Partial<ProductType>
 }
+
+export interface Error{
+    Error:string
+}
