@@ -4,7 +4,7 @@ import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
 // import { WritableDraft } from "immer/dist/internal"
 
 import {  sortByName } from "../../redux/reducers/productReducer"
-import { getAllProducts, createProduct, updateProduct } from "../../redux/methods/productMethod"
+import { getAllProducts, createProduct, updateProduct, createProductWithImages } from '../../redux/methods/productMethod';
 import { createStore, RootState } from "../../redux/store"
 import { CreateProductType} from "../../types/product"
 import server from "../shared/server"
@@ -73,5 +73,36 @@ describe("Test all the products actions", () => {
         expect(store.getState().productReducer.find(product => product.id === 1)?.title).toBe("Luxurious Concrete")
         expect(store.getState().productReducer.find(product => product.id === 1)?.price).toBe(500)
         expect(store.getState().productReducer.find(product => product.id === 1)?.description).toBe("Test update")
+    })
+
+    test("should create product with form and images", async () => {
+        const image1: File = {
+            lastModified: 0,
+            name: "test for image",
+            webkitRelativePath: "",
+            size: 0,
+            type: "",
+            arrayBuffer: function (): Promise<ArrayBuffer> {
+                throw new Error("Function not implemented.")
+            },
+            slice: function (start?: number | undefined, end?: number | undefined, contentType?: string | undefined): Blob {
+                throw new Error("Function not implemented.")
+            },
+            stream: function () {
+                throw new Error("Function not implemented.")
+            },
+            text: function (): Promise<string> {
+                throw new Error("Function not implemented.")
+            }
+        }
+        const productCreate: CreateProductType = {
+            title: "Test for createProductWithImages",
+            price: 900,
+            description: "Test create product",
+            categoryId: 1,
+            images: []
+        }
+        await store.dispatch(createProductWithImages({ images:[image1], productCreate }))
+        expect(store.getState().productReducer.length).toBe(1)
     })
 })

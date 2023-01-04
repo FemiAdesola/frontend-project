@@ -61,8 +61,8 @@ const handler = [
             )
         )
     }),
-    rest.post("https://api.escuelajs.co/api/v1/products/", async(req, res, context) => {
-        const product:CreateProductType = await req.json()
+    rest.post("https://api.escuelajs.co/api/v1/products", async (req, res, context) => {
+        const product: CreateProductType = await req.json()
         if (product.price < 1000) {
             return res(
                 context.status(400, "Data is invalid")
@@ -72,7 +72,7 @@ const handler = [
             context.json(product)
         )
     }),
-    rest.put("https://api.escuelajs.co/api/vl/products/:id", async (req, res, context) => {
+    rest.put("https://api.escuelajs.co/api/v1/products/:id", async (req, res, context) => {
         const update: Partial<ProductType> = await req.json()
         const { id } = req.params as any
         const foundProduct = productApi.find(product => product.id === parseInt(id))
@@ -88,6 +88,23 @@ const handler = [
                 context.status(404, "Product is not found")
             )
         }
+    }),
+    rest.post("https://api.escuelajs.co/api/v1/files/upload", async (req, res, context) => {
+        const file: File = await req.json()
+        if (file) {
+            return res(
+                context.json(
+                    {
+                        originalname: file.name,
+                        filename: file.name,
+                        location: `https://api.escuelajs.co/api/v1/files/${file.name}`
+                    }
+                )
+            )
+        }
+        return res(
+            context.status(400, "file is not found")
+        )
     })
 ]
 

@@ -51,7 +51,7 @@ export const createProduct = createAsyncThunk(
     "createProduct",
     async (product: CreateProductType) => {
         try {
-            const response: AxiosResponse<ProductType, ProductType> = await axiosInstance.post("products/", product)
+            const response: AxiosResponse<ProductType, any> = await axiosInstance.post("products", product)
             return response.data
         } catch (err) {
             const error = err as AxiosError
@@ -67,11 +67,10 @@ export const createProduct = createAsyncThunk(
     }
 )
 
-
 export const createProductWithImages = createAsyncThunk(
     "createProductWithImages",
     async ({ images, productCreate }: CreateProductWithImages) => {
-        let imageLocations:string[] = []
+        let imageLocations: string[] = []
         try {
             for (let i = 0; i < images.length; i++) {
                 const response = await axiosInstance.post("files/upload", images[i],
