@@ -88,7 +88,7 @@ export const createProductWithImages = createAsyncThunk(
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.response.status}`)
+                console.log(`Error from response: ${error.response.statusText}`)
                 console.log(error.response.data)
             }else if (error.request) {
                 console.log(`Error from request: ${error.request}`)
@@ -104,12 +104,12 @@ export const updateProduct = createAsyncThunk(
     "updateProduct",
     async ({ id, update }: UpdateProductType) => { 
         try {
-            const response: AxiosResponse<ProductType, any> = await axiosInstance.put(`products/${id}`)
+            const response: AxiosResponse<ProductType, any> = await axiosInstance.put(`products/${id}`, update)
             return response.data
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.response.status}`)
+                console.log(`Error from response: ${error.response.statusText}`)
                 console.log(error.response.data)
             } else if (error.request) {
                 console.log(`Error from request: ${error.request}`)

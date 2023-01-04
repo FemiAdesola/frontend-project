@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import {setupServer} from "msw/node"
-import { CreateProductType } from "../../types/product";
+import { CreateProductType, ProductType } from "../../types/product";
 
 const productApi = [
                     {
@@ -61,7 +61,7 @@ const handler = [
             )
         )
     }),
-    rest.post("https://api.escuelajs.co/api/v1/products/",async(req, res, context) => {
+    rest.post("https://api.escuelajs.co/api/v1/products/", async(req, res, context) => {
         const product:CreateProductType = await req.json()
         if (product.price < 1000) {
             return res(
@@ -71,6 +71,23 @@ const handler = [
         return res(
             context.json(product)
         )
+    }),
+    rest.put("https://api.escuelajs.co/api/vl/products/:id", async (req, res, context) => {
+        const update: Partial<ProductType> = await req.json()
+        const { id } = req.params as any
+        const foundProduct = productApi.find(product => product.id === parseInt(id))
+        if (foundProduct) {
+            return res(
+                context.json({
+                    ...foundProduct,
+                    ...update
+                })
+            )
+        } else {
+            return res(
+                context.status(404, "Product is not found")
+            )
+        }
     })
 ]
 
