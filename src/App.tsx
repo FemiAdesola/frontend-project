@@ -9,7 +9,7 @@ import Layout from './pages/Layout';
 import Cart from './pages/Cart';
 import Login from './components/user/Login';
 import SignUp from './components/user/SignUp';
-import CreateProdduct from './components/product/CreateProduct';
+import CreateProducts from './components/product/CreateProduct';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
        {
         path: 'create',
-         element: <CreateProdduct title={''} description={''} price={0} categoryId={0} images={[]}  />
+         element: <CreateProducts productCreate={...[]} images={[]} />
       },
       {
         path: '*',

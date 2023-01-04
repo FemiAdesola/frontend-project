@@ -74,14 +74,11 @@ export const createProductWithImages = createAsyncThunk(
         let imageLocations:string[] = []
         try {
             for (let i = 0; i < images.length; i++) {
-                const response = await axiosInstance.post("files/upload", images[i])
+                const response = await axiosInstance.post("files/upload", images[i],
+                    { headers: {'Content-Type': 'multipart/form-data' }
+                })
                 const data = response.data.location
                 imageLocations.push(data)
-                // headers: {
-                //     'Content-Type': 'multipart/form-data'
-                // }
-            
-            
             }
             const productResponse = await axiosInstance.post("products", {
                 ...productCreate,
@@ -98,6 +95,6 @@ export const createProductWithImages = createAsyncThunk(
             } else {
                  console.log(error.config)
             }
-        }
+        } 
     }
 )

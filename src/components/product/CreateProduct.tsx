@@ -9,45 +9,56 @@ import {
   Grid,
 } from '@mui/material';
 
-import { createProduct} from '../../redux/methods/productMethod';
+import { createProductWithImages} from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
-import { CreateProductType } from '../../types/product';
+import { CreateProductWithImages } from '../../types/product';
 
-const CreateProducts = ({ title, description, price, categoryId, images }: CreateProductType) => {
-  
+const CreateProducts = ({ productCreate, images }: CreateProductWithImages) => {
   const [productTitle, setProductTitle] = useState("")
   const [productDescription, setProductDescription]= useState("")
   const [productPrice, setProductPrice]= useState(0)
   const [productCategoryId, setProductCategoryId] = useState(0)
-  const [productImages, setProductImages]= useState([])
+  const [productImages, setProductImages] = useState<File[] | null>(null)
   const dispatch = useAppDispatch();
 
-  // const imagesHandler = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
-  //   e.preventDefault();
-  //   dispatch(createImages({images:productImages}))
-  // }
-
+  const imagesHandler = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const files = e.target.files
+    let fileArray = [];
+    if (files?.length) {
+      for (let i = 0; i <= files?.length; i++) {
+        fileArray.push(files[i])
+      }
+    }
+    setProductImages(fileArray)
+  }
   useEffect(() => {
     setProductTitle("")
     setProductDescription("")
     setProductPrice(0)
     setProductCategoryId(0)
-    setProductImages([])
+    setProductImages(null)
   }, [])
-  const addHandler = (e:React.FormEvent<HTMLFormElement>) => {
+  const addProductHandler = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(createProduct({
+    let message = []
+    if (!productImages && !productTitle && !productDescription && !productCategoryId) {
+      return message.push("title,description,id,category is required")
+    }
+    dispatch(createProductWithImages({
+       image:productImages,
+      productCreate: {
         title: productTitle,
         description: productDescription,
         price: productPrice,
-        categoryId:productCategoryId,
-        images:productImages,
+        categoryId: productCategoryId,
+        images: productImages,
+      } 
     }));
     setProductTitle("")
     setProductDescription("")
     setProductPrice(0)
     setProductCategoryId(0)
-    setProductImages([])
+    setProductImages(null)
 };
   return (
     <Container maxWidth="sm">
@@ -68,7 +79,7 @@ const CreateProducts = ({ title, description, price, categoryId, images }: Creat
             padding:"0 60px"
           }}
           component="form"
-          onSubmit={(e) => addHandler(e)}
+          onSubmit={addProductHandler}
         >
           <Typography 
             component="span"
@@ -136,8 +147,8 @@ const CreateProducts = ({ title, description, price, categoryId, images }: Creat
               type="file"
               name="file"
               inputProps={{multiple: true}}
-              // onChange={(e)=>setProductImages(e.target.value)}
-              value={productImages}
+              onChange={imagesHandler}
+              // value={productImages}
               fullWidth
             /> 
           <Button 

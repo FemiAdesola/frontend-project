@@ -21,3 +21,8 @@ export interface CreateProductWithImages{
     images: File[]
     productCreate: CreateProductType
 }
+
+export interface UpdateProductType{
+    id: number
+    update:Partial<ProductType>
+}
