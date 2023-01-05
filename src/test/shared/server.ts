@@ -1,6 +1,8 @@
 import { rest } from "msw";
-import {setupServer} from "msw/node"
+import { setupServer } from "msw/node"
+import jwt from "jsonwebtoken"
 import { CreateProductType, ProductType } from "../../types/product";
+import { AxiosError } from "axios";
 
 const productApi = [
                     {
@@ -145,6 +147,40 @@ const handler = [
         return res(
             context.json(userApi)
         )
+    }),
+    rest.post("https://api.escuelajs.co/api/v1/auth/login", async (req, res, context) => {
+        const { email, password } = await req.json()
+        const foundUser = userApi.find (user => user.email === email && user.password === password)
+        if (foundUser) {
+            const access_token = jwt.sign( foundUser, 'femi12345');
+            return res(
+                context.json({access_token})
+            )
+        } else {
+            return res(
+                context.status(401, "User is not authorized to login")
+            )
+        }
+    }),
+    rest.get("https://api.escuelajs.co/api/v1/auth/profile", (req, res, context) => {
+        const access_tokenArray = req.headers.get("Authorization")?.split(" ")
+        try {
+            if (access_tokenArray) {
+                const access_token = access_tokenArray[1]
+                const foundUser = jwt.verify(access_token, 'femi12345')
+                return res(
+                    context.json({
+                        foundUser
+                    })
+                )
+            } else {
+                context.status(401, "User is not authorized to login")
+            }
+        } catch (err:any) {
+            return res(
+                context.json(err)
+            ) 
+        }
     })
 ]
 

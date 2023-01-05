@@ -22,7 +22,11 @@ const userSlice = createSlice({
 
         })
             .addCase(userAuthentication.fulfilled, (state, action) => {
-                return state
+                if (action.payload instanceof AxiosError) {
+                    return state
+                } else {
+                    state.access_token = action.payload?.access_token
+                }
             })
 
             .addCase(loginUser.fulfilled, (state, action) => {

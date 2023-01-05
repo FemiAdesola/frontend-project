@@ -29,7 +29,7 @@ export const userAuthentication = createAsyncThunk(
     "userAuthentication",
     async ({ email, password }: Authentications ) => {
         try {
-            const response = await axiosInstance.post ("auth/login", { email, password })
+            const response = await axiosInstance.post("auth/login", { email, password })
             const data: ReturnedAuthentications  = response.data
             return data
         } catch (err) {
@@ -50,14 +50,21 @@ export const loginUser = createAsyncThunk(
     "loginUser",
     async (access_token: string) => {
         try {
-            const response = await axiosInstance.get ("auth/profile", {
+            const response = await axiosInstance.get("auth/profile", {
                 headers: { "Authorization": ` Bearer ${access_token}` }
             })
             const data: User = response.data
             return data
-        } catch (e) {
-            const error = e as AxiosError
-            return error
+        } catch (err) {
+            const error = err as AxiosError
+            if (error.response) {
+                console.log(`Error from response: ${error.message}`)
+                console.log(error.response.data)
+            }else if (error.request) {
+                console.log(`Error from request: ${error.request}`)
+            } else {
+                 console.log(error.config)
+            }
         }
     }
 )

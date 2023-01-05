@@ -1,6 +1,6 @@
 import { AnyAction,  ThunkMiddleware } from "@reduxjs/toolkit"
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
-import { getAllUsers } from "../../redux/methods/userMethod"
+import { getAllUsers, loginUser, userAuthentication } from '../../redux/methods/userMethod';
 
 import { createStore, RootState } from "../../redux/store"
 import server from "../shared/server"
@@ -28,6 +28,18 @@ describe("Test userReducer", () => {
         await store.dispatch(getAllUsers())
         const state = store.getState().userReducer
         expect (state.userList.length).toBe(4)
+    })
+
+    test("should login user with right authentication", async () => {
+        const authentication = {
+            email: "maria@mail.com",
+            password: "12345",
+        }
+        await store.dispatch(userAuthentication(authentication))
+        const access_token = store.getState().userReducer.access_token as string
+        const currentUser = store.getState().userReducer.currentUser
+        await store.dispatch (loginUser(access_token))
+        expect(currentUser).toBeUndefined()
     })
 })
 

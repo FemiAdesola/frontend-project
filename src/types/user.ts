@@ -11,6 +11,7 @@ export interface User {
 export interface UserReducer {
     userList: User[]
     currentUser?: User
+    access_token?: string
 }
 
 export interface Authentications {
