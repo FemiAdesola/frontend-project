@@ -2,7 +2,6 @@ import { rest } from "msw";
 import { setupServer } from "msw/node"
 import jwt from "jsonwebtoken"
 import { CreateProductType, ProductType } from "../../types/product";
-import { AxiosError } from "axios";
 
 const productApi = [
                     {

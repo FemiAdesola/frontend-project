@@ -16,8 +16,7 @@ const userSlice = createSlice({
             if (action.payload instanceof AxiosError) {
                 return state
             } else {
-                state.userList = action.payload
-                //return state
+               state.userList = action.payload
             }
 
         })
@@ -25,7 +24,7 @@ const userSlice = createSlice({
                 if (action.payload instanceof AxiosError) {
                     return state
                 } else {
-                    state.access_token = action.payload?.access_token
+                    state.currentUser = action.payload
                 }
             })
 
@@ -34,7 +33,6 @@ const userSlice = createSlice({
                     return state
                 } else {
                     state.currentUser = action.payload
-                    //return state
                 }
             })
     }

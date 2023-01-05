@@ -21,17 +21,19 @@ export const getAllUsers = createAsyncThunk(
             } else {
                  console.log(error.config)
             }
+            return error
         }
     }
 )
 
 export const userAuthentication = createAsyncThunk(
     "userAuthentication",
-    async ({ email, password }: Authentications ) => {
+    async ({ email, password }: Authentications, thunkAPI ) => {
         try {
             const response = await axiosInstance.post("auth/login", { email, password })
-            const data: ReturnedAuthentications  = response.data
-            return data
+            const data: ReturnedAuthentications = response.data
+            const result = await thunkAPI.dispatch (loginUser (data.access_token) )
+                return result.payload as User
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
@@ -40,8 +42,9 @@ export const userAuthentication = createAsyncThunk(
             }else if (error.request) {
                 console.log(`Error from request: ${error.request}`)
             } else {
-                 console.log(error.config)
+                console.log(error.config)
             }
+            return error
         }
     }
 )
@@ -65,6 +68,7 @@ export const loginUser = createAsyncThunk(
             } else {
                  console.log(error.config)
             }
+            // return error
         }
     }
 )
