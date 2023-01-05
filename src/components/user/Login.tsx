@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import {yupResolver} from "@hookform/resolvers/yup"
 import {
 TextField,
 Box,
@@ -8,21 +10,23 @@ Typography,
 Container,
 } from '@mui/material';
 
+import { SignUpSchema } from '../../formvalidation/signUpSchema';
+import { Authentications } from '../../types/user';
+
+
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log(email, password)
-    setEmail('')
-    setPassword('')
+  const { handleSubmit, register, formState: { errors } } = useForm<Authentications>({
+    resolver: yupResolver(SignUpSchema)
+  })
+  const onsubmit: SubmitHandler<Authentications> = data => {
+    console.log(data)
   }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         component="form"
-        onSubmit={handleSubmit} 
+        onSubmit={handleSubmit(onsubmit)} 
         sx={{ 
         maxWidth: "560px",
         margin: "60px auto",
@@ -39,8 +43,7 @@ const Login = () => {
         <TextField
           variant="outlined"
           InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+           {...register("email")}
           fullWidth
           margin="normal"
           type="email" 
@@ -53,12 +56,12 @@ const Login = () => {
             }
           }}
         />
+        <Typography component="div" variant="body2" color="red">{errors.email?.message}</Typography>
         <Typography component="span" variant="body2" >Password:</Typography>
         <TextField
           variant="outlined"
           InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+           {...register("password")}
           fullWidth
           margin="normal"
           type="password" 
@@ -71,21 +74,24 @@ const Login = () => {
             }
           }}
         />
+        <Typography component="div" variant="body2" color="red">{errors.password?.message}</Typography>
         <Button 
           type="submit"
+           variant="outlined"
           sx={{
             width: "250px",
             marginLeft: "25px",
             height: "60px",
             textTransform: "none",
-            backgroundColor: "gray",
+            color: "gray",
             borderRadius: "5px",
-            color: "white",
+            borderColor: "gray",
             fontSize:"25px",
             marginTop:"20px",
             "&: hover": {
               backgroundColor: "#162639",
-              color: "#ffFFFf"
+              color: "#ffFFFf",
+              borderColor: "gray",
   
             },
         }}

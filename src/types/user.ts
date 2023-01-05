@@ -1,11 +1,9 @@
 export type Role = "admin" | "customer"
-export interface User {
+export interface User  extends UserForm{
     id: number
-    email: string
-    password: string
-    name: string 
     role: Role
     avatar: string
+    confirm_password: undefined
 }
 
 export interface UserReducer {
@@ -29,4 +27,12 @@ export interface CreateUser{
     name: string
     role: Role
     avatar: string
+}
+
+export interface UserForm{
+    email: string
+    password: string
+    name: string
+    confirm_password?: string
+    avatar: File | string
 }

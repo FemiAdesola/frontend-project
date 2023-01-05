@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import {yupResolver} from "@hookform/resolvers/yup"
 import {
   TextField,
   Box,
@@ -9,43 +11,16 @@ import {
   Container,
 } from '@mui/material';
 
+import { User, UserForm} from '../../types/user';
+import { SignUpSchema } from '../../formvalidation/signUpSchema';
+
+
 const SignUp = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [displayName, setDisplayName] = useState('')
-  const [roles, setRoles] = useState("")
-  const [thumbnailError, setThumbnailError] = useState(null)
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // signup(email, password, displayName, thumbnail)
-    console.log(email, password, displayName, roles)
-    setEmail('')
-    setPassword('')
-    setDisplayName('')
-    setRoles("")
-  }
-
-  // handle file
-  const handleFileChange = (e: React.FormEvent<HTMLFormElement>) => {
-    
-    // let selected = e.target.files[0]
-    // console.log(selected)
-    // if (!selected) {
-    //   setThumbnailError('Please select a file')
-    //   return
-    // }
-    // if (!selected.type.includes('image')) {
-    //   setThumbnailError('Selected file must be an image')
-    //   return
-    // }
-    // if (selected.size > 100000) {
-    //   setThumbnailError('Image file size must be less than 100kb')
-    //   return
-    // }
-    setThumbnailError(null)
-    // setThumbnail(selected)
-    console.log('thumbnail updated')
+  const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
+    resolver: yupResolver(SignUpSchema)
+  })
+  const onsubmit: SubmitHandler<UserForm> = data => {
+    console.log(data)
   }
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/login";
@@ -54,7 +29,7 @@ const SignUp = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
         <Box
-          component="form" onSubmit={handleSubmit} 
+          component="form" onSubmit={handleSubmit(onsubmit)} 
           sx={{ 
             maxWidth: "560px",
             margin: "60px auto",
@@ -68,11 +43,10 @@ const SignUp = () => {
           Sign up
           </Typography>
           <Typography component="span" variant="body2" >Email:</Typography>
-          <TextField
+        <TextField
+          {...register("email")}
             variant="outlined"
             InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             fullWidth
             margin="normal"
             type="email" 
@@ -84,13 +58,13 @@ const SignUp = () => {
                 display: "none",
               }
             }}
-          />
-          <Typography component="span" variant="body2" >Password:</Typography>
-          <TextField
+        />
+        <Typography component="div" variant="body2" color="red">{errors.email?.message}</Typography>
+        <Typography component="span" variant="body2" >Password:</Typography>
+        <TextField
+          {...register("password")}
             variant="outlined"
             InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             fullWidth
             margin="normal"
             type="password" 
@@ -102,13 +76,31 @@ const SignUp = () => {
                 display: "none",
               }
             }}
-          />
+        />
+        <Typography component="div" variant="body2" color="red">{errors.password?.message}</Typography>
+         <Typography component="span" variant="body2" >Confirm Password:</Typography>
+        <TextField
+          {...register("confirm_password")}
+            variant="outlined"
+            InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
+            fullWidth
+            margin="normal"
+            type="password" 
+            sx={{
+              "& label.Mui-focused": {
+                display: "none",
+              },
+              "& legend": {
+                display: "none",
+              }
+            }}
+        />
+        <Typography component="div" variant="body2" color="red">{errors.confirm_password?.message}</Typography>
           <Typography component="span" variant="body2" >Your name</Typography>
-          <TextField
+        <TextField
+          {...register("name")}
             variant="outlined"
             InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
             fullWidth
             margin="normal"
             type="text" 
@@ -120,13 +112,13 @@ const SignUp = () => {
                 display: "none",
               }
             }}
-          />
+        />
+        <Typography component="div" variant="body2" color="red">{errors.name?.message}</Typography>
           <Typography component="span" variant="body2" >Role</Typography>
-          <TextField
+        <TextField
+          // {...register("role")}
             variant="outlined"
             InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            value={roles}
-            onChange={(e) => setRoles(e.target.value)}
             fullWidth
             margin="normal"
             type="text" 
@@ -138,52 +130,44 @@ const SignUp = () => {
                 display: "none",
               }
             }}
-          />
-        {/* {!ispending && */}
+        />
+        {/* <Typography component="div" variant="body2" color="red">{errors.role?.message}</Typography> */}
+        <Typography 
+            component="span"
+            marginTop={2}
+            >Upload images:
+          </Typography>
+        <TextField
+          {...register("avatar")}
+              type="file"
+              name="file"
+              inputProps={{multiple: true}}
+              // value={productImages}
+              fullWidth
+        /> 
+         <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
           <Button 
-            type="submit"
+          type="submit"
+          variant="outlined"
             sx={{
               width: "250px",
               marginLeft: "25px",
               height: "60px",
               textTransform: "none",
-              backgroundColor: "gray",
               borderRadius: "5px",
-              color: "white",
+              color: "gray",
               fontSize:"25px",
-              marginTop:"20px",
+              marginTop: "20px",
+              borderColor: "gray",
               "&: hover": {
                 backgroundColor: "#162639",
-                color: "#ffFFFf"
+                color: "#ffFFFf",
+                borderColor:"gray",
 
               },
             }}
           >Sign up
           </Button>
-         {/* }
-         {ispending && */}
-          {/* <Button 
-          type="submit"
-          sx={{
-            width: "250px",
-            marginLeft: "25px",
-            height: "60px",
-            textTransform: "none",
-            backgroundColor: "#D66434",
-            borderRadius: "5px",
-            color: "white",
-            fontSize:"25px",
-            marginTop:"20px",
-            "&: hover": {
-              backgroundColor: "#162639",
-              color: "#ffFFFf"
-  
-            },
-          }}
-          
-          disabled>Loading</Button> */}
-        {/* }
-        {error && <Box className='error'>{error}</Box>}  */}
         <Box marginTop={3}>
             Already have an account?{" "}
             <Link to={`/login?redirect=${redirect}`}>Login</Link>
