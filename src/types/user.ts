@@ -13,12 +13,12 @@ export interface UserReducer {
     currentUser?: User
 }
 
-export interface Credentials {
+export interface Authentications {
     email: string
     password: string
 }
 
-export interface ReturnedCredentials{
+export interface ReturnedAuthentications{
 access_token: string
 }
 

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { UserReducer } from "../../types/user"; 
-import { getAllUsers} from "../methods/userMethod";
+import { getAllUsers, loginUser, userAuthentication } from "../methods/userMethod";
 
 const initialState: UserReducer = {
     userList: []
@@ -21,6 +21,18 @@ const userSlice = createSlice({
             }
 
         })
+            .addCase(userAuthentication.fulfilled, (state, action) => {
+                return state
+            })
+
+            .addCase(loginUser.fulfilled, (state, action) => {
+                if (action.payload instanceof AxiosError) {
+                    return state
+                } else {
+                    state.currentUser = action.payload
+                    //return state
+                }
+            })
     }
 });
 

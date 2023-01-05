@@ -9,7 +9,8 @@ export const getAllProducts = createAsyncThunk(
         try {
             const jsondata = await axiosInstance.get("products")
             return jsondata.data
-        } catch (error: any) {
+        } catch (err) {
+             const error = err as AxiosError
             if (error.response) {
                 console.log(error.response.status)
                 console.log(error.response.data)
