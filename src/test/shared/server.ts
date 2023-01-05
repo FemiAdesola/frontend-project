@@ -9,8 +9,8 @@ const productApi = [
                         price: 491,
                         description: "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
                         category: {
-                            "id": 4,
-                            "name": "Shoes",
+                            id: 4,
+                            name: "Shoes",
                             "image": "https://api.lorem.space/image/shoes?w=640&h=480&r=8827"
                         },
                         images: [
@@ -25,8 +25,8 @@ const productApi = [
                         price: 500,
                         description: "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
                         category: {
-                            "id": 2,
-                            "name": "Shoes",
+                            id: 2,
+                            name: "Shoes",
                             "image": "https://api.lorem.space/image/shoes?w=640&h=480&r=1667",
                         },
                         images: [
@@ -41,8 +41,8 @@ const productApi = [
                         price: 150,
                         description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
                         category: {
-                            "id": 5,
-                            "name":"Others",
+                            id: 5,
+                            name:"Others",
                             "image": "https://api.lorem.space/image?w=640&h=480&r=3464",
                         },
                         images: [
@@ -52,7 +52,7 @@ const productApi = [
                         ]
                     }
                 ]
-
+            
 const handler = [
     rest.get("https://api.escuelajs.co/api/v1/products", (req, res, context) => {
         return res(
@@ -91,6 +91,7 @@ const handler = [
     }),
     rest.post("https://api.escuelajs.co/api/v1/files/upload", async (req, res, context) => {
         const file: File = await req.json()
+        console.log("check file", file)
         if (file) {
             return res(
                 context.json(
@@ -105,7 +106,9 @@ const handler = [
         return res(
             context.status(400, "file is not found")
         )
-    })
+    }),
+   
+    
 ]
 
 const server = setupServer(...handler)

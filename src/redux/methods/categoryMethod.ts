@@ -23,5 +23,3 @@ export const getAllCategories = createAsyncThunk(
         }
     }
 )
-
-

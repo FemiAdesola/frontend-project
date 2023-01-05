@@ -13,7 +13,7 @@ import { createProductWithImages} from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { CreateProductWithImages } from '../../types/product';
 
-const CreateProducts = ({ productCreate, images }: CreateProductWithImages) => {
+const CreateProducts = () => {
   const [productTitle, setProductTitle] = useState("")
   const [productDescription, setProductDescription]= useState("")
   const [productPrice, setProductPrice]= useState(0)
@@ -44,16 +44,16 @@ const CreateProducts = ({ productCreate, images }: CreateProductWithImages) => {
     if (!productImages && !productTitle && !productDescription && !productCategoryId) {
       return message.push("title,description,id,category is required")
     }
-    dispatch(createProductWithImages({
-       image:productImages,
-      productCreate: {
-        title: productTitle,
-        description: productDescription,
-        price: productPrice,
-        categoryId: productCategoryId,
-        images: productImages,
-      } 
-    }));
+    // dispatch(createProductWithImages({
+    //   image:productImages,
+    //   productCreate: {
+    //     title: productTitle,
+    //     description: productDescription,
+    //     price: productPrice,
+    //     categoryId: productCategoryId,
+    //     images: productImages,
+    //   }
+    // }));
     setProductTitle("")
     setProductDescription("")
     setProductPrice(0)

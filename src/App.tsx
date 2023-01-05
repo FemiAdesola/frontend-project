@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
        {
         path: 'create',
-        element: <CreateProducts  images={[]} productCreate={[]} />
+        element: <CreateProducts  />
       },
       {
         path: '*',

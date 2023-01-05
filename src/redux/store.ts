@@ -3,13 +3,15 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import productReducer from './reducers/productReducer';
 import categoryReducer from './reducers/categoryReducer';
 import darkLightReducer from './reducers/darkLightReducer';
+import userReducer from './reducers/userReducer';
 
 export const createStore = () => {
   return configureStore({
     reducer: {
       productReducer,
       categoryReducer,
-      darkLightReducer
+      darkLightReducer,
+      userReducer
     },
   });
 }

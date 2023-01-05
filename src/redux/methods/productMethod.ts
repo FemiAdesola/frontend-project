@@ -56,7 +56,7 @@ export const createProduct = createAsyncThunk(
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.response.status}`)
+                console.log(`Error from response: ${error.message}`)
                 console.log(error.response.data)
             }else if (error.request) {
                 console.log(`Error from request: ${error.request}`)
@@ -71,6 +71,8 @@ export const createProductWithImages = createAsyncThunk(
     "createProductWithImages",
     async ({ images, productCreate }: CreateProductWithImages) => {
         let imageLocations: string[] = []
+        console.log("before Creating with image")
+        //  nothing happen after here
         try {
             for (let i = 0; i < images.length; i++) {
                 const response = await axiosInstance.post("files/upload", images[i],
@@ -78,26 +80,29 @@ export const createProductWithImages = createAsyncThunk(
                 })
                 const data = response.data.location
                 imageLocations.push(data)
+                console.log("before Creating with image ", data)
             }
+            console.log("let's check here ", imageLocations)
+            
             const productResponse = await axiosInstance.post("products", {
                 ...productCreate,
                 images: [...productCreate.images, ...imageLocations]
             })
-            return productResponse.data
+            // return productResponse.data
+            console.log("checkoutproductData", productResponse.data)
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
                 console.log(`Error from response: ${error.response.statusText}`)
                 console.log(error.response.data)
             }else if (error.request) {
-                console.log(`Error from request: ${error.request}`)
+                console.log(`Error from request: ${error.message}`)
             } else {
-                 console.log(error.config)
+                console.log(error.config)
             }
         } 
     }
 )
-
 
 export const updateProduct = createAsyncThunk(
     "updateProduct",
@@ -119,5 +124,3 @@ export const updateProduct = createAsyncThunk(
     }
 
 )
-
-

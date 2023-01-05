@@ -8,7 +8,7 @@ import { Button, CardActionArea } from '@mui/material';
 import { ProductType } from '../../types/product';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({id, title, price, images, description, category }: ProductType) => {
+const ProductCard = ({id, title, price, images, category }: ProductType) => {
   return (
       <Card sx={{
           maxWidth: 340,
