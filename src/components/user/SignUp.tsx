@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
@@ -11,7 +10,7 @@ import {
   Container,
 } from '@mui/material';
 
-import { User, UserForm} from '../../types/user';
+import {UserForm} from '../../types/user';
 import { SignUpSchema } from '../../formvalidation/signUpSchema';
 
 

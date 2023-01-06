@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
 import axiosInstance from "../../common/axiosInstance"
-import { Authentications, ReturnedAuthentications, User } from "../../types/user"
+import { Authentications, ReturnedAuthentications, User, UserForm } from "../../types/user"
 
 
 export const getAllUsers = createAsyncThunk(
@@ -69,6 +69,33 @@ export const loginUser = createAsyncThunk(
                  console.log(error.config)
             }
             // return error
+        }
+    }
+)
+
+
+export const createUserWithSignUp = createAsyncThunk(
+    "createUserWithSignUp",
+    async (user: UserForm) => {
+        try {
+            const response = await axiosInstance.post("files/upload", user.avatar)
+            const url: string = response.data.location
+            const userResponse = await axiosInstance.post("users", {
+                ...user,
+                avatar: url
+            })
+            const data: User = userResponse.data
+            return data
+        } catch (err) {
+            const error = err as AxiosError
+            if (error.response) {
+                console.log(`Error from response: ${error.message}`)
+                console.log(error.response.data)
+            } else if (error.request) {
+                console.log(`Error from request: ${error.request}`)
+            } else {
+                console.log(error.config)
+            }
         }
     }
 )
