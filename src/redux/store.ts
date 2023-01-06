@@ -4,6 +4,7 @@ import productReducer from './reducers/productReducer';
 import categoryReducer from './reducers/categoryReducer';
 import darkLightReducer from './reducers/darkLightReducer';
 import userReducer from './reducers/userReducer';
+import cartReducer from './methods/cartMethod';
 
 export const createStore = () => {
   return configureStore({
@@ -11,7 +12,8 @@ export const createStore = () => {
       productReducer,
       categoryReducer,
       darkLightReducer,
-      userReducer
+      userReducer,
+      cartReducer
     },
   });
 }

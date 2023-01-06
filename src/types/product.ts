@@ -30,3 +30,7 @@ export interface UpdateProductType{
 export interface Error{
     Error:string
 }
+
+export interface CartProduct extends ProductType{
+    amount: number
+}
