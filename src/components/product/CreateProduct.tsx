@@ -164,7 +164,7 @@ const CreateProducts = () => {
         <input 
           type="file"
           multiple
-          {...register("images")}
+          {...register("productCreate.images")}
         />
       </Typography>
            <Typography component="div" variant="body2" color="red">{errors.images?.message}</Typography>

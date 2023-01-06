@@ -102,7 +102,8 @@ describe("Test all the products actions", () => {
             categoryId: 1,
             images: []
         }
-        await store.dispatch(createProductWithImages({ images:[image1], productCreate }))
-        expect(store.getState().productReducer.length).toBe(1)
+        await store.dispatch(createProductWithImages({ images: [image1], productCreate }))
+        expect(store.getState().productReducer[0].images.length).toBe(1)
+        // expect(store.getState().productReducer.length).toBe(1)
     })
 })

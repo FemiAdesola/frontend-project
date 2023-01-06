@@ -46,7 +46,7 @@ const productSlice = createSlice({
             })
             .addCase(createProductWithImages.fulfilled, (state, action) => {
                 if (action.payload) {
-                    // state.push(action.payload)
+                    state.push(action.payload)
                 } else {
                     return state 
                 }

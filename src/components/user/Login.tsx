@@ -100,7 +100,7 @@ const Login = () => {
         }}
         >Login</Button>
         <Box marginTop={3}>
-          No account?{" "}
+          Not yet register?{" "}
             <Link to={`/signup?redirect=${redirect}`}>Register</Link>
         </Box>
       </Box>

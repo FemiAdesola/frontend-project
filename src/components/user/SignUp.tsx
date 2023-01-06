@@ -1,167 +1,127 @@
+import * as React from 'react';
 import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
-import {
-  TextField,
-  Box,
-  Button,
-  CssBaseline,
-  Typography, 
-  Container,
-} from '@mui/material';
-
-import {UserForm} from '../../types/user';
-import { SignUpSchema } from '../../formvalidation/signUpSchema';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import { useAppDispatch } from '../../hooks/reduxHook';
-import { createUserWithSignUp } from '../../redux/methods/userMethod';
+import { UserForm } from '../../types/user';
+import { SignUpSchema } from '../../formvalidation/signUpSchema';
 
 
-const SignUp = () => {
+const SignUp = () =>  {
   const dispatch = useAppDispatch()
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
     resolver: yupResolver(SignUpSchema)
   })
   const onsubmit: SubmitHandler<UserForm> = data => {
-    // console.log(data)
-    dispatch(createUserWithSignUp(data))
+    console.log(data)
+    // dispatch(createUserWithSignUp(data))
   }
-
   const redirectInUrl = new URLSearchParams().get("redirect");
-  const redirect = redirectInUrl ? redirectInUrl : "/login";
-
+  const redirect = redirectInUrl ? redirectInUrl : "/login";  
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
         <Box
-          component="form" onSubmit={handleSubmit(onsubmit)} 
-          sx={{ 
-            maxWidth: "560px",
-            margin: "60px auto",
-            padding: "40px",
-            border: "1px solid #ddd",
-            boxShadow: "3px 3px 5px rgba(0,0,0,0.05)",
-            alignItems: 'center' ,
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Typography component="h2" variant="h2" marginBottom={3}>
-          Sign up
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
           </Typography>
-          <Typography component="span" variant="body2" >Email:</Typography>
-        <TextField
-          {...register("email")}
-            variant="outlined"
-            InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            fullWidth
-            margin="normal"
-            type="email" 
-            sx={{
-              "& label.Mui-focused": {
-                display: "none",
-              },
-              "& legend": {
-                display: "none",
-              }
-            }}
-        />
-        <Typography component="div" variant="body2" color="red">{errors.email?.message}</Typography>
-        <Typography component="span" variant="body2" >Password:</Typography>
-        <TextField
-          {...register("password")}
-            variant="outlined"
-            InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            fullWidth
-            margin="normal"
-            type="password" 
-            sx={{
-              "& label.Mui-focused": {
-                display: "none",
-              },
-              "& legend": {
-                display: "none",
-              }
-            }}
-        />
-        <Typography component="div" variant="body2" color="red">{errors.password?.message}</Typography>
-         <Typography component="span" variant="body2" >Confirm Password:</Typography>
-        <TextField
-          {...register("confirm_password")}
-            variant="outlined"
-            InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            fullWidth
-            margin="normal"
-            type="password" 
-            sx={{
-              "& label.Mui-focused": {
-                display: "none",
-              },
-              "& legend": {
-                display: "none",
-              }
-            }}
-        />
-        <Typography component="div" variant="body2" color="red">{errors.confirm_password?.message}</Typography>
-          <Typography component="span" variant="body2" >Your name</Typography>
-        <TextField
-          {...register("name")}
-            variant="outlined"
-            InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            fullWidth
-          margin="normal"
-          autoComplete='true'
-            type="text" 
-            sx={{
-              "& label.Mui-focused": {
-                display: "none",
-              },
-              "& legend": {
-                display: "none",
-              }
-            }}
-        />
-        <Typography component="div" variant="body2" color="red">{errors.name?.message}</Typography>
-        <Typography 
-            component="span"
-            marginTop={2}
-            >Upload images:
-        </Typography>
-       <Typography component="div" sx={{margin:"20px"}}>
-        <input 
-          type="file"
-          multiple
-          {...register("avatar")}
-        />
-      </Typography>
-         <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
-        <Button
-          // component={Link}to={{ pathname: `/users`}}
-          type="submit"
-          variant="outlined"
-            sx={{
-              width: "250px",
-              marginLeft: "25px",
-              height: "60px",
-              textTransform: "none",
-              borderRadius: "5px",
-              color: "gray",
-              fontSize:"25px",
-              marginTop: "20px",
-              borderColor: "gray",
-              "&: hover": {
-                backgroundColor: "#162639",
-                color: "#ffFFFf",
-                borderColor:"gray",
-
-              },
-            }}
-          >Sign up
-          </Button>
-        <Box marginTop={3}>
-            Already have an account?{" "}
-            <Link to={`/login?redirect=${redirect}`}>Login</Link>
+          <Box component="form" noValidate onSubmit={handleSubmit(onsubmit)} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="given-name"
+                   {...register("name")}
+                  required
+                  fullWidth
+                  id="Name"
+                  label="Your Name"
+                  autoFocus
+              />
+              <Typography component="div" variant="body2" color="red">{errors.name?.message}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                {...register("email")}
+                  autoComplete="email"
+              />
+              <Typography component="div" variant="body2" color="red">{errors.email?.message}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                   {...register("password")}
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+              />
+              <Typography component="div" variant="body2" color="red">{errors.password?.message}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                   {...register("confirm_password")}
+                  label=" confirm Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+              />
+              <Typography component="div" variant="body2" color="red">{errors.confirm_password?.message}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <input 
+                  type="file"
+                  multiple
+                  {...register("avatar")}
+              />
+              <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to={`/login?redirect=${redirect}`}>
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
-      </Box>
     </Container>
-  )
+  );
 }
-
 export default SignUp

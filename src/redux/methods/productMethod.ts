@@ -71,10 +71,8 @@ export const createProduct = createAsyncThunk(
 
 export const createProductWithImages = createAsyncThunk(
     "createProductWithImages",
-    async ({images, productCreate }: CreateProductWithImages) => {
+    async ({ images, productCreate }: CreateProductWithImages) => {
         let imageLocations: string[] = []
-        console.log("before Creating with image")
-        //  nothing happen after here
         try {
             for (let i = 0; i < images.length; i++) {
                 const response = await axiosInstance.post("files/upload", {file:images[i]},
@@ -84,25 +82,23 @@ export const createProductWithImages = createAsyncThunk(
                 imageLocations.push(data)
                
             }
-          
-            
             const productResponse = await axiosInstance.post("products", {
                 ...productCreate,
                 images: [...productCreate.images, ...imageLocations]
+               
             })
-            // return productResponse.data
-            console.log("checkoutproductData", productResponse.data)
+            return productResponse.data
         } catch (err) {
             const error = err as AxiosError
-            // if (error.response) {
-            //     console.log(`Error from response: ${error.response.statusText}`)
-            //     console.log(error.response.data)
-            // }else if (error.request) {
-            //     console.log(`Error from request: ${error.message}`)
-            // } else {
-            //     console.log(error.config)
-            // }
-            return error
+            if (error.response) {
+                console.log(`Error from response: ${error.response.statusText}`)
+                console.log(error.response.data)
+            }else if (error.request) {
+                console.log(`Error from request: ${error.message}`)
+            } else {
+                console.log(error.config)
+            }
+           
         } 
     }
 )
