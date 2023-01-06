@@ -33,10 +33,7 @@ const SingleProduct = () => {
         display: 'flex',
         height: '520px',
       }}>
-        <CardActionArea
-          component={Link}
-          to={{ pathname: `/products`}}
-        >
+        <CardActionArea >
           <CardMedia
             component="img"
             sx={{

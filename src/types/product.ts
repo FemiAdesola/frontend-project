@@ -14,7 +14,7 @@ export interface CreateProductType {
     description: string
     price: number
     categoryId: number
-    images: string[]
+   images: File[] | string[]
 }
 
 export interface CreateProductWithImages{

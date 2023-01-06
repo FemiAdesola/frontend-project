@@ -14,13 +14,17 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import GroupIcon from '@mui/icons-material/Group';
 
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
 import { toggleTheme } from '../redux/reducers/darkLightReducer';
-import { FormControlLabel, Switch } from '@mui/material';
+
 
 
 // import Search from './features/Search';
+import { width } from '@mui/system';
 
 interface Props {
   window?: () => Window;
@@ -45,18 +49,6 @@ const Header = (props: Props) => {
                 <IconButton sx={{ ml: 1 }} onClick={() => dispatch(toggleTheme())} color="inherit">
                     {theme.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
-            {/* <FormControlLabel
-                control={
-                <Switch
-                    onChange={() => dispatch(toggleTheme())}
-                    defaultChecked={theme.darkTheme ? false : true}
-                    color="default"
-                />
-                }
-                label={
-                theme.darkTheme ? <Typography style={{ color: "white" }}><Brightness7Icon /></Typography> :  <Brightness4Icon />
-                }
-            /> */}
         </Box>
         );
     };
@@ -85,6 +77,11 @@ const Header = (props: Props) => {
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="create" sx={{ textAlign: 'center' }}>
                   CreateProduct
+                </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                <ListItemButton component={Link} to="users" sx={{ textAlign: 'center' }}>
+                  Users
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
@@ -124,8 +121,8 @@ const Header = (props: Props) => {
                 <MenuIcon />
                 </IconButton>
                 <Typography
-                    variant="h6"
-                    component={Link} to=""
+                    variant="h4"
+                        component={Link} to=""
                         sx={{
                             textDecoration: 'none', flexGrow: 1,
                             display: {
@@ -135,7 +132,7 @@ const Header = (props: Props) => {
                         }}
                         
                 >
-                Home
+                        <HomeOutlinedIcon sx={{fontSize:"50px"}} />
                 </Typography>
                 <Box sx={{ display: "flex", m: 3, paddingRight: 20 }}>
                     <Box
@@ -151,18 +148,20 @@ const Header = (props: Props) => {
                     <Box
                         component={Link}
                             to="products"
-                            marginRight={5}
-                        sx={{
+                            marginRight={3}
+                            sx={{
+                             mt:-1,
                             textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
+                            display: { xs: 'none', sm: 'flex' },
                             color: (theme) => theme.palette.common.white,
                             fontWeight: 'bold',
                             "&:hover": {
                                 color: (theme) => theme.palette.common.white,
                             }
                             
-                        }}>
-                    Products
+                            }}>
+                            <Typography sx={{mt:1}}>Products</Typography>
+                 <ShoppingBasketIcon sx={{fontSize:"30px"}}/>
                     </Box>
                     <Box
                         component={Link}
@@ -180,15 +179,17 @@ const Header = (props: Props) => {
                     <Box
                         component={Link}
                             to="users"
-                            marginRight={5}
-                        sx={{
+                            marginRight={3}
+                            sx={{
+                            mt:-2,
                             textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
+                            display: { xs: 'none', sm: 'flex' },
                             color: (theme) => theme.palette.common.white,
                             fontWeight: 'bold',
                             
                         }}>
-                        Users
+                        <Typography sx={{mt:2}}>Users</Typography> 
+                        <GroupIcon sx={{fontSize:"40px"}}/>
                     </Box>
                     <Box
                         component={Link}

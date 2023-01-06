@@ -20,6 +20,7 @@ const productSlice = createSlice({
         sortByName: sortByTitle,
         sortByCategory: sortByCategoryName,
         sortByPrice: sortProductByPrice,
+        
     },
     extraReducers: (build) => {
         build.addCase(getAllProducts.fulfilled, (state, action) => {
@@ -44,11 +45,11 @@ const productSlice = createSlice({
             }
             })
             .addCase(createProductWithImages.fulfilled, (state, action) => {
-                // if (action.payload) {
-                //     state.push(action.payload)
-                // } else {
-                //     return state 
-                // }
+                if (action.payload) {
+                    // state.push(action.payload)
+                } else {
+                    return state 
+                }
             })
         build.addCase(updateProduct.fulfilled, (state, action) => {
             return state.map(product => {

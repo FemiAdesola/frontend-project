@@ -52,7 +52,7 @@ export const createProduct = createAsyncThunk(
     "createProduct",
     async (product: CreateProductType) => {
         try {
-            const response: AxiosResponse<ProductType, any> = await axiosInstance.post("products", product)
+            const response: AxiosResponse<ProductType, ProductType> = await axiosInstance.post("products", product)
             return response.data
         } catch (err) {
             const error = err as AxiosError
@@ -64,26 +64,27 @@ export const createProduct = createAsyncThunk(
             } else {
                  console.log(error.config)
             }
+            
         }
     }
 )
 
 export const createProductWithImages = createAsyncThunk(
     "createProductWithImages",
-    async ({ images, productCreate }: CreateProductWithImages) => {
+    async ({images, productCreate }: CreateProductWithImages) => {
         let imageLocations: string[] = []
         console.log("before Creating with image")
         //  nothing happen after here
         try {
             for (let i = 0; i < images.length; i++) {
-                const response = await axiosInstance.post("files/upload", images[i],
+                const response = await axiosInstance.post("files/upload", {file:images[i]},
                     { headers: {'Content-Type': 'multipart/form-data' }
                 })
                 const data = response.data.location
                 imageLocations.push(data)
-                console.log("before Creating with image ", data)
+               
             }
-            console.log("let's check here ", imageLocations)
+          
             
             const productResponse = await axiosInstance.post("products", {
                 ...productCreate,
@@ -93,14 +94,15 @@ export const createProductWithImages = createAsyncThunk(
             console.log("checkoutproductData", productResponse.data)
         } catch (err) {
             const error = err as AxiosError
-            if (error.response) {
-                console.log(`Error from response: ${error.response.statusText}`)
-                console.log(error.response.data)
-            }else if (error.request) {
-                console.log(`Error from request: ${error.message}`)
-            } else {
-                console.log(error.config)
-            }
+            // if (error.response) {
+            //     console.log(`Error from response: ${error.response.statusText}`)
+            //     console.log(error.response.data)
+            // }else if (error.request) {
+            //     console.log(`Error from request: ${error.message}`)
+            // } else {
+            //     console.log(error.config)
+            // }
+            return error
         } 
     }
 )

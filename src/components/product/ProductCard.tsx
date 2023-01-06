@@ -17,14 +17,12 @@ const ProductCard = ({id, title, price, images, category }: ProductType) => {
           display: 'flex',
           height: '400px',
       }}>
-      <CardActionArea
-        component={Link}
-        to={{ pathname: `/products/${id}`}}>
+      <CardActionArea>
         <CardMedia
           component="img"
           sx={{
-            width:"100%",
-            height: 'auto',
+            width:"400px",
+            height: '200px',
             maxWidth: '100%',
             objectFit: 'cover',
           }}

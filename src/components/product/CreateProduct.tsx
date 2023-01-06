@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import {yupResolver} from "@hookform/resolvers/yup"
 import {
   TextField,
   Box,
@@ -9,57 +11,66 @@ import {
   Grid,
 } from '@mui/material';
 
-import { createProductWithImages} from '../../redux/methods/productMethod';
+import { createProductWithImages, createProduct } from '../../redux/methods/productMethod';
 import { useAppDispatch } from '../../hooks/reduxHook';
-import { CreateProductWithImages } from '../../types/product';
+import { CreateProductType, CreateProductWithImages } from '../../types/product';
+import { productSchema } from '../../formvalidation/productSchema';
 
 const CreateProducts = () => {
-  const [productTitle, setProductTitle] = useState("")
-  const [productDescription, setProductDescription]= useState("")
-  const [productPrice, setProductPrice]= useState(0)
-  const [productCategoryId, setProductCategoryId] = useState(0)
-  const [productImages, setProductImages] = useState<File[] | null>(null)
+  // const [productTitle, setProductTitle] = useState("")
+  // const [productDescription, setProductDescription]= useState("")
+  // const [productPrice, setProductPrice]= useState(0)
+  // const [productCategoryId, setProductCategoryId] = useState(0)
+  // const [productImages, setProductImages] = useState<File[] | null>(null)
   const dispatch = useAppDispatch();
 
-  const imagesHandler = (e:React.ChangeEvent<HTMLInputElement>)=>{
-    const files = e.target.files
-    let fileArray = [];
-    if (files?.length) {
-      for (let i = 0; i <= files?.length; i++) {
-        fileArray.push(files[i])
-      }
-    }
-    setProductImages(fileArray)
+  // const imagesHandler = (e:React.ChangeEvent<HTMLInputElement>)=>{
+  //   const files = e.target.files
+  //   let fileArray = [];
+  //   if (files?.length) {
+  //     for (let i = 0; i <= files?.length; i++) {
+  //       fileArray.push(files[i])
+  //     }
+  //   }
+  //   setProductImages(fileArray)
+  // }
+  // useEffect(() => {
+  //   setProductTitle("")
+  //   setProductDescription("")
+  //   setProductPrice(0)
+  //   setProductCategoryId(0)
+  //   setProductImages(null)
+  // }, [])
+//   const addProductHandler = (e:React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault();
+//     let message = []
+//     if (!productImages && !productTitle && !productDescription && !productCategoryId) {
+//       return message.push("title,description,id,category is required")
+//     }
+//     dispatch(createProductWithImages({
+//       image:productImages,
+//       productCreate: {
+//         title: productTitle,
+//         description: productDescription,
+//         price: productPrice,
+//         categoryId: productCategoryId,
+//         images: productImages,
+//       }
+//     }));
+//     setProductTitle("")
+//     setProductDescription("")
+//     setProductPrice(0)
+//     setProductCategoryId(0)
+//     setProductImages(null)
+// };
+  
+  const { handleSubmit, register, formState: { errors } } = useForm<CreateProductWithImages>({
+    resolver: yupResolver(productSchema)
+  })
+   const onsubmit: SubmitHandler<CreateProductWithImages> = data => {
+    console.log(data)
+    // dispatch(createProduct(data))
   }
-  useEffect(() => {
-    setProductTitle("")
-    setProductDescription("")
-    setProductPrice(0)
-    setProductCategoryId(0)
-    setProductImages(null)
-  }, [])
-  const addProductHandler = (e:React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let message = []
-    if (!productImages && !productTitle && !productDescription && !productCategoryId) {
-      return message.push("title,description,id,category is required")
-    }
-    // dispatch(createProductWithImages({
-    //   image:productImages,
-    //   productCreate: {
-    //     title: productTitle,
-    //     description: productDescription,
-    //     price: productPrice,
-    //     categoryId: productCategoryId,
-    //     images: productImages,
-    //   }
-    // }));
-    setProductTitle("")
-    setProductDescription("")
-    setProductPrice(0)
-    setProductCategoryId(0)
-    setProductImages(null)
-};
   return (
     <Container maxWidth="sm">
      <CssBaseline />
@@ -78,8 +89,8 @@ const CreateProducts = () => {
             marginBottom:"20px",
             padding:"0 60px"
           }}
-          component="form"
-          onSubmit={addProductHandler}
+         
+         component="form" onSubmit={handleSubmit(onsubmit)} 
         >
           <Typography 
             component="span"
@@ -88,13 +99,12 @@ const CreateProducts = () => {
             >Product title:
           </Typography>
               <TextField
-                required 
+             
                 type="text" 
-                onChange={(e) => setProductTitle(e.target.value)}
-              // onChange={(e) =>changeHandler(e)}
-                value={productTitle}
+                 {...register("productCreate.title")}
                 fullWidth
-              />
+          />
+           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.title?.message}</Typography> */}
           <Typography 
             component="span"
             marginTop={2}
@@ -102,28 +112,28 @@ const CreateProducts = () => {
             >Price:
           </Typography>
               <TextField
-                required 
+                
                 type="number" 
             // onChange={changeHandler}
-                onChange={(e) => setProductPrice(parseInt(e.target.value))}
-                value={productPrice}
+               {...register("productCreate.price")}
                 fullWidth
-              />
+          />
+          {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.price?.message}</Typography> */}
           <Typography 
             component="span"
             marginTop={3}
             display= "block"
             >Product Description:
           </Typography>
+          
               <TextField
-                required
-                onChange={(e) => setProductDescription(e.target.value)}
-            // onChange={changeHandler}
-                value={productDescription}
+             
+               {...register("productCreate.description")}
                 multiline
                 rows={4}
                 fullWidth
-              />
+          />
+           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.description?.message}</Typography> */}
           <Typography 
             component="span"
             marginTop={2}
@@ -133,8 +143,7 @@ const CreateProducts = () => {
               <TextField
                 required 
                 type="number" 
-                onChange={(e) => setProductCategoryId(parseInt(e.target.value))}
-               value={productCategoryId}
+                {...register("productCreate.categoryId")}
                 fullWidth
               />
           <Typography 
@@ -142,15 +151,23 @@ const CreateProducts = () => {
             marginTop={2}
             >Upload images:
           </Typography>
-            <TextField
+            {/* <TextField
                 // required 
               type="file"
-              name="file"
+           
               inputProps={{multiple: true}}
-              onChange={imagesHandler}
+             {...register("images")}
               // value={productImages}
               fullWidth
-            /> 
+          />  */}
+          <Typography component="div" sx={{margin:"20px"}}>
+        <input 
+          type="file"
+          multiple
+          {...register("images")}
+        />
+      </Typography>
+           <Typography component="div" variant="body2" color="red">{errors.images?.message}</Typography>
           <Button 
             type="submit"
             sx={{
