@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea } from '@mui/material';
-import { ProductType } from '../../types/product';
 import { Link } from 'react-router-dom';
+
+import { ProductType } from '../../types/product';
+
 
 const ProductCard = ({id, title, price, images, category }: ProductType) => {
   return (

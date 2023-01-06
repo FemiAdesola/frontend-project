@@ -1,5 +1,5 @@
 export type Role = "admin" | "customer"
-export interface User  extends UserForm{
+export interface UserType  extends UserForm{
     id: number
     role: Role
     avatar: string
@@ -7,8 +7,8 @@ export interface User  extends UserForm{
 }
 
 export interface UserReducer {
-    userList: User[]
-    currentUser?: User
+    userList: UserType[]
+    currentUser?: UserType
     access_token?: string
 }
 
@@ -34,5 +34,5 @@ export interface UserForm{
     password: string
     name: string
     confirm_password?: string
-    avatar: File | string
+    avatar: File[] | string
 }

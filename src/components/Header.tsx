@@ -179,6 +179,19 @@ const Header = (props: Props) => {
                     </Box>
                     <Box
                         component={Link}
+                            to="users"
+                            marginRight={5}
+                        sx={{
+                            textDecoration: 'none',
+                            display: { xs: 'none', sm: 'block' },
+                            color: (theme) => theme.palette.common.white,
+                            fontWeight: 'bold',
+                            
+                        }}>
+                        Users
+                    </Box>
+                    <Box
+                        component={Link}
                             to="signup"
                             marginRight={5}
                         sx={{

@@ -36,7 +36,13 @@ const userSlice = createSlice({
                 }
             })
             .addCase(createUserWithSignUp.fulfilled, (state, action) => {
-               return state
+              if (action.payload instanceof AxiosError) {
+                  if (action.payload.request) {
+                       console.log("requesterror", action.payload.request)
+                  } else {
+                      console.log("requesterror", action.payload.response)
+                   }
+                }
             })
     }
 });

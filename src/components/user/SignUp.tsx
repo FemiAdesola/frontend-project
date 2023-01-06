@@ -12,15 +12,20 @@ import {
 
 import {UserForm} from '../../types/user';
 import { SignUpSchema } from '../../formvalidation/signUpSchema';
+import { useAppDispatch } from '../../hooks/reduxHook';
+import { createUserWithSignUp } from '../../redux/methods/userMethod';
 
 
 const SignUp = () => {
+  const dispatch = useAppDispatch()
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
     resolver: yupResolver(SignUpSchema)
   })
   const onsubmit: SubmitHandler<UserForm> = data => {
-    console.log(data)
+    // console.log(data)
+    dispatch(createUserWithSignUp(data))
   }
+
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/login";
 
@@ -101,7 +106,8 @@ const SignUp = () => {
             variant="outlined"
             InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
             fullWidth
-            margin="normal"
+          margin="normal"
+          autoComplete='true'
             type="text" 
             sx={{
               "& label.Mui-focused": {
@@ -113,39 +119,21 @@ const SignUp = () => {
             }}
         />
         <Typography component="div" variant="body2" color="red">{errors.name?.message}</Typography>
-          <Typography component="span" variant="body2" >Role</Typography>
-        <TextField
-          // {...register("role")}
-            variant="outlined"
-            InputLabelProps={{  style: { fontSize: 30 }, shrink: true }}
-            fullWidth
-            margin="normal"
-            type="text" 
-            sx={{
-              "& label.Mui-focused": {
-                display: "none",
-              },
-              "& legend": {
-                display: "none",
-              }
-            }}
-        />
-        {/* <Typography component="div" variant="body2" color="red">{errors.role?.message}</Typography> */}
         <Typography 
             component="span"
             marginTop={2}
             >Upload images:
-          </Typography>
-        <TextField
+        </Typography>
+       <Typography component="div" sx={{margin:"20px"}}>
+        <input 
+          type="file"
+          multiple
           {...register("avatar")}
-              type="file"
-              name="file"
-              inputProps={{multiple: true}}
-              // value={productImages}
-              fullWidth
-        /> 
+        />
+      </Typography>
          <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
-          <Button 
+        <Button
+          // component={Link}to={{ pathname: `/users`}}
           type="submit"
           variant="outlined"
             sx={{

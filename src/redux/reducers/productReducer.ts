@@ -44,11 +44,11 @@ const productSlice = createSlice({
             }
             })
             .addCase(createProductWithImages.fulfilled, (state, action) => {
-                if (action.payload) {
-                    state.push(action.payload)
-                } else {
-                    return state 
-                }
+                // if (action.payload) {
+                //     state.push(action.payload)
+                // } else {
+                //     return state 
+                // }
             })
         build.addCase(updateProduct.fulfilled, (state, action) => {
             return state.map(product => {

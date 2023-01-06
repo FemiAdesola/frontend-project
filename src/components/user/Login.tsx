@@ -12,6 +12,7 @@ Container,
 
 import { SignUpSchema } from '../../formvalidation/signUpSchema';
 import { Authentications } from '../../types/user';
+import { Link } from 'react-router-dom';
 
 
 const Login = () => {
@@ -21,6 +22,8 @@ const Login = () => {
   const onsubmit: SubmitHandler<Authentications> = data => {
     console.log(data)
   }
+  const redirectInUrl = new URLSearchParams().get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/signup";
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -96,6 +99,10 @@ const Login = () => {
             },
         }}
         >Login</Button>
+        <Box marginTop={3}>
+          No account?{" "}
+            <Link to={`/signup?redirect=${redirect}`}>Register</Link>
+        </Box>
       </Box>
     </Container>
   )
