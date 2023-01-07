@@ -4,11 +4,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CssBaseline } from '@mui/material';
+import { Button, CardActionArea, CardActions, CssBaseline } from '@mui/material';
 
 import { Container } from '@mui/system';
 import axiosInstance from '../../common/axiosInstance';
 import { ProductType } from '../../types/product';
+import Box from '@mui/material/Box';
 
 const SingleProduct = () => {
   let {id} = useParams()
@@ -31,7 +32,7 @@ const SingleProduct = () => {
         maxWidth: 400,
         margin: '10px',
         display: 'flex',
-        height: '520px',
+        height: '600px',
       }}>
         <CardActionArea >
           <CardMedia
@@ -46,15 +47,18 @@ const SingleProduct = () => {
           />
           <CardContent>
             <Typography variant="h5" component="div">{products?.title}</Typography>
-            <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
+            <Typography variant="h6" sx={{display:'flex', gap:'5px'}} color="text.secondary">
               <Typography  color="lightcoral">Category: {products?.category.name} </Typography>
             </Typography>
-            <Typography color ="blue" variant="body1" component="div">Price: {products?.price}€</Typography>
-            <Typography variant="body1" color="green" sx={{display:'flex', gap:'5px'}}>Description:
-                <Typography variant="body2"  color="text.secondary">{products?.description}</Typography>
+            <Typography color ="blue" variant="body2">Price: {products?.price}€</Typography>
+            <Typography  variant="subtitle2" color="green" sx={{ display: 'flex', gap: '5px' }}>
+              <Typography>Description:</Typography>
+              <Typography color="text.secondary">{products?.description}</Typography> 
             </Typography>
+          </CardContent>
+          <CardActions>
             <Button variant="outlined" sx={{ml:10, mt:1}} component={Link}to={{ pathname: `/products`}}>Back to productlist</Button>
-            </CardContent>
+           </CardActions>
         </CardActionArea>
       </Card>
     </Container>

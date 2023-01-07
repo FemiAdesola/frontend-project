@@ -14,7 +14,6 @@ const Categories = ({ name, id, image }: CategoryType) => {
       dispatch(getAllCategories())
       setIsLoading(false) 
     }, [])
-  console.log(categories)
   return (
       <Container maxWidth="lg">
         <Box sx={{ flexGrow: 1 }}>
