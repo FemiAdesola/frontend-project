@@ -24,7 +24,6 @@ console.log(totalPrice)
           //   handleRemoveFromCart={handleRemoveFromCart}
           // />
             
-        
         <ul key={product.id}>
           <span>{ product.title}</span>
           <span>{product.amount}</span>
