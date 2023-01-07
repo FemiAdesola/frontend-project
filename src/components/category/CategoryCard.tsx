@@ -1,18 +1,18 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { CategoryType } from '../../types/category';
-import { Link } from 'react-router-dom';
 
-const CategoryCard = ({ id,name,image}: CategoryType) => {
+import { CategoryType } from '../../types/category';
+
+const CategoryCard = ({name,image}: CategoryType) => {
   return (
     <Card
       sx={{
-        maxWidth: 300,
+        maxWidth: 340,
         margin: '10px',
         display: 'flex',
         height: '300px',
@@ -23,9 +23,10 @@ const CategoryCard = ({ id,name,image}: CategoryType) => {
         <CardMedia
           component="img"
           sx={{
-            width: '100%',
-            maxWidth: '100%',
-            objectFit: 'cover',
+            width:"400px",
+              height: '200px',
+              maxWidth: '100%',
+              objectFit: 'cover',
           }}
           image={image}
         />

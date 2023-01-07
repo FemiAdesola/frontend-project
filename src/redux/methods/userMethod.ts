@@ -32,7 +32,7 @@ export const userAuthentication = createAsyncThunk(
         try {
             const response = await axiosInstance.post("auth/login", { email, password })
             const data: ReturnedAuthentications = response.data
-            const result = await thunkAPI.dispatch (loginUser (data.access_token) )
+            const result = await thunkAPI.dispatch (loginUser (data.access_token))
                 return result.payload as UserType
         } catch (err) {
             const error = err as AxiosError
@@ -72,7 +72,6 @@ export const loginUser = createAsyncThunk(
         }
     }
 )
-
 
 export const createUserWithSignUp = createAsyncThunk(
     "createUserWithSignUp",

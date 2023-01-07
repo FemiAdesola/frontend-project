@@ -3,12 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Box, Button, CardActionArea, CardActions} from '@mui/material';
+import { Box, Button, CardActionArea} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { Link } from 'react-router-dom';
 
 import { ProductType } from '../../types/product';
-import { useAppSelector, useAppDispatch } from '../../hooks/reduxHook';
+import { useAppDispatch } from '../../hooks/reduxHook';
 import { addToCart } from '../../redux/methods/cartMethod';
 
 
@@ -21,7 +21,6 @@ const ProductCard = ({ id, title, price, images, category}: ProductType, product
     <Card sx={{
       maxWidth: 340,
       margin: '10px',
-      // display: 'flex',
       height: '350px',
     }}>
       <Card>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid';
 import { Box, Button, Container, CssBaseline} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import Pagination from '@mui/material/Pagination';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { sortByName, sortByPrice} from '../../redux/reducers/productReducer';
@@ -13,9 +14,17 @@ import Loading from '../loading/Loading';
 const Products = () => {
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  let rowsPerPage = 20;
   let products = useAppSelector(state => state.productReducer.filter(item => {
     return item.title.toLowerCase().includes(search.toLowerCase())
   }))
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+  const count = Math.ceil(products.length / rowsPerPage);
+
   const [filteredValue, setFilteredValue] = useState("");
   const categories = useAppSelector(state => state.categoryReducer)
   const dispatch = useAppDispatch()
@@ -66,11 +75,19 @@ const Products = () => {
             </select>
           </Button>
         </div>
-     </Box>
+      </Box>
+      <Pagination
+        count={count}
+        page={page}
+        onChange={handleChange} variant="outlined"        
+        shape="rounded"        
+        color="standard"
+        sx={{ml:3}}
+      />
       {isLoading && <Loading/>}{
         !isLoading && (
           <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {products.map((product) => (
+        {products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((product) => (
           <ProductCard
             key={product.id}
             images={product.images}
@@ -84,8 +101,15 @@ const Products = () => {
       </Grid>
         )
       }
+      <Pagination
+        count={count}
+        page={page}
+        onChange={handleChange} variant="outlined"        
+        shape="rounded"        
+        color="standard"
+        sx={{ ml: 3 , mt:3}}
+      />
     </Container>
-
   )
 }
 

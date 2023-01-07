@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 import { useAppDispatch } from '../../hooks/reduxHook';
 import { UserForm } from '../../types/user';
 import { SignUpSchema } from '../../formvalidation/signUpSchema';
+import { createUserWithSignUp } from '../../redux/methods/userMethod';
 
 
 const SignUp = () =>  {
@@ -24,8 +25,8 @@ const SignUp = () =>  {
     resolver: yupResolver(SignUpSchema)
   })
   const onsubmit: SubmitHandler<UserForm> = data => {
-    console.log(data)
-    // dispatch(createUserWithSignUp(data))
+    // console.log(data)
+    dispatch(createUserWithSignUp(data))
   }
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/login";  
