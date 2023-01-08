@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import Typography from '@mui/material/Typography';
 import {
+  Box,
   Button,
   Card,
   CardContent,
-  CardMedia,
   Container,
   CssBaseline,
   Grid,
@@ -30,7 +30,7 @@ const Cart = () => {
       {
         cartItems.length === 0 ? (
           <>
-            <Typography variant="h5">Your cart is empty</Typography>
+            <Typography variant="h5">No item in your cart</Typography>
             <Button variant="outlined" sx={{ ml: 10, mt: 1 }} component={Link} to={{ pathname: `/products` }}>Back to productlist
             </Button>
           </>  
@@ -38,11 +38,12 @@ const Cart = () => {
             <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {
                 cartItems.map((cartItem) => (
+                  <Box key={cartItem.id} sx={{width:"100%", pl:5}} >
                   <List key={cartItem.id} sx={{display:"flex"}}>
                     <ImageListItem sx={{ width: 100, height: 100, mr: 4}} >
                       <img src={cartItem.images[0]} alt={cartItem.title }/>
                     </ImageListItem>
-                    <List sx={{display:"block"}}>
+                    <List  key={cartItem.id} sx={{display:"block"}}>
                     <ListItem disablePadding>Title: {cartItem.title}</ListItem>
                       <ListItem disablePadding>
                         Quantity: {cartItem.amount}
@@ -51,7 +52,8 @@ const Cart = () => {
                       </ListItem>
                       <ListItem disablePadding>Total price: {(cartItem.price * cartItem.amount).toLocaleString()} €</ListItem>
                     </List>
-                  </List>
+                    </List>
+                    </Box>
                 ))
               }
               <Card sx={{display:"flex"}}>

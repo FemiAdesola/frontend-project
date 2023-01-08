@@ -15,7 +15,7 @@ const CategoryCard = ({name,image}: CategoryType) => {
         maxWidth: 340,
         margin: '10px',
         display: 'flex',
-        height: '300px',
+        height: 'auto',
       }}>
       <CardActionArea
       component={Link}
@@ -24,7 +24,7 @@ const CategoryCard = ({name,image}: CategoryType) => {
           component="img"
           sx={{
             width:"400px",
-              height: '200px',
+              height: 'auto',
               maxWidth: '100%',
               objectFit: 'cover',
           }}

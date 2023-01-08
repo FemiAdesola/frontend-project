@@ -4,12 +4,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, CssBaseline, Stack } from '@mui/material';
+import { Button, CardActionArea, CssBaseline, Stack } from '@mui/material';
 
-import { Container, width } from '@mui/system';
+import { Container} from '@mui/system';
 import axiosInstance from '../../common/axiosInstance';
 import { CartProductType, ProductType } from '../../types/product';
-import Box from '@mui/material/Box';
 import { addToCart } from '../../redux/reducers/cartReducer';
 import { useAppDispatch } from '../../hooks/reduxHook';
 
@@ -40,7 +39,7 @@ const SingleProduct = () => {
       <Card sx={{
         maxWidth: 450,
         display: 'block',
-        height: '600px',
+        height: 'auto',
       }}>
         <Card>
         <CardActionArea >

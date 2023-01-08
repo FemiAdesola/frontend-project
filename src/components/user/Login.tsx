@@ -67,7 +67,8 @@ const Login = () => {
            {...register("password")}
           fullWidth
           margin="normal"
-          type="password" 
+          type="password"
+          autoComplete="password"
           sx={{
             "& label.Mui-focused": {
               display: "none",

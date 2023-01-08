@@ -40,4 +40,3 @@ const ProductCard = ({ id, title, price, images, category}: ProductType)  => {
 }
 
 export default ProductCard
-

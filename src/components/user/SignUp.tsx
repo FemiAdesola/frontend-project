@@ -93,7 +93,7 @@ const SignUp = (role:UserForm) =>  {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  autoComplete="password"
               />
               <Typography component="div" variant="body2" color="red">{errors.password?.message}</Typography>
             </Grid>
@@ -104,8 +104,8 @@ const SignUp = (role:UserForm) =>  {
                    {...register("confirm_password")}
                   label=" confirm Password"
                   type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  id="confirm_password"
+                  autoComplete=" new password"
               />
               <Typography component="div" variant="body2" color="red">{errors.confirm_password?.message}</Typography>
               </Grid>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { Link } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,14 +21,18 @@ import { Badge } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
 import { toggleTheme } from '../redux/reducers/darkLightReducer';
+
+
 interface Props {
   window?: () => Window;
 }
 const drawerWidth = 240;
 
+
 const Header = (props: Props) => {
     const theme = useAppSelector(state => state.darkLightReducer)
     const { cartItems } = useAppSelector((state) => state.cartReducer);
+    const [isUser, setIsUser] = useState("")
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
@@ -40,12 +44,12 @@ const Header = (props: Props) => {
     const ToggleSwitch = () => {
         const dispatch = useAppDispatch();
         return (
-            <Box>
+            <>
                 {theme.darkTheme}
                 <IconButton sx={{ ml: 1 }} onClick={() => dispatch(toggleTheme())} color="inherit">
                     {theme.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
-        </Box>
+            </>
         );
     };
     const drawer = (
@@ -98,11 +102,14 @@ const Header = (props: Props) => {
           justifyContent: "left",
           alignItems: "left",
           paddingLeft: "57px",
-          paddingTop: "7px",
+                paddingTop: "7px",
+           bgcolor: 'background.paper' 
         }}
         >
         <AppBar component="nav" sx={{backgroundColor: colorToggle(theme)}}>
+                
             <Toolbar>
+                     
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
@@ -112,7 +119,7 @@ const Header = (props: Props) => {
                 >
                 <MenuIcon />
                 </IconButton>
-                <Typography
+                <Typography 
                     variant="h4"
                     component={Link} to=""
                     sx={{
@@ -167,7 +174,37 @@ const Header = (props: Props) => {
                         }}>
                         CreateProduct
                     </Box>
+                    
                     <Box
+                        component={Link}
+                            to="cart"
+                            marginRight={5}
+                        sx={{
+                            textDecoration: 'none',
+                            display: { xs: 'none', sm: 'block' },
+                            color: (theme) => theme.palette.common.white,
+                            fontWeight: 'bold', 
+                    }}>
+                        <Badge color="secondary" badgeContent={cartItems.length}>
+                            <AddShoppingCartIcon />    
+                        </Badge>
+                        </Box>
+                       
+                    {!isUser ? (<Box
+                        component={Link}
+                            to="login"
+                            marginRight={5}
+                        sx={{
+                            textDecoration: 'none',
+                            display: { xs: 'none', sm: 'block' },
+                            color: (theme) => theme.palette.common.white,
+                            fontWeight: 'bold',
+                            
+                        }}>
+                      login
+                    </Box>
+                        ) : (
+                                 <Box
                         component={Link}
                             to="users"
                             marginRight={3}
@@ -182,46 +219,12 @@ const Header = (props: Props) => {
                         <Typography sx={{mt:2}}>Users</Typography> 
                         <GroupIcon sx={{fontSize:"40px"}}/>
                     </Box>
-                    <Box
-                        component={Link}
-                            to="signup"
-                            marginRight={5}
-                        sx={{
-                            textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
-                            color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold',
-                            
-                        }}>
-                        Signup
-                    </Box>
-                    <Box
-                        component={Link}
-                            to="cart"
-                            marginRight={5}
-                        sx={{
-                            textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
-                            color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold', 
-                    }}>
-                        <Badge color="secondary" badgeContent={cartItems.length}>
-                            <AddShoppingCartIcon />    
-                        </Badge>
-                    </Box>
-                    <Box
-                        marginTop={-1}
-                        sx={{
-                            textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
-                            color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold',
-                            justifyContent:"center"
-                        }}>
-                    </Box>
+                    )}
                 </Box>
-            </Toolbar>
-        </AppBar>
+                        
+                </Toolbar>
+               
+                </AppBar>
         <Box component="nav">
             <Drawer
                 container={container}

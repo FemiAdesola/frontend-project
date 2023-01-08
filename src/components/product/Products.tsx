@@ -14,7 +14,7 @@ import Loading from '../loading/Loading';
 const Products = () => {
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   let rowsPerPage = 20;
   let products = useAppSelector(state => state.productReducer.filter(item => {
     return item.title.toLowerCase().includes(search.toLowerCase())
@@ -87,7 +87,7 @@ const Products = () => {
       {isLoading && <Loading/>}{
         !isLoading && (
           <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((product) => (
+        {products.slice(page * rowsPerPage , page * rowsPerPage + rowsPerPage).map((product) => (
           <ProductCard
             key={product.id}
             images={product.images}
@@ -104,7 +104,8 @@ const Products = () => {
       <Pagination
         count={count}
         page={page}
-        onChange={handleChange} variant="outlined"        
+        onChange={handleChange}
+        variant="outlined"        
         shape="rounded"        
         color="standard"
         sx={{ ml: 3 , mt:3}}
