@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Container, Paper, Typography } from '@mui/material'
+import Products from './product/Products';
 
 const Footer = () => {
   return (
-   <Paper sx={{marginTop: 'calc(50% - 200px)',
+   <Paper sx={{marginTop: 'calc(30% - 200px)',
     width: '100%',
     position: 'relative',
     bottom: 0,
@@ -31,11 +32,17 @@ const Footer = () => {
               align="center"
               gutterBottom
             >
-              Home
+            eCommerce website
+          </Typography>
+          <Typography variant="caption"  component={Link} to="products" sx={{color: (theme) => theme.palette.common.white,textDecoration: 'none',}}>
+              Check our products
+          </Typography>
+           <Typography variant="caption"  component={Link} to="login" sx={{color: (theme) => theme.palette.common.white,textDecoration: 'none',}}>
+              sign in
             </Typography>
             <Typography variant="caption" sx={{color: (theme) => theme.palette.common.white,}}>
-              Copyright ©2022.
-            </Typography>
+              Copyright ©2023.
+          </Typography>
           </Box>
       </Container>
     </Paper>

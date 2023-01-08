@@ -17,9 +17,10 @@ import { useAppDispatch } from '../../hooks/reduxHook';
 import { UserForm } from '../../types/user';
 import { SignUpSchema } from '../../formvalidation/signUpSchema';
 import { createUserWithSignUp } from '../../redux/methods/userMethod';
+import { MenuItem, Select } from '@mui/material';
 
 
-const SignUp = () =>  {
+const SignUp = (role:UserForm) =>  {
   const dispatch = useAppDispatch()
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
     resolver: yupResolver(SignUpSchema)
@@ -71,6 +72,18 @@ const SignUp = () =>  {
                   autoComplete="email"
               />
               <Typography component="div" variant="body2" color="red">{errors.email?.message}</Typography>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="Role"
+                  label="role"
+                {...register("role")}
+                  autoComplete="role"
+                />
+              <Typography component="div" variant="body2" color="red">{errors.role?.message}</Typography>
+              
+              </Grid>
               </Grid>
               <Grid item xs={12}>
                 <TextField

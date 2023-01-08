@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <SignUp />
+        element: <SignUp email={''} password={''} name={''} avatar={''} role={'admin'} />
       },
       {
         path: 'cart',

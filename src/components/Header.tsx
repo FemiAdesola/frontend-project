@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -17,22 +16,19 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import GroupIcon from '@mui/icons-material/Group';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Badge } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
 import { toggleTheme } from '../redux/reducers/darkLightReducer';
-
-
-
-// import Search from './features/Search';
-import { width } from '@mui/system';
-
 interface Props {
   window?: () => Window;
 }
 const drawerWidth = 240;
 
 const Header = (props: Props) => {
-    const theme = useAppSelector(state=>state.darkLightReducer)
+    const theme = useAppSelector(state => state.darkLightReducer)
+    const { cartItems } = useAppSelector((state) => state.cartReducer);
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
@@ -86,15 +82,11 @@ const Header = (props: Props) => {
             </ListItem>
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="cart" sx={{ textAlign: 'center' }}>
-                    Cart
+                  <Badge color="secondary" badgeContent={cartItems.length}>
+                    <AddShoppingCartIcon />    
+                </Badge>
                 </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-                <ListItemButton component={Link} to="search" sx={{ textAlign: 'center' }}>
-                   {/* <Search/> */}
-                </ListItemButton>
-            </ListItem>
-                
+            </ListItem>    
         </List>
     </Box>
   );
@@ -122,17 +114,16 @@ const Header = (props: Props) => {
                 </IconButton>
                 <Typography
                     variant="h4"
-                        component={Link} to=""
-                        sx={{
-                            textDecoration: 'none', flexGrow: 1,
-                            display: {
-                                xs: 'none', sm: 'block'
-                            },
-                            color: (theme) => theme.palette.common.white,
-                        }}
-                        
+                    component={Link} to=""
+                    sx={{
+                        textDecoration: 'none', flexGrow: 1,
+                        display: {
+                            xs: 'none', sm: 'block'
+                        },
+                        color: (theme) => theme.palette.common.white,
+                    }}
                 >
-                        <HomeOutlinedIcon sx={{fontSize:"50px"}} />
+                <HomeOutlinedIcon sx={{fontSize:"50px"}} />
                 </Typography>
                 <Box sx={{ display: "flex", m: 3, paddingRight: 20 }}>
                     <Box
@@ -159,9 +150,9 @@ const Header = (props: Props) => {
                                 color: (theme) => theme.palette.common.white,
                             }
                             
-                            }}>
-                            <Typography sx={{mt:1}}>Products</Typography>
-                 <ShoppingBasketIcon sx={{fontSize:"30px"}}/>
+                        }}>
+                    <Typography sx={{mt:1}}>Products</Typography>
+                    <ShoppingBasketIcon sx={{fontSize:"30px"}}/>
                     </Box>
                     <Box
                         component={Link}
@@ -212,10 +203,11 @@ const Header = (props: Props) => {
                             textDecoration: 'none',
                             display: { xs: 'none', sm: 'block' },
                             color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold',
-                            
-                        }}>
-                        Cart 
+                            fontWeight: 'bold', 
+                    }}>
+                        <Badge color="secondary" badgeContent={cartItems.length}>
+                            <AddShoppingCartIcon />    
+                        </Badge>
                     </Box>
                     <Box
                         marginTop={-1}
@@ -226,7 +218,6 @@ const Header = (props: Props) => {
                             fontWeight: 'bold',
                             justifyContent:"center"
                         }}>
-                       {/* <Search/>  */}
                     </Box>
                 </Box>
             </Toolbar>

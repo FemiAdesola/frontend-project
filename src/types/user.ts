@@ -35,4 +35,5 @@ export interface UserForm{
     name: string
     confirm_password?: string
     avatar: File[] | string
+    role: Role
 }

@@ -1,7 +1,7 @@
 import { CategoryType} from './category';
 
 export interface ProductType {
-    id: number;
+    id: number | string;
     title: string;
     price: number;
     description: string;
@@ -31,6 +31,6 @@ export interface Error{
     Error:string
 }
 
-export interface CartProduct extends ProductType{
+export interface CartProductType extends ProductType{
     amount: number
 }

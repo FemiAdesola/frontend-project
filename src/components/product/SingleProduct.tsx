@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, CssBaseline } from '@mui/material';
+import { Button, CardActionArea, CardActions, CssBaseline, Stack } from '@mui/material';
 
-import { Container } from '@mui/system';
+import { Container, width } from '@mui/system';
 import axiosInstance from '../../common/axiosInstance';
-import { ProductType } from '../../types/product';
+import { CartProductType, ProductType } from '../../types/product';
 import Box from '@mui/material/Box';
+import { addToCart } from '../../redux/reducers/cartReducer';
+import { useAppDispatch } from '../../hooks/reduxHook';
 
 const SingleProduct = () => {
-  let {id} = useParams()
-  const [products, setProducts]=useState<ProductType>()
+  let { id } = useParams()
+    const dispatch = useAppDispatch()
+   const navigate = useNavigate();
+  const [products, setProducts] = useState<ProductType>()
+  
+   const onAdd = () => {
+    dispatch(addToCart(products as CartProductType));
+    navigate('/cart');
+  };
   useEffect(() => {
     const singleProductDetails = async () => {
       try {
@@ -29,11 +38,11 @@ const SingleProduct = () => {
     <Container component="main" maxWidth="xs">
     <CssBaseline />
       <Card sx={{
-        maxWidth: 400,
-        margin: '10px',
-        display: 'flex',
+        maxWidth: 450,
+        display: 'block',
         height: '600px',
       }}>
+        <Card>
         <CardActionArea >
           <CardMedia
             component="img"
@@ -50,16 +59,20 @@ const SingleProduct = () => {
             <Typography variant="h6" sx={{display:'flex', gap:'5px'}} color="text.secondary">
               <Typography  color="lightcoral">Category: {products?.category.name} </Typography>
             </Typography>
-            <Typography color ="blue" variant="body2">Price: {products?.price}€</Typography>
+              <Typography color="blue" variant="body2">Price: {products?.price}€</Typography>
             <Typography  variant="subtitle2" color="green" sx={{ display: 'flex', gap: '5px' }}>
               <Typography>Description:</Typography>
               <Typography color="text.secondary">{products?.description}</Typography> 
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button variant="outlined" sx={{ml:10, mt:1}} component={Link}to={{ pathname: `/products`}}>Back to productlist</Button>
-           </CardActions>
         </CardActionArea>
+      </Card>
+      <Stack sx={{m:1, gap:1}} >
+        <Button  variant="outlined" sx={{ ml: 2,   width: '90%' }} component={Link} to={{ pathname: "/products"}}>Back to productlist</Button>
+        <Button variant="outlined" sx={{ ml: 2,  width: '90%' }} onClick={onAdd}>
+          Add to cart
+        </Button>
+      </Stack>
       </Card>
     </Container>
   )
