@@ -26,7 +26,6 @@ const SignUp = (role:UserForm) =>  {
     resolver: yupResolver(SignUpSchema)
   })
   const onsubmit: SubmitHandler<UserForm> = data => {
-    // console.log(data)
     dispatch(createUserWithSignUp(data))
   }
   const redirectInUrl = new URLSearchParams().get("redirect");

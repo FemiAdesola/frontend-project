@@ -14,11 +14,11 @@ import { useAppDispatch } from '../../hooks/reduxHook';
 
 const SingleProduct = () => {
   let { id } = useParams()
-    const dispatch = useAppDispatch()
-   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate();
   const [products, setProducts] = useState<ProductType>()
   
-   const onAdd = () => {
+  const onAdd = () => {
     dispatch(addToCart(products as CartProductType));
     navigate('/cart');
   };

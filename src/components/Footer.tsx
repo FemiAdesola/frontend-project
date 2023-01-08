@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Container, Paper, Typography } from '@mui/material'
-import Products from './product/Products';
 
 const Footer = () => {
   return (

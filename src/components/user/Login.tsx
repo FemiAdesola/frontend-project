@@ -14,7 +14,6 @@ import { SignUpSchema } from '../../formvalidation/signUpSchema';
 import { Authentications } from '../../types/user';
 import { Link } from 'react-router-dom';
 
-
 const Login = () => {
   const { handleSubmit, register, formState: { errors } } = useForm<Authentications>({
     resolver: yupResolver(SignUpSchema)
@@ -37,7 +36,6 @@ const Login = () => {
         border: "1px solid #ddd",
         boxShadow: "3px 3px 5px rgba(0,0,0,0.05)",
         alignItems: 'center' ,
-        
       }}>
         <Typography component="h2" variant="h2" marginBottom={3}>
            Login

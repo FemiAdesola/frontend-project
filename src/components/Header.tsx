@@ -22,12 +22,10 @@ import { Badge } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
 import { toggleTheme } from '../redux/reducers/darkLightReducer';
 
-
 interface Props {
   window?: () => Window;
 }
 const drawerWidth = 240;
-
 
 const Header = (props: Props) => {
     const theme = useAppSelector(state => state.darkLightReducer)
@@ -106,10 +104,8 @@ const Header = (props: Props) => {
            bgcolor: 'background.paper' 
         }}
         >
-        <AppBar component="nav" sx={{backgroundColor: colorToggle(theme)}}>
-                
-            <Toolbar>
-                     
+        <AppBar component="nav" sx={{backgroundColor: colorToggle(theme)}}>   
+            <Toolbar>       
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
@@ -174,7 +170,6 @@ const Header = (props: Props) => {
                         }}>
                         CreateProduct
                     </Box>
-                    
                     <Box
                         component={Link}
                             to="cart"
@@ -188,8 +183,7 @@ const Header = (props: Props) => {
                         <Badge color="secondary" badgeContent={cartItems.length}>
                             <AddShoppingCartIcon />    
                         </Badge>
-                        </Box>
-                       
+                    </Box>  
                     {!isUser ? (<Box
                         component={Link}
                             to="login"
@@ -220,11 +214,10 @@ const Header = (props: Props) => {
                         <GroupIcon sx={{fontSize:"40px"}}/>
                     </Box>
                     )}
-                </Box>
-                        
-                </Toolbar>
+                </Box>     
+            </Toolbar>
                
-                </AppBar>
+        </AppBar>
         <Box component="nav">
             <Drawer
                 container={container}
@@ -241,8 +234,7 @@ const Header = (props: Props) => {
             >
             {drawer}
             </Drawer>
-        </Box>
-        
+        </Box> 
     </Box>
   )
 }

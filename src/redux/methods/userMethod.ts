@@ -3,7 +3,6 @@ import { AxiosError } from "axios"
 import axiosInstance from "../../common/axiosInstance"
 import { Authentications, ReturnedAuthentications, UserType, UserForm } from "../../types/user"
 
-
 export const getAllUsers = createAsyncThunk(
     "getAllUsers",
     async () => {

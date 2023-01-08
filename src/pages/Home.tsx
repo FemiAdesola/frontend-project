@@ -7,7 +7,6 @@ import { Container } from '@mui/system';
 import Categories from '../components/category/Categories';
 import HomeCarousel from '../components/features/HomeCarousel';
 
-
 const Home = () => {
   return (
   <Container>

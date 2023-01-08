@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Typography from '@mui/material/Typography';
 import {
   Box,
@@ -18,7 +18,6 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../../redux/reducers/cartReducer';
-
 
 const Cart = () => {
   const dispatch = useAppDispatch()
