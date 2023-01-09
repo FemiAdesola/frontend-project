@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -17,10 +17,13 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import GroupIcon from '@mui/icons-material/Group';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { Badge } from '@mui/material';
+import { Badge, Button } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
 import { toggleTheme } from '../redux/reducers/darkLightReducer';
+import { userLogout } from '../redux/reducers/userReducer';
+import {reset} from '../redux/reducers/cartReducer'
+
 
 interface Props {
   window?: () => Window;
@@ -28,9 +31,11 @@ interface Props {
 const drawerWidth = 240;
 
 const Header = (props: Props) => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const theme = useAppSelector(state => state.darkLightReducer)
     const { cartItems } = useAppSelector((state) => state.cartReducer);
-    const [isUser, setIsUser] = useState("")
+     const  userInfo  = useAppSelector((state) => state.userReducer.currentUser);
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
@@ -39,6 +44,14 @@ const Header = (props: Props) => {
     const colorToggle = (theme: { darkTheme: boolean; }) => {
         return theme.darkTheme ? "#303b47" : "gray";
     };
+
+    const onLogout = () => { 
+        dispatch(userLogout())
+        dispatch(reset());
+        navigate('/login');
+    }
+
+
     const ToggleSwitch = () => {
         const dispatch = useAppDispatch();
         return (
@@ -157,20 +170,7 @@ const Header = (props: Props) => {
                     <Typography sx={{mt:1}}>Products</Typography>
                     <ShoppingBasketIcon sx={{fontSize:"30px"}}/>
                     </Box>
-                    <Box
-                        component={Link}
-                            to="create"
-                            marginRight={5}
-                        sx={{
-                            textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
-                            color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold',
-                            
-                        }}>
-                        CreateProduct
-                    </Box>
-                    <Box
+                         <Box
                         component={Link}
                             to="cart"
                             marginRight={5}
@@ -183,51 +183,76 @@ const Header = (props: Props) => {
                         <Badge color="secondary" badgeContent={cartItems.length}>
                             <AddShoppingCartIcon />    
                         </Badge>
-                    </Box>  
-                        {/* {!isUser ? */}
-                            <Box
-                        component={Link}
-                            to="login"
-                            marginRight={5}
-                        sx={{
-                            textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
-                            color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold',
-                            
-                        }}>
-                      login
                     </Box>
-                        {/* ) : ( */}
-                                 <Box
-                        component={Link}
-                            to="users"
-                            marginRight={3}
-                            sx={{
-                            mt:-2,
-                            textDecoration: 'none',
-                            display: { xs: 'none', sm: 'flex' },
-                            color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold',
+
+                        {!userInfo ? (
+                            <>
+                                <Box
+                                    component={Link}
+                                    to="login"
+                                    marginRight={5}
+                                    sx={{
+                                        textDecoration: 'none',
+                                        display: { xs: 'none', sm: 'block' },
+                                        color: (theme) => theme.palette.common.white,
+                                        fontWeight: 'bold',
                             
-                        }}>
-                        <Typography sx={{mt:2}}>Users</Typography> 
-                        <GroupIcon sx={{fontSize:"40px"}}/>
-                        </Box>
-                          <Box
-                        component={Link}
-                            to="profile"
-                            marginRight={5}
-                        sx={{
-                            textDecoration: 'none',
-                            display: { xs: 'none', sm: 'block' },
-                            color: (theme) => theme.palette.common.white,
-                            fontWeight: 'bold',
+                                    }}>
+                                    login
+                                </Box>
+                            </>
+                                ) : ( 
+                            <>
+                                <Box
+                                    component={Link}
+                                    to="create"
+                                    marginRight={5}
+                                    sx={{
+                                        textDecoration: 'none',
+                                        display: { xs: 'none', sm: 'block' },
+                                        color: (theme) => theme.palette.common.white,
+                                        fontWeight: 'bold',
                             
-                        }}>
-                        Profile
-                    </Box>
-                    {/* )} */}
+                                    }}>
+                                    CreateProduct
+                                </Box>
+                                <Box
+                                    component={Link}
+                                    to="users"
+                                    marginRight={3}
+                                    sx={{
+                                        mt: -2,
+                                        textDecoration: 'none',
+                                        display: { xs: 'none', sm: 'flex' },
+                                        color: (theme) => theme.palette.common.white,
+                                        fontWeight: 'bold',
+                            
+                                    }}>
+                                    <Typography sx={{ mt: 2 }}>Users</Typography>
+                                    <GroupIcon sx={{ fontSize: "40px" }} />
+                                </Box>
+                                <Box
+                                    component={Link}
+                                    to={{ pathname: `/profile/${userInfo?.id}` }}
+                                    marginRight={5}
+                                    sx={{
+                                        textDecoration: 'none',
+                                        display: { xs: 'none', sm: 'block' },
+                                        color: (theme) => theme.palette.common.white,
+                                        fontWeight: 'bold',
+                            
+                                    }}>
+                                    Profile
+                                    </Box>
+                                    <Button
+                                   onClick={onLogout}
+                                    sx={{mt:-1, color:"inherit"}}
+                                    
+                                    >
+                                    Logout
+                                </Button>
+                            </>
+                         )}     
                 </Box>     
             </Toolbar>
                

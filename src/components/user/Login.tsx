@@ -13,29 +13,25 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { SignInSchema } from '../../formvalidation/signUpSchema';
 import { Authentications } from '../../types/user';
-import { userAuthentication } from '../../redux/methods/userMethod';
+import { userAuthentication} from '../../redux/methods/userMethod';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 
 const Login = () => {
   const { handleSubmit, register, formState: { errors } } = useForm<Authentications>({
     resolver: yupResolver(SignInSchema)
   })
-  const { userInfo } = useAppSelector((state) => state.userReducer);
+  const  userInfo  = useAppSelector((state) => state.userReducer.currentUser);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const onsubmit: SubmitHandler<Authentications> = data => {
-  //   // console.log(data)
-  //   dispatch(userAuthentication(data))
-  // }
 
   const onsubmit=(data:Authentications)=> {
-    // console.log(data)
     dispatch(userAuthentication(data))
   }
    
   useEffect(() => {
-    if (userInfo) return navigate('/users');
-  }, [userInfo]);
+    if (userInfo)
+    { return navigate('/') };
+  }, [navigate, userInfo]);
 
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/signup";
