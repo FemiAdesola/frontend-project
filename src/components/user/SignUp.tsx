@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -17,16 +15,18 @@ import { useAppDispatch } from '../../hooks/reduxHook';
 import { UserForm } from '../../types/user';
 import { SignUpSchema } from '../../formvalidation/signUpSchema';
 import { createUserWithSignUp } from '../../redux/methods/userMethod';
-import { MenuItem, Select } from '@mui/material';
+
 
 
 const SignUp = (role:UserForm) =>  {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate();
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
     resolver: yupResolver(SignUpSchema)
   })
   const onsubmit: SubmitHandler<UserForm> = data => {
     dispatch(createUserWithSignUp(data))
+    navigate('/login');
   }
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/login";  
@@ -70,19 +70,6 @@ const SignUp = (role:UserForm) =>  {
                 {...register("email")}
                   autoComplete="email"
               />
-              <Typography component="div" variant="body2" color="red">{errors.email?.message}</Typography>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="Role"
-                  label="role"
-                {...register("role")}
-                  autoComplete="role"
-                />
-              <Typography component="div" variant="body2" color="red">{errors.role?.message}</Typography>
-              
-              </Grid>
               </Grid>
               <Grid item xs={12}>
                 <TextField

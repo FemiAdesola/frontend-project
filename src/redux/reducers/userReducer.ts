@@ -1,16 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
-import { UserReducer } from "../../types/user"; 
-import { createUserWithSignUp, getAllUsers, loginUser, userAuthentication } from "../methods/userMethod";
+import { UserReducer} from '../../types/user'; 
+import { createUserWithSignUp, getAllUsers, getUserBydId, loginUser, userAuthentication } from "../methods/userMethod";
 
 const initialState: UserReducer = {
-    userList: []
+    userList: [],
+    
 }
 
 const userSlice = createSlice({
     name: "userSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        userLogout: (state: UserReducer) => {
+         state.userInfo = null;
+    },
+    },
     extraReducers: (build) => {
         build.addCase(getAllUsers.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
@@ -44,9 +49,25 @@ const userSlice = createSlice({
                    }
                 }
             })
+            .addCase(getUserBydId.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                        return state
+                    } else {
+                    state.userList = action.payload
+                    }
+            })
+        
+            .addCase(getUserBydId.pending, (state, action) => {
+                return state
+            })
+            .addCase(getUserBydId.rejected, (state, action) => {
+                return state
+            })
     }
 });
 
-const userReducer= userSlice.reducer
+const userReducer = userSlice.reducer
+export const { userLogout } = userSlice.actions;
+
 
 export default userReducer

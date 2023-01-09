@@ -9,6 +9,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import { useAppSelector } from '../../hooks/reduxHook';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -41,6 +42,7 @@ const images = [
 ];
 
 const HomeCarousel = () => {
+    //  const images = useAppSelector(state => state.categoryReducer)
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     const maxSteps = images.length;

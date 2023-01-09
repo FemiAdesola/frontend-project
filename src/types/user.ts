@@ -10,6 +10,7 @@ export interface UserReducer {
     userList: UserType[]
     currentUser?: UserType
     access_token?: string
+  userInfo?: UserType | null
 }
 
 export interface Authentications {
@@ -37,3 +38,4 @@ export interface UserForm{
     avatar: File[] | string
     role: Role
 }
+

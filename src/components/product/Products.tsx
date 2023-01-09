@@ -104,7 +104,7 @@ const Products = () => {
       <Pagination
         count={count}
         page={page}
-        onChange={handleChange}
+        onChange={handleChange} 
         variant="outlined"        
         shape="rounded"        
         color="standard"

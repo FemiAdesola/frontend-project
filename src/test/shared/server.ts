@@ -125,8 +125,7 @@ const handler = [
         }
     }),
     rest.post("https://api.escuelajs.co/api/v1/files/upload", async (req, res, context) => {
-        const file: File = await req.json()
-        console.log("check file", file)
+        const file = await req.json()
         if (file) {
             return res(
                 context.json(

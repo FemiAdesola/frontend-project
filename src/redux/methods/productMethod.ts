@@ -2,6 +2,7 @@ import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { CreateProductType, ProductType, CreateProductWithImages, UpdateProductType } from '../../types/product';
 import axiosInstance from "../../common/axiosInstance";
+import { response } from 'msw';
 
 export const getAllProducts = createAsyncThunk(
     "getAllProducts",
@@ -12,14 +13,15 @@ export const getAllProducts = createAsyncThunk(
         } catch (err) {
              const error = err as AxiosError
             if (error.response) {
-                console.log(error.response.status)
-                console.log(error.response.data)
+                return(error.response.status)
+                   ? error.response.data as AxiosResponse<Error>
+                    : error.response
             }else if (error.request) {
-                console.log(error.request)  
+                return(error.request)  
             } else {
-                console.log(error.message)
+                return(error.message)
             }
-            console.log(error.config)
+            
         }
     }
 )
@@ -48,58 +50,52 @@ export const sortProductByPrice = (state:ProductType[], action:PayloadAction<"as
     }
 }
 
-export const createProduct = createAsyncThunk(
-    "createProduct",
-    async (product: CreateProductType) => {
-        try {
-            const response: AxiosResponse<ProductType, ProductType> = await axiosInstance.post("products", product)
-            return response.data
-        } catch (err) {
-            const error = err as AxiosError
-            if (error.response) {
-                console.log(`Error from response: ${error.message}`)
-                console.log(error.response.data)
-            }else if (error.request) {
-                console.log(`Error from request: ${error.request}`)
-            } else {
-                 console.log(error.config)
-            }
-            
-        }
-    }
-)
+
 
 export const createProductWithImages = createAsyncThunk(
     "createProductWithImages",
     async ({ images, productCreate }: CreateProductWithImages) => {
-        let imageLocations: string[] = []
+       let imageLocations: string[] = []
         try {
-            for (let i = 0; i < images.length; i++) {
-                const response = await axiosInstance.post("files/upload", {file:images[i]},
-                    { headers: {'Content-Type': 'multipart/form-data' }
-                })
+            for (let i = 0; i < images.length; i++) { 
+                const response = await axiosInstance.post("files/upload", images[i])
                 const data = response.data.location
                 imageLocations.push(data)
-               
             }
             const productResponse = await axiosInstance.post("products", {
                 ...productCreate,
                 images: [...productCreate.images, ...imageLocations]
-               
             })
             return productResponse.data
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.response.statusText}`)
-                console.log(error.response.data)
+                return(error.response.data)
             }else if (error.request) {
-                console.log(`Error from request: ${error.message}`)
+                return(`Error from request: ${error.message}`)
             } else {
-                console.log(error.config)
+                return(error.config)
             }
-           
+            
         } 
+    }
+)
+export const createProduct = createAsyncThunk(
+    "createProduct",
+    async (product: CreateProductType) => {
+        try {
+            const response: AxiosResponse<ProductType, any> = await axiosInstance.post("products", product)
+            return response.data
+        } catch (err) {
+            const error = err as AxiosError
+            if (error.response) {
+                console.log(`Error from response: ${error.message}`)
+            }else if (error.request) {
+                console.log(`Error from request: ${error.request}`)
+            } else {
+               console.log(error.config)
+            }
+        }
     }
 )
 

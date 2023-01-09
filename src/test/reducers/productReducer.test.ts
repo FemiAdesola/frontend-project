@@ -95,15 +95,34 @@ describe("Test all the products actions", () => {
                 throw new Error("Function not implemented.")
             }
         }
+         const image2: File = {
+            lastModified: 0,
+            name: "test for image",
+            webkitRelativePath: "",
+            size: 0,
+            type: "",
+            arrayBuffer: function (): Promise<ArrayBuffer> {
+                throw new Error("Function not implemented.")
+            },
+            slice: function (start?: number | undefined, end?: number | undefined, contentType?: string | undefined): Blob {
+                throw new Error("Function not implemented.")
+            },
+            stream: function () {
+                throw new Error("Function not implemented.")
+            },
+            text: function (): Promise<string> {
+                throw new Error("Function not implemented.")
+            }
+        }
         const productCreate: CreateProductType = {
             title: "Test for createProductWithImages",
-            price: 900,
+            price: 1000,
             description: "Test create product",
-            categoryId: 1,
+            categoryId: 2,
             images: []
         }
-        await store.dispatch(createProductWithImages({ images: [image1], productCreate }))
-        expect(store.getState().productReducer[0].images.length).toBe(1)
-        // expect(store.getState().productReducer.length).toBe(1)
+        await store.dispatch(createProductWithImages({images:[image1, image2], productCreate }))
+        expect(store.getState().productReducer[0].images.length).toBe(2)
+        expect(store.getState().productReducer.length).toBe(1)
     })
 })

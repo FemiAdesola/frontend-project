@@ -184,7 +184,8 @@ const Header = (props: Props) => {
                             <AddShoppingCartIcon />    
                         </Badge>
                     </Box>  
-                    {!isUser ? (<Box
+                        {/* {!isUser ? */}
+                            <Box
                         component={Link}
                             to="login"
                             marginRight={5}
@@ -197,7 +198,7 @@ const Header = (props: Props) => {
                         }}>
                       login
                     </Box>
-                        ) : (
+                        {/* ) : ( */}
                                  <Box
                         component={Link}
                             to="users"
@@ -212,8 +213,21 @@ const Header = (props: Props) => {
                         }}>
                         <Typography sx={{mt:2}}>Users</Typography> 
                         <GroupIcon sx={{fontSize:"40px"}}/>
+                        </Box>
+                          <Box
+                        component={Link}
+                            to="profile"
+                            marginRight={5}
+                        sx={{
+                            textDecoration: 'none',
+                            display: { xs: 'none', sm: 'block' },
+                            color: (theme) => theme.palette.common.white,
+                            fontWeight: 'bold',
+                            
+                        }}>
+                        Profile
                     </Box>
-                    )}
+                    {/* )} */}
                 </Box>     
             </Toolbar>
                

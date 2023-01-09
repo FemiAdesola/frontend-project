@@ -11,6 +11,7 @@ import Login from './components/user/Login';
 import SignUp from './components/user/SignUp';
 import CreateProducts from './components/product/CreateProduct';
 import UserList from './components/user/UserList';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: 'users',
         element: <UserList id={0} role={'admin'} avatar={''} confirm_password={undefined} email={''} password={''} name={''}/>
+      },
+       {
+        path: 'profile',
+        element: <Profile/>
       },
       {
         path: 'signup',

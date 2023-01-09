@@ -15,10 +15,11 @@ export interface CreateProductType {
     price: number
     categoryId: number
    images: File[] 
+    // images: string[] ;
 }
 
 export interface CreateProductWithImages{
-    images: File[]
+    images: File[],
     productCreate: CreateProductType
 }
 

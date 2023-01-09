@@ -99,3 +99,25 @@ export const createUserWithSignUp = createAsyncThunk(
         }
     }
 )
+
+export const getUserBydId = createAsyncThunk(
+  'users/:id',
+  async (id: string | undefined) => {
+    try {
+      const response  = await axiosInstance.get(`/users/${id}`);
+      if (response.data) {
+        return response.data;
+      }
+    } catch (err) {
+            const error = err as AxiosError
+            if (error.response) {
+                console.log(`Error from response: ${error.message}`)
+                console.log(error.response.data)
+            } else if (error.request) {
+                console.log(`Error from request: ${error.request}`)
+            } else {
+                console.log(error.config)
+            }
+        }
+  }
+);

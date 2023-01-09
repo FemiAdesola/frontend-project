@@ -64,12 +64,12 @@ const CreateProducts = () => {
 //     setProductImages(null)
 // };
   
-  const { handleSubmit, register, formState: { errors } } = useForm<CreateProductType>({
+  const { handleSubmit, register, formState: { errors } } = useForm<CreateProductWithImages>({
     resolver: yupResolver(productSchema)
   })
-   const onsubmit: SubmitHandler<CreateProductType> = data => {
-    // console.log(data)
-    dispatch(createProduct(data))
+   const onsubmit: SubmitHandler<CreateProductWithImages> = data => {
+    // console.log((data))
+    dispatch(createProductWithImages(data))
   }
   return (
     <Container maxWidth="sm">
@@ -101,7 +101,7 @@ const CreateProducts = () => {
               <TextField
              
                 type="text" 
-                 {...register("title")}
+                 {...register("productCreate.title")}
                 fullWidth
           />
            {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.title?.message}</Typography> */}
@@ -115,7 +115,7 @@ const CreateProducts = () => {
                 
                 type="number" 
             // onChange={changeHandler}
-               {...register("price")}
+               {...register("productCreate.price")}
                 fullWidth
           />
           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.price?.message}</Typography> */}
@@ -128,7 +128,7 @@ const CreateProducts = () => {
           
               <TextField
              
-               {...register("description")}
+               {...register("productCreate.description")}
                 multiline
                 rows={4}
                 fullWidth
@@ -143,7 +143,7 @@ const CreateProducts = () => {
               <TextField
                 required 
                 type="number" 
-                {...register("categoryId")}
+                {...register("productCreate.categoryId")}
                 fullWidth
               />
           <Typography 
@@ -165,7 +165,7 @@ const CreateProducts = () => {
           type="file"
           multiple
               // {...register("productCreate.images")}
-              // {...register("images")}
+              {...register("images")}
         />
       </Typography>
            <Typography component="div" variant="body2" color="red">{errors.images?.message}</Typography>

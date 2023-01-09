@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import {
@@ -9,18 +9,34 @@ CssBaseline,
 Typography, 
 Container,
 } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { SignUpSchema } from '../../formvalidation/signUpSchema';
+import { SignInSchema } from '../../formvalidation/signUpSchema';
 import { Authentications } from '../../types/user';
-import { Link } from 'react-router-dom';
+import { userAuthentication } from '../../redux/methods/userMethod';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 
 const Login = () => {
   const { handleSubmit, register, formState: { errors } } = useForm<Authentications>({
-    resolver: yupResolver(SignUpSchema)
+    resolver: yupResolver(SignInSchema)
   })
-  const onsubmit: SubmitHandler<Authentications> = data => {
-    console.log(data)
+  const { userInfo } = useAppSelector((state) => state.userReducer);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  // const onsubmit: SubmitHandler<Authentications> = data => {
+  //   // console.log(data)
+  //   dispatch(userAuthentication(data))
+  // }
+
+  const onsubmit=(data:Authentications)=> {
+    // console.log(data)
+    dispatch(userAuthentication(data))
   }
+   
+  useEffect(() => {
+    if (userInfo) return navigate('/users');
+  }, [userInfo]);
+
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/signup";
   return (
