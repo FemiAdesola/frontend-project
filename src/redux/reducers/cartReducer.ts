@@ -18,7 +18,7 @@ export const cartSlice = createSlice({
         (cartItem) => cartItem.id === product.id
       );
       if (existItem) {
-        state.cartItems = state.cartItems.map((cartItem: any) =>
+        state.cartItems = state.cartItems.map((cartItem) =>
           cartItem.id === product.id ? { ...product, amount: cartItem.amount + 1 } : cartItem
         );
       } else {

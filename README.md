@@ -179,11 +179,11 @@ When the user signs in, the user can perform activities such as create product, 
 │   │       ├── categoryServer.ts
 │   │       ├── productServer.ts
 │   │       └── userServer.ts
-│   ├── types
-│   │   ├── category.ts
-│   │   ├── product.ts
-│   │   └── user.ts
-│   └── utils
+│   └── types
+│       ├── category.ts
+│       ├── product.ts
+│       └── user.ts
+│   
 └── tsconfig.json
 ```
 
