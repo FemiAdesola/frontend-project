@@ -11,7 +11,7 @@ import { Box } from '@mui/material';
 const Root = () => {
   const theme = useAppSelector(state=>state.darkLightReducer)
   return (
-    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme.lightTheme  ?  lightTheme: darkTheme}>
       <Box>
         <Header />
         <Outlet />

@@ -42,7 +42,6 @@ const images = [
 ];
 
 const HomeCarousel = () => {
-    //  const images = useAppSelector(state => state.categoryReducer)
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
     const maxSteps = images.length;

@@ -17,7 +17,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import GroupIcon from '@mui/icons-material/Group';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { Badge, Button } from '@mui/material';
+import { Avatar, Badge, Button } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '../hooks/reduxHook';
 import { toggleTheme } from '../redux/reducers/darkLightReducer';
@@ -35,14 +35,14 @@ const Header = (props: Props) => {
     const navigate = useNavigate();
     const theme = useAppSelector(state => state.darkLightReducer)
     const { cartItems } = useAppSelector((state) => state.cartReducer);
-     const  userInfo  = useAppSelector((state) => state.userReducer.currentUser);
+    const  userInfo  = useAppSelector((state) => state.userReducer.currentUser);
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
-    const colorToggle = (theme: { darkTheme: boolean; }) => {
-        return theme.darkTheme ? "#303b47" : "gray";
+    const colorToggle = (theme: { lightTheme : boolean; }) => {
+        return theme.lightTheme  ? "#303b47" : "gray";
     };
 
     const onLogout = () => { 
@@ -56,9 +56,9 @@ const Header = (props: Props) => {
         const dispatch = useAppDispatch();
         return (
             <>
-                {theme.darkTheme}
+                {theme.lightTheme }
                 <IconButton sx={{ ml: 1 }} onClick={() => dispatch(toggleTheme())} color="inherit">
-                    {theme.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
+                    {theme.lightTheme  ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
             </>
         );
@@ -237,12 +237,14 @@ const Header = (props: Props) => {
                                     marginRight={5}
                                     sx={{
                                         textDecoration: 'none',
-                                        display: { xs: 'none', sm: 'block' },
+                                        display: { xs: 'none', sm: 'flex' },
                                         color: (theme) => theme.palette.common.white,
                                         fontWeight: 'bold',
+                                       
                             
                                     }}>
-                                    Profile
+                                        <Avatar sx={{ mt: -1}} alt="Profile Picture" src={userInfo.avatar} />
+                                        <Typography sx={{mt:-2}} >{userInfo.name}</Typography>
                                     </Box>
                                     <Button
                                    onClick={onLogout}

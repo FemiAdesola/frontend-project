@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
     addToCart: (state: CartSliceState, action: PayloadAction<CartProductType>) => {
       const product = action.payload;
       const existItem = state.cartItems.find(
-        (cartItem: any) => cartItem.id === product.id
+        (cartItem) => cartItem.id === product.id
       );
       if (existItem) {
         state.cartItems = state.cartItems.map((cartItem: any) =>
@@ -28,20 +28,20 @@ export const cartSlice = createSlice({
     removeFromCart: (state: CartSliceState, action: PayloadAction<CartProductType>) => {
       const product = action.payload;
       const existItem = state.cartItems.find(
-        (cartItem: any) => cartItem.id === product.id
+        (cartItem) => cartItem.id === product.id
       );
 
       if (existItem && existItem.amount === 1) {
         state.cartItems = state.cartItems.filter(
-          (cartItem: any) => cartItem.id !== product.id
+          (cartItem) => cartItem.id !== product.id
         );
       } else {
-        state.cartItems = state.cartItems.map((cartItem: any) =>
+        state.cartItems = state.cartItems.map((cartItem) =>
           cartItem.id === product.id ? { ...product, amount: cartItem.amount - 1 } : cartItem
         );
       }
     },
-    reset: (state: any) => { state.cartItems = [];}
+    reset: (state) => { state.cartItems = [];}
   },
 });
 

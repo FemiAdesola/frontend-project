@@ -12,6 +12,7 @@ import SignUp from './components/user/SignUp';
 import CreateProducts from './components/product/CreateProduct';
 import UserList from './components/user/UserList';
 import Profile from './pages/Profile';
+import UpdateProduct from './components/product/UpdateProduct';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,12 @@ const router = createBrowserRouter([
         path: 'profile/:id',
         element: <Profile/>
       },
+
+       {
+        path: 'products/:id',
+        element: <UpdateProduct/>
+      },
+
       {
         path: 'signup',
         element: <SignUp email={''} password={''} name={''} avatar={''} role={'admin'} />

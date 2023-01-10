@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useDeferredValue } from 'react'
 import Grid from '@mui/material/Grid';
 import { Box, Button, Container, CssBaseline} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -15,11 +15,14 @@ const Products = () => {
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
+
+  const deferredQuery = useDeferredValue(search);
+  
   let rowsPerPage = 20;
   let products = useAppSelector(state => state.productReducer.filter(item => {
-    return item.title.toLowerCase().includes(search.toLowerCase())
+    return item.title.toLowerCase().includes(deferredQuery.toLowerCase())
   }))
-
+  
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
@@ -28,6 +31,7 @@ const Products = () => {
   const [filteredValue, setFilteredValue] = useState("");
   const categories = useAppSelector(state => state.categoryReducer)
   const dispatch = useAppDispatch()
+
   const sortName = () => {
     dispatch(sortByName("asc"))
   }
@@ -54,14 +58,15 @@ const Products = () => {
         <div>
           <Button onClick={() => { sortName() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Name</Button>
           <Button onClick={() => { sortByProductPriceN() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Price</Button>
-          <SearchMenu>
+          <SearchMenu >
             <SearchIconWrapper>
             <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
                   placeholder="Type your search here..."
                   inputProps={{ 'aria-label': 'search'}}
-                  value={search}
+              value={search}
+             
                   onChange={e => setSearch(e.target.value)}  
             />
           </SearchMenu>
@@ -89,6 +94,7 @@ const Products = () => {
           <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {products.slice(page * rowsPerPage , page * rowsPerPage + rowsPerPage).map((product) => (
           <ProductCard
+            
             key={product.id}
             images={product.images}
             title={product.title}

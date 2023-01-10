@@ -14,23 +14,19 @@ import Container from '@mui/material/Container';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { UserForm } from '../types/user';
-import { SignUpSchema } from '../formvalidation/signUpSchema';
-// import { useAppDispatch } from '../../hooks/reduxHook';
-// import { UserForm } from '../../types/user';
-// import { SignUpSchema } from '../../formvalidation/signUpSchema';
-// import { createUserWithSignUp } from '../../redux/methods/userMethod';
+import { SignUpSchema } from '../formvalidation/signUpSchema'
 import { getUserBydId } from '../redux/methods/userMethod';
 import axiosInstance from '../common/axiosInstance';
 import Loading from '../components/loading/Loading';
 import { Card, CardActionArea, CardContent, CardMedia, ImageListItem, List, ListItem, Paper } from '@mui/material';
-import UserList from '../components/user/UserList';
+
 
 const Profile = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate();
   const { id } = useParams();
   const [refresh, setRefresh] = useState<boolean>(false);
-   const  users = useAppSelector((state) => state.userReducer.currentUser);
+  const  users = useAppSelector((state) => state.userReducer.currentUser);
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
     resolver: yupResolver(SignUpSchema)
   })

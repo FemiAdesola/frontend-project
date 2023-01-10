@@ -3,3 +3,9 @@ export interface CategoryType {
     name: string;
     image: string;
 }
+
+export interface CreateCategoryType {
+    name: string;
+    image: string;
+    id?: number;
+}

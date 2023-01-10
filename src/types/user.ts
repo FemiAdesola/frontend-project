@@ -6,11 +6,10 @@ export interface UserType  extends UserForm{
     confirm_password: undefined
 }
 
-export interface UserReducer {
+export interface UserReducer extends UserLogout{
     userList: UserType[]
     currentUser?: UserType
     access_token?: string
-  userInfo?: UserType | null
 }
 
 export interface Authentications {
@@ -39,3 +38,6 @@ export interface UserForm{
     role: Role
 }
 
+export interface UserLogout{
+    userInfo?: UserType | null
+}

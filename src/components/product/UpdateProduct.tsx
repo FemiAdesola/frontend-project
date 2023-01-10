@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import {
@@ -11,28 +11,21 @@ import {
   Grid,
 } from '@mui/material';
 
-import { createProductWithImages, createProduct } from '../../redux/methods/productMethod';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { CreateProductType, CreateProductWithImages } from '../../types/product';
+import { useAppDispatch } from '../../hooks/reduxHook';
 import { productSchema } from '../../formvalidation/productSchema';
-import { useNavigate, useParams } from 'react-router-dom';
+import { UpdateProductType } from '../../types/product';
+import { updateProduct } from '../../redux/methods/productMethod';
 
-const CreateProducts = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-   let { id } = useParams()
-  const { handleSubmit, register, formState: { errors } } = useForm<CreateProductWithImages>({
+
+const UpdateProduct = () => {
+    const dispatch = useAppDispatch();
+    const { handleSubmit, register, formState: { errors } } = useForm<UpdateProductType>({
     resolver: yupResolver(productSchema)
   })
-  // const  update = useAppSelector((state) => state.productReducer);
-   const onsubmit: SubmitHandler<CreateProductWithImages> = data => {
+   const onsubmit: SubmitHandler<UpdateProductType> = data => {
     // console.log((data))
-    dispatch(createProductWithImages(data))
-   }
-  const updateHandler = () => {
-    
-    navigate(`products/${id}`);
-  };
+    dispatch(updateProduct(data))
+  }
   return (
     <Container maxWidth="sm">
      <CssBaseline />
@@ -63,7 +56,7 @@ const CreateProducts = () => {
               <TextField
              
                 type="text" 
-                 {...register("productCreate.title")}
+                 {...register("update.title")}
                 fullWidth
           />
            {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.title?.message}</Typography> */}
@@ -77,7 +70,7 @@ const CreateProducts = () => {
                 
                 type="number" 
             // onChange={changeHandler}
-               {...register("productCreate.price")}
+               {...register("update.price")}
                 fullWidth
           />
           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.price?.message}</Typography> */}
@@ -90,7 +83,7 @@ const CreateProducts = () => {
           
               <TextField
              
-               {...register("productCreate.description")}
+               {...register("update.description")}
                 multiline
                 rows={4}
                 fullWidth
@@ -105,7 +98,7 @@ const CreateProducts = () => {
               <TextField
                 required 
                 type="number" 
-                {...register("productCreate.categoryId")}
+                {...register("update.category.id")}
                 fullWidth
               />
           <Typography 
@@ -113,24 +106,15 @@ const CreateProducts = () => {
             marginTop={2}
             >Upload images:
           </Typography>
-            {/* <TextField
-                // required 
-              type="file"
-           
-              inputProps={{multiple: true}}
-             {...register("images")}
-              // value={productImages}
-              fullWidth
-          />  */}
           <Typography component="div" sx={{margin:"20px"}}>
         <input 
           type="file"
           multiple
               // {...register("productCreate.images")}
-              {...register("images")}
+              {...register("update.images")}
         />
       </Typography>
-          <Typography component="div" variant="body2" color="red">{errors.images?.message}</Typography>
+           <Typography component="div" variant="body2" color="red">{errors.update?.images?.message}</Typography>
           <Button 
             type="submit"
             sx={{
@@ -147,15 +131,11 @@ const CreateProducts = () => {
                   color: "#ffFFFf"
                 },
             }}
-          >Add Product</Button> 
-            
-          <Button  component="form" onSubmit={handleSubmit(onsubmit)} variant="outlined" sx={{ ml: 2,  width: '90%' }} onClick={updateHandler}>
-         Update
-        </Button>  
+          >Update Product</Button>
         </Box>
       </Grid>
     </Container>
   )
 }
 
-export default CreateProducts
+export default UpdateProduct

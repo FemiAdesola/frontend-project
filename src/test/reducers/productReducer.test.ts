@@ -1,22 +1,21 @@
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit"
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
-// import axios from "axios"
-// import { WritableDraft } from "immer/dist/internal"
 
 import {  sortByName } from "../../redux/reducers/productReducer"
 import { getAllProducts, createProduct, updateProduct, createProductWithImages } from '../../redux/methods/productMethod';
 import { createStore, RootState } from "../../redux/store"
 import { CreateProductType} from "../../types/product"
-import server from "../shared/server"
+
+import productServer from "../shared/productServer";
 
 let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 
 beforeAll(() => {
-    server.listen()
+    productServer.listen()
 })
 
 afterAll(() => {
-    server.close()
+    productServer.close()
 })
 
 beforeEach(() => {

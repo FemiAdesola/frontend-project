@@ -1,29 +1,100 @@
 # Front-end Project @Integrify
+<div align="center">
+ <img src="https://res.cloudinary.com/demo/image/upload/c_fill,h_250,w_250/docs/models" alt="logo" width="200" height="auto"  />
+  <h1> eCommerce using <span><a href="https://fakeapi.platzi.com">fakeAPI</a></span></h1>
+
+   
+    This is E-commerce store using React and Redux  with typescript
+  </p>
+
+</div>
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
 ![Redux toolkit](https://img.shields.io/badge/Redux-v.1.9-purple)
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4.9-green)
 ![SASS](https://img.shields.io/badge/SASS-v.4.9-hotpink)
 
-This project requires implementation of TypeScript and SASS.
+## Table of content
 
-## Requirement
+- [Introduction](#introduction)
+- [Technologies](#technologies)
+- [Requirements](#requirements)
+- [Project structure](#project-structure)
+- [Getting started](#getting-started)
+- [Instruction to start the project](#instruction-to-start-the-project)
 
-1. Use the API endpoint [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/) to create an e-commerce website. Read the documentation and learn how to use the different endpoints.
-2. Create at lease 4 pages (can be more if you want): Home page, product page,
-profile page (only available if user logins), and cart page (cart could be a page or a modal)
-3. Create Redux store for following features:
+## Introduction
+
+This is an eCommerce app where users can order products through an online service.
+The users can filter the product based on the available category of product, sort by highest and lowest price, name of the product, and search through the product. Upon clicking on **Products** from the menu tab, the user can see all products in the product lists. 
+Also, by clicking on each **check details** on each product, users can view the details of that specific product and add the product to the cart. 
+## Technologies
+
+- RectJS
+- MUI (material MUI for design and styling)
+- TypeScript
+- Redux
+- React hook userform
+- react-router-dom
+- Reach hooks
+- redux-persist
+
+## Requirements
+
+1. The API endpoint from [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)  was used to create an e-commerce website. 
+2. Home page, product page, user page, create product page, profile page were created. Also
+profile page is only available when user logins, and user can chekout from there cart page 
+3. Redux store were created for following features:
     - product reducer: get all products, find a single products, sort products by
-    categories, sort products by price. Create, update and delete a product (enable update & delete features only for admin of the webapp. For example, you can check if user is your admin account before let them delete product)
+    categories, sort products by price. 
+    - Create, update  a product and update features only for admin of the webapp. 
     - user reducer: Register and Login
     - cart reducer: add product to cart, remove products, update products's quantity in cart
-4. When adding routers to your application, programatically set certain routes to be private. For example, route to user profile page should not be accessible if user has not logged in.
-5. Deploy the application and rewrite README file.
+4.  Routes to the following are private: route to user profile page is not accessible if user has not logged in.
+5. Check the website from [here]()
+6. Theme was used for light and dark mode 
+7. Pagination was created
 
-## Bonus
+## Getting started
+### Home page
+On the home page, the user can switch from dark mode to light mode, click on the product to see the product inside the product list, click on the cart link, and click on the login link to log in.
 
-1. Use context API to switch theme
-2. Implement unit testing for the reducers
+![From](/img/Front.png)
+
+### Product List
+
+- From the product list page, the User clicks on the **Check details** button to view the details about single product. 
+![produlist](/img/ProductList.png)
+
+#### Single product page
+![SingleProduct](/img/Details.png)
+
+### SignUp and Login 
+#### SignUp page
+
+- Users can **"signup"** with their name, email, and password, upload their avatar, and get access to view their profile and see other users. Then have access to create and update products.
+ ![SignUp](/img/signup.png)
+
+#### Login page
+
+- For the user to log in, it requires the user's **"email and password"** used initially for signing up for an account.
+- After logging in, the user can view all necessary information about the product.
+
+![Login](/img/Login.png)
+
+#### Users Login
+
+When the user signs in, the user can perform activities such as create product, update their profiles 
+
+![UserLogin](/img/SignedUser.png)
+
+- User can add item to cart
+![Cartitem](/img/Cart.png)
+
+![itemcart](/img/AddToCart.png)
+
+- User's profile
+![UserProfile](/img/Profile.png)
 
 ## Instruction to start the project
 
@@ -45,7 +116,3 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.

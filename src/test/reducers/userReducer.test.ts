@@ -3,19 +3,19 @@ import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
 import { getAllUsers, userAuthentication } from '../../redux/methods/userMethod';
 
 import { createStore, RootState } from "../../redux/store"
-import server from "../shared/server"
+import userServer from "../shared/userServer";
 
 let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 
 beforeAll(() => {
-    server.listen()
+    userServer.listen()
 })
 
 beforeEach(() => {
     store = createStore()
 })
 afterAll(() => {
-    server.close()
+    userServer.close()
 })
 
 describe("Test userReducer", () => {
