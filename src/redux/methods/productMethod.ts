@@ -91,7 +91,6 @@ export const createProduct = createAsyncThunk(
             if (error.status) {
                 console.log(error.status)
             }else if (error.request) {
-                console.log(`Error from request: ${error.request}`)
             } else {
                console.log(error.config)
             }

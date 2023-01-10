@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Pagination } from '@mui/material'
+import { Box, Container, Grid, Pagination, TablePagination } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
@@ -8,13 +8,22 @@ import Loading from '../loading/Loading';
 
 const Categories = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  let rowsPerPage = 1;
+  const [page, setPage] = useState(0);
+   const [rowsPerPage, setRowsPerPage] = useState(3);
   const categories = useAppSelector(state => state.categoryReducer)
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
+    setPage(newPage);
   };
-  const count = Math.ceil(categories.length / rowsPerPage)  ;
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
     const dispatch = useAppDispatch()
     useEffect (() => {
       dispatch(getAllCategories())
@@ -26,24 +35,27 @@ const Categories = () => {
         {isLoading && <Loading />}{
           !isLoading && (
             <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {categories.slice(page * rowsPerPage -1, page * rowsPerPage).map((category) => (
-            <CategoryCard
-            image={category.image}
-            name={category.name}
-            id={category.id}            
-          />
+              {categories.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((category) => (
+                < Grid key={category.id}>
+              <CategoryCard
+                image={category.image}
+                name={category.name}
+                id={category.id}            
+              />
+            </Grid>
           ))}
           </Grid>
           )
           }
       </Box>
-      <Pagination
-        count={count}
-        page={page}
-        onChange={handleChange} variant="outlined"        
-        shape="rounded"        
-        color="standard"
-        sx={{ ml: 3 , mt:3}}
+       <TablePagination
+          rowsPerPageOptions={[3, 10, 20, 50, 100]}
+          component="div"
+          count={categories.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Container>
   )

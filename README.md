@@ -51,7 +51,7 @@ profile page is only available when user logins, and user can chekout from there
     - user reducer: Register and Login
     - cart reducer: add product to cart, remove products, update products's quantity in cart
 4.  Routes to the following are private: route to user profile page is not accessible if user has not logged in.
-5. Check the website from [here]()
+5. Check the website from [here](https://femi-frontend.netlify.app/)
 6. Theme was used for light and dark mode 
 7. Pagination was created
 
@@ -96,6 +96,10 @@ When the user signs in, the user can perform activities such as create product, 
 - User's profile
 ![UserProfile](/img/Profile.png)
 
+### Reducer Test result
+
+The total of 13 test were performed on the product, category and user
+![TestResult](/img/TestResult.png)
 ##
 ```shell
 .

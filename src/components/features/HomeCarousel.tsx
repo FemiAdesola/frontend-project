@@ -9,7 +9,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import { useAppSelector } from '../../hooks/reduxHook';
+
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -63,7 +63,7 @@ const HomeCarousel = () => {
             enableMouseEvents
         >
             {images.map((step, index) => (
-            <div key={step.label}>
+            <Typography key={step.label}>
                 {Math.abs(activeStep - index) <= 2 ? (
                 <Box
                     component="img"
@@ -78,7 +78,7 @@ const HomeCarousel = () => {
                     alt={step.label}
                 />
                 ) : null}
-            </div>
+            </Typography>
             ))}
             </AutoPlaySwipeableViews>
             <Paper

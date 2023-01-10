@@ -21,15 +21,15 @@ beforeEach(() => {
     store = createStore()
 })
 
-describe("Test all the products actions", () => {
-    test("Should return initial product state", () => {
+describe("Test all the categories actions", () => {
+    test("Should return initial category state", () => {
         expect(store.getState().categoryReducer.length).toBe(0)
     })
     test("Shou get all products", async () => {
         await store.dispatch(getAllCategories())
         expect(store.getState().categoryReducer.length).toBe(4)
     })
-    test("should create a new product", async () => {
+    test("should create a new category", async () => {
         const newCategory: CreateCategoryType = {
             id: 5,
             name: "Clothes",
