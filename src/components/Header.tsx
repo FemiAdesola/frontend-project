@@ -41,8 +41,8 @@ const Header = (props: Props) => {
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
-    const colorToggle = (theme: { lightTheme : boolean; }) => {
-        return theme.lightTheme  ? "#303b47" : "gray";
+    const colorToggle = (theme: { darkTheme  : boolean; }) => {
+        return theme.darkTheme   ? "#303b47" : "gray";
     };
 
     const onLogout = () => { 
@@ -56,9 +56,9 @@ const Header = (props: Props) => {
         const dispatch = useAppDispatch();
         return (
             <>
-                {theme.lightTheme }
+                {theme.darkTheme }
                 <IconButton sx={{ ml: 1 }} onClick={() => dispatch(toggleTheme())} color="inherit">
-                    {theme.lightTheme  ? <Brightness7Icon /> : <Brightness4Icon />}
+                    {theme.darkTheme  ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
             </>
         );

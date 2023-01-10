@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'users',
-        element: <UserList id={0} role={'admin'} avatar={''} confirm_password={undefined} email={''} password={''} name={''}/>
+        element: <UserList/>
       },
        {
         path: 'profile/:id',

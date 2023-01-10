@@ -3,11 +3,10 @@ import React, { useEffect, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
 import { getAllUsers } from '../../redux/methods/userMethod'
-import { UserType } from '../../types/user'
 import Loading from '../loading/Loading'
 import UserCard from './UserCard'
 
-const UserList = ({id ,email, name,role, avatar }:UserType) => {
+const UserList = () => {
     const users = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
       const [isLoading, setIsLoading] = useState(true);

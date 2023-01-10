@@ -23,8 +23,7 @@ const userSlice = createSlice({
             } else {
                state.userList = action.payload
             }
-
-        })
+            })
             .addCase(userAuthentication.fulfilled, (state, action) => {
                 if (action.payload instanceof AxiosError) {
                     return state
@@ -32,7 +31,6 @@ const userSlice = createSlice({
                     state.currentUser = action.payload
                 }
             })
-
             .addCase(loginUser.fulfilled, (state, action) => {
                 if (action.payload instanceof AxiosError) {
                     return state
@@ -56,7 +54,6 @@ const userSlice = createSlice({
                     state.userList = action.payload
                     }
             })
-        
             .addCase(getUserBydId.pending, (state, action) => {
                 return state
             })
@@ -68,6 +65,4 @@ const userSlice = createSlice({
 
 const userReducer = userSlice.reducer
 export const { userLogout } = userSlice.actions;
-
-
 export default userReducer

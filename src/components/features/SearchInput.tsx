@@ -1,7 +1,6 @@
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 
-
 export const SearchMenu = styled('button')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -28,7 +27,6 @@ export const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    
   color: 'inherit',
   '& .MuiInputBase-input': {
       color: 'white',

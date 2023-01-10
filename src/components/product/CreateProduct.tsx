@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import {
@@ -11,9 +11,9 @@ import {
   Grid,
 } from '@mui/material';
 
-import { createProductWithImages, createProduct } from '../../redux/methods/productMethod';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { CreateProductType, CreateProductWithImages } from '../../types/product';
+import { createProductWithImages} from '../../redux/methods/productMethod';
+import { useAppDispatch} from '../../hooks/reduxHook';
+import {  CreateProductWithImages } from '../../types/product';
 import { productSchema } from '../../formvalidation/productSchema';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -24,13 +24,10 @@ const CreateProducts = () => {
   const { handleSubmit, register, formState: { errors } } = useForm<CreateProductWithImages>({
     resolver: yupResolver(productSchema)
   })
-  // const  update = useAppSelector((state) => state.productReducer);
    const onsubmit: SubmitHandler<CreateProductWithImages> = data => {
-    // console.log((data))
     dispatch(createProductWithImages(data))
    }
   const updateHandler = () => {
-    
     navigate(`products/${id}`);
   };
   return (
@@ -51,7 +48,6 @@ const CreateProducts = () => {
             marginBottom:"20px",
             padding:"0 60px"
           }}
-         
          component="form" onSubmit={handleSubmit(onsubmit)} 
         >
           <Typography 
@@ -66,21 +62,19 @@ const CreateProducts = () => {
                  {...register("productCreate.title")}
                 fullWidth
           />
-           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.title?.message}</Typography> */}
+           <Typography component="div" variant="body2" color="red">{errors.productCreate?.title?.message}</Typography>
           <Typography 
             component="span"
             marginTop={2}
             display= "block"
             >Price:
           </Typography>
-              <TextField
-                
-                type="number" 
-            // onChange={changeHandler}
-               {...register("productCreate.price")}
-                fullWidth
+          <TextField
+            type="number" 
+            {...register("productCreate.price")}
+            fullWidth
           />
-          {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.price?.message}</Typography> */}
+          <Typography component="div" variant="body2" color="red">{errors.productCreate?.price?.message}</Typography>
           <Typography 
             component="span"
             marginTop={3}
@@ -95,7 +89,7 @@ const CreateProducts = () => {
                 rows={4}
                 fullWidth
           />
-           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.description?.message}</Typography> */}
+           <Typography component="div" variant="body2" color="red">{errors.productCreate?.description?.message}</Typography>
           <Typography 
             component="span"
             marginTop={2}
@@ -113,15 +107,6 @@ const CreateProducts = () => {
             marginTop={2}
             >Upload images:
           </Typography>
-            {/* <TextField
-                // required 
-              type="file"
-           
-              inputProps={{multiple: true}}
-             {...register("images")}
-              // value={productImages}
-              fullWidth
-          />  */}
           <Typography component="div" sx={{margin:"20px"}}>
         <input 
           type="file"
@@ -148,7 +133,6 @@ const CreateProducts = () => {
                 },
             }}
           >Add Product</Button> 
-            
           <Button  component="form" onSubmit={handleSubmit(onsubmit)} variant="outlined" sx={{ ml: 2,  width: '90%' }} onClick={updateHandler}>
          Update
         </Button>  

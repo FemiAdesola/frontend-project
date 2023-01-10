@@ -16,8 +16,8 @@ const categorySlice = createSlice({
             } else if (!action.payload) {
                 return state
             }
-            return action.payload
-        })
+                return action.payload
+            })
             .addCase(getAllCategories.rejected, (state, action) => {
                 return state
             })
@@ -36,5 +36,4 @@ const categorySlice = createSlice({
 });
 
 const categoryReducer = categorySlice.reducer
-
 export default categoryReducer

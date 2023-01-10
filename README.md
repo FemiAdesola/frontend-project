@@ -96,6 +96,97 @@ When the user signs in, the user can perform activities such as create product, 
 - User's profile
 ![UserProfile](/img/Profile.png)
 
+##
+```shell
+.
+├── README.md
+
+├── img
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── App.css
+│   ├── App.css.map
+│   ├── App.tsx
+│   ├── SCSS
+│   │   ├── App.SCSS
+│   │   └── features
+│   │       └── _select.scss
+│   ├── common
+│   │   └── axiosInstance.ts
+│   ├── components
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── cart
+│   │   │   └── Cart.tsx
+│   │   ├── category
+│   │   │   ├── Categories.tsx
+│   │   │   └── CategoryCard.tsx
+│   │   ├── features
+│   │   │   ├── HomeCarousel.tsx
+│   │   │   └── SearchInput.tsx
+│   │   ├── loading
+│   │   │   └── Loading.tsx
+│   │   ├── product
+│   │   │   ├── CreateProduct.tsx
+│   │   │   ├── ProductCard.tsx
+│   │   │   ├── Products.tsx
+│   │   │   ├── SingleProduct.tsx
+│   │   │   └── UpdateProduct.tsx
+│   │   └── user
+│   │       ├── Login.tsx
+│   │       ├── SignUp.tsx
+│   │       ├── UserCard.tsx
+│   │       └── UserList.tsx
+│   ├── formvalidation
+│   │   ├── productSchema.ts
+│   │   └── signUpSchema.ts
+│   ├── hooks
+│   │   └── reduxHook.ts
+│   ├── index.tsx
+│   ├── pages
+│   │   ├── Home.tsx
+│   │   ├── Layout.tsx
+│   │   ├── NotFound.tsx
+│   │   └── Profile.tsx
+│   ├── react-app-env.d.ts
+│   ├── redux
+│   │   ├── methods
+│   │   │   ├── categoryMethod.ts
+│   │   │   ├── darkLightMethod.ts
+│   │   │   ├── productMethod.ts
+│   │   │   └── userMethod.ts
+│   │   ├── reducers
+│   │   │   ├── cartReducer.ts
+│   │   │   ├── categoryReducer.ts
+│   │   │   ├── darkLightReducer.ts
+│   │   │   ├── productReducer.ts
+│   │   │   └── userReducer.ts
+│   │   └── store.ts
+│   ├── reportWebVitals.ts
+│   ├── setupTests.ts
+│   ├── test
+│   │   ├── reducers
+│   │   │   ├── categoryReducer.test.ts
+│   │   │   ├── productReducer.test.ts
+│   │   │   └── userReducer.test.ts
+│   │   └── shared
+│   │       ├── categoryServer.ts
+│   │       ├── productServer.ts
+│   │       └── userServer.ts
+│   ├── types
+│   │   ├── category.ts
+│   │   ├── product.ts
+│   │   └── user.ts
+│   └── utils
+└── tsconfig.json
+```
+
 ## Instruction to start the project
 
 In the project directory, you can run:

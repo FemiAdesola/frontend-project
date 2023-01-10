@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import Avatar from '@mui/material/Avatar';
@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Card, CardActionArea, CardContent, CardMedia} from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { UserForm } from '../types/user';
@@ -18,12 +19,9 @@ import { SignUpSchema } from '../formvalidation/signUpSchema'
 import { getUserBydId } from '../redux/methods/userMethod';
 import axiosInstance from '../common/axiosInstance';
 import Loading from '../components/loading/Loading';
-import { Card, CardActionArea, CardContent, CardMedia, ImageListItem, List, ListItem, Paper } from '@mui/material';
-
 
 const Profile = () => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate();
   const { id } = useParams();
   const [refresh, setRefresh] = useState<boolean>(false);
   const  users = useAppSelector((state) => state.userReducer.currentUser);
@@ -55,15 +53,14 @@ const Profile = () => {
         <Loading />
         ) : (
         <Grid container justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-             
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -153,7 +150,6 @@ const Profile = () => {
                   backgroundColor: "#162639",
                   color: "#ffFFFf",
                   borderColor: "gray",
-
                 },
               }}
             >

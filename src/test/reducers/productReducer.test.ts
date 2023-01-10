@@ -73,7 +73,6 @@ describe("Test all the products actions", () => {
         expect(store.getState().productReducer.find(product => product.id === 1)?.price).toBe(500)
         expect(store.getState().productReducer.find(product => product.id === 1)?.description).toBe("Test update")
     })
-
     test("should create product with form and images", async () => {
         const image1: File = {
             lastModified: 0,

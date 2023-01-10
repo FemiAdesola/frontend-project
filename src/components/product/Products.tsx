@@ -15,23 +15,18 @@ const Products = () => {
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
-
   const deferredQuery = useDeferredValue(search);
-  
   let rowsPerPage = 20;
   let products = useAppSelector(state => state.productReducer.filter(item => {
     return item.title.toLowerCase().includes(deferredQuery.toLowerCase())
   }))
-  
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
   const count = Math.ceil(products.length / rowsPerPage);
-
   const [filteredValue, setFilteredValue] = useState("");
   const categories = useAppSelector(state => state.categoryReducer)
   const dispatch = useAppDispatch()
-
   const sortName = () => {
     dispatch(sortByName("asc"))
   }
@@ -42,7 +37,6 @@ const Products = () => {
     dispatch(getAllProducts())
     setIsLoading(false)
   }, [])
-
   if (filteredValue) {
     products = products.filter((item) => {
       return item.category.name.toLowerCase().includes(filteredValue)
@@ -50,7 +44,6 @@ const Products = () => {
   } else{
   products.map(option=>(option.category.name.toLowerCase().includes(filteredValue)))
   }
-
   return (
       <Container maxWidth="xl">
       <CssBaseline />

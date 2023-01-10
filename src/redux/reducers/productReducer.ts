@@ -30,14 +30,14 @@ const productSlice = createSlice({
                 return state
             }
             return action.payload
-        })
+             })
             .addCase(getAllProducts.rejected, (state, action) => {
                 return state
             })
             .addCase(getAllProducts.pending, (state, action) => {
                 return state
             })
-        build.addCase(createProduct.fulfilled, (state, action) => {
+            .addCase(createProduct.fulfilled, (state, action) => {
             if (action.payload) {
                 state.push(action.payload)
             } else {
@@ -51,7 +51,7 @@ const productSlice = createSlice({
                     return state 
                 }
             })
-        build.addCase(updateProduct.fulfilled, (state, action) => {
+            .addCase(updateProduct.fulfilled, (state, action) => {
             return state.map(product => {
                 if (product.id === action.payload?.id) {
                     return action.payload

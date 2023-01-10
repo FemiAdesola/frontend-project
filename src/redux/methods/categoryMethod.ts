@@ -13,12 +13,11 @@ export const getAllCategories = createAsyncThunk(
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.response.status}`)
-                console.log(error.response.data)
+                 return(`Error from response: ${error.response.status}`)
             }else if (error.request) {
-                console.log(`Error from request: ${error.request}`)
+                 return(`Error from request: ${error.request}`)
             } else {
-                 console.log(error.config)
+                return(error.config)
             }
         }
     }

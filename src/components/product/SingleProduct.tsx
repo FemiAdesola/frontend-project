@@ -11,16 +11,13 @@ import axiosInstance from '../../common/axiosInstance';
 import { CartProductType, ProductType } from '../../types/product';
 import { addToCart } from '../../redux/reducers/cartReducer';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { updateProduct } from '../../redux/methods/productMethod';
 
 const SingleProduct = () => {
   let { id } = useParams()
   const dispatch = useAppDispatch()
   const navigate = useNavigate();
   const [products, setProducts] = useState<ProductType>()
-  const update = useAppSelector((state) => state.productReducer);
   const  userInfo = useAppSelector((state) => state.userReducer.currentUser);
-  
   const onAdd = () => {
     dispatch(addToCart(products as CartProductType));
     navigate('/cart');
@@ -36,16 +33,12 @@ const SingleProduct = () => {
     };
   singleProductDetails();
   }, [id]);
-
-   const updateHandler = () => {
+  const updateHandler = () => {
     navigate(`products/${id}`);
   };
   return (
     <Container component="main" maxWidth="xs">
-   
       <CssBaseline />
-      
-        
         <Card sx={{
           maxWidth: 450,
           display: 'block',
@@ -78,7 +71,6 @@ const SingleProduct = () => {
               </CardContent>
             </CardActionArea>
           </Card>
-        
           <Stack sx={{ m: 1, gap: 1 }} >
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
           </Stack>
@@ -110,7 +102,6 @@ const SingleProduct = () => {
               </CardContent>
             </CardActionArea>
           </Card>
-        
           <Stack sx={{ m: 1, gap: 1 }} >
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
           </Stack>
@@ -124,9 +115,7 @@ const SingleProduct = () => {
               </Stack>
               </>
         )}
-        </Card>
-        
-      
+        </Card>   
     </Container>
   )
 }

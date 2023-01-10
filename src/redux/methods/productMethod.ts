@@ -88,8 +88,8 @@ export const createProduct = createAsyncThunk(
             return response.data
         } catch (err) {
             const error = err as AxiosError
-            if (error.response) {
-                console.log(`Error from response: ${error.message}`)
+            if (error.status) {
+                console.log(error.status)
             }else if (error.request) {
                 console.log(`Error from request: ${error.request}`)
             } else {
@@ -108,7 +108,6 @@ export const updateProduct = createAsyncThunk(
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.response.statusText}`)
                 console.log(error.response.data)
             } else if (error.request) {
                 console.log(`Error from request: ${error.request}`)

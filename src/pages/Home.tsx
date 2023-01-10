@@ -24,7 +24,7 @@ const Home = () => {
         columns={{ xs: 4, sm: 8, md: 12 }}
         >
           <HomeCarousel/>
-        <Categories id={0} name={''} image={''}/>
+        <Categories />
       </Grid>
     </Box>
   </Container>

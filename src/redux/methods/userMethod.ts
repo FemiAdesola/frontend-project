@@ -61,13 +61,11 @@ export const loginUser = createAsyncThunk(
             const error = err as AxiosError
             if (error.response) {
                 console.log(`Error from response: ${error.message}`)
-                console.log(error.response.data)
             }else if (error.request) {
                 console.log(`Error from request: ${error.request}`)
             } else {
                  console.log(error.config)
             }
-            // return error
         }
     }
 )
@@ -89,12 +87,11 @@ export const createUserWithSignUp = createAsyncThunk(
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.message}`)
-                console.log(error.response.data)
+                return(`Error from response: ${error.message}`)
             } else if (error.request) {
-                console.log(`Error from request: ${error.request}`)
+                return(`Error from request: ${error.request}`)
             } else {
-                console.log(error.config)
+                return(error.config)
             }
         }
     }
@@ -111,12 +108,11 @@ export const getUserBydId = createAsyncThunk(
     } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                console.log(`Error from response: ${error.message}`)
-                console.log(error.response.data)
+                return(`Error from response: ${error.message}`)
             } else if (error.request) {
-                console.log(`Error from request: ${error.request}`)
+                return(`Error from request: ${error.request}`)
             } else {
-                console.log(error.config)
+                return(error.config)
             }
         }
   }

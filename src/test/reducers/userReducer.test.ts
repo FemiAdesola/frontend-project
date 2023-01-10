@@ -29,7 +29,6 @@ describe("Test userReducer", () => {
         const state = store.getState().userReducer
         expect (state.userList.length).toBe(4)
     })
-
     test("should login user with right authentication", async () => {
         const authentication = {
             email: "maria@mail.com",

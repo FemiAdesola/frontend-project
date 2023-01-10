@@ -23,7 +23,6 @@ const UpdateProduct = () => {
     resolver: yupResolver(productSchema)
   })
    const onsubmit: SubmitHandler<UpdateProductType> = data => {
-    // console.log((data))
     dispatch(updateProduct(data))
   }
   return (
@@ -44,7 +43,6 @@ const UpdateProduct = () => {
             marginBottom:"20px",
             padding:"0 60px"
           }}
-         
          component="form" onSubmit={handleSubmit(onsubmit)} 
         >
           <Typography 
@@ -54,12 +52,11 @@ const UpdateProduct = () => {
             >Product title:
           </Typography>
               <TextField
-             
                 type="text" 
                  {...register("update.title")}
                 fullWidth
           />
-           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.title?.message}</Typography> */}
+           <Typography component="div" variant="body2" color="red">{errors.update?.title?.message}</Typography>
           <Typography 
             component="span"
             marginTop={2}
@@ -73,7 +70,7 @@ const UpdateProduct = () => {
                {...register("update.price")}
                 fullWidth
           />
-          {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.price?.message}</Typography> */}
+          <Typography component="div" variant="body2" color="red">{errors.update?.price?.message}</Typography>
           <Typography 
             component="span"
             marginTop={3}
@@ -88,7 +85,7 @@ const UpdateProduct = () => {
                 rows={4}
                 fullWidth
           />
-           {/* <Typography component="div" variant="body2" color="red">{errors.productCreate?.description?.message}</Typography> */}
+           <Typography component="div" variant="body2" color="red">{errors.update?.description?.message}</Typography>
           <Typography 
             component="span"
             marginTop={2}

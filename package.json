@@ -39,7 +39,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "compile": "sass --watch src/scss/App.scss:src/App.css",
+    "deploy": "npm run build"
   },
   "jest": {
     "transformIgnorePatterns": [

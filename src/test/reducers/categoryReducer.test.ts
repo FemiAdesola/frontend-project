@@ -36,7 +36,6 @@ describe("Test all the products actions", () => {
             image: "https://api.lorem.space/image/fashion?w=640&h=480&r=6174",
         }
         await store.dispatch(createCategory(newCategory))
-        console.log(newCategory)
         expect(store.getState().categoryReducer.length).toBe(1)
     })
 })

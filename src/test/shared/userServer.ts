@@ -2,8 +2,6 @@ import { rest } from "msw";
 import { setupServer } from "msw/node"
 import jwt from "jsonwebtoken"
 
-import { CategoryType } from "../../types/category"
-
 const userApi = [
     {
     id: 1,

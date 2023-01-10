@@ -2,12 +2,11 @@ import { Box, Container, Grid, Pagination } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
-import { CategoryType } from '../../types/category'
 import CategoryCard from './CategoryCard';
 import { getAllCategories } from '../../redux/methods/categoryMethod';
 import Loading from '../loading/Loading';
 
-const Categories = ({ name, id, image }: CategoryType) => {
+const Categories = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   let rowsPerPage = 1;
