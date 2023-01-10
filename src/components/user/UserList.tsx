@@ -21,7 +21,7 @@ const UserList = ({id ,email, name,role, avatar }:UserType) => {
           {isLoading && <Loading/>}{
         !isLoading && (
           <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {users.userList.map((user)=> (
+        {users.userList?.map((user)=> (
           <UserCard
                 key={user.id}
                 email={user.email}

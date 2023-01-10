@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import React, { useEffect} from 'react'
+import {  useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import {
 TextField,
@@ -23,16 +23,13 @@ const Login = () => {
   const  userInfo  = useAppSelector((state) => state.userReducer.currentUser);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
   const onsubmit=(data:Authentications)=> {
     dispatch(userAuthentication(data))
   }
-   
   useEffect(() => {
     if (userInfo)
     { return navigate('/') };
   }, [navigate, userInfo]);
-
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/signup";
   return (

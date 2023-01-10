@@ -22,13 +22,15 @@ import { SignUpSchema } from '../formvalidation/signUpSchema';
 import { getUserBydId } from '../redux/methods/userMethod';
 import axiosInstance from '../common/axiosInstance';
 import Loading from '../components/loading/Loading';
+import { Card, CardActionArea, CardContent, CardMedia, ImageListItem, List, ListItem, Paper } from '@mui/material';
+import UserList from '../components/user/UserList';
 
 const Profile = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate();
   const { id } = useParams();
   const [refresh, setRefresh] = useState<boolean>(false);
-   const  user = useAppSelector((state) => state.userReducer);
+   const  users = useAppSelector((state) => state.userReducer.currentUser);
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
     resolver: yupResolver(SignUpSchema)
   })
@@ -37,9 +39,10 @@ const Profile = () => {
       name: data.name,
       email: data.email,
       password: data.password === '' ? null : data.password,
+      avatar : data.avatar
     };
     axiosInstance
-      .put(`/users/${user.userInfo?.id}`, update)
+      .put(`/users/${users?.id}`, update)
       .then((res) => {
         setRefresh((prev) => (prev = !prev));
       })
@@ -47,14 +50,16 @@ const Profile = () => {
    }
   
    useEffect(() => {
-    dispatch(getUserBydId(id));
-  }, [dispatch, id])
+     dispatch(getUserBydId(id));
+   }, [dispatch, id, refresh])
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      {<Loading /> || !user ? (
+      { !users ? (
         <Loading />
-      ):(
+        ) : (
+        <Grid container justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+             
         <Box
           sx={{
             marginTop: 8,
@@ -74,7 +79,9 @@ const Profile = () => {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                   {...register("name")}
+                   {...register("name", {
+                          value: users?.name,
+                        })}
                   required
                   fullWidth
                   id="Name"
@@ -89,15 +96,18 @@ const Profile = () => {
                   fullWidth
                   id="email"
                   label="Email Address"
-                {...register("email")}
-                  autoComplete="email"
+                {...register("email", {
+                          value: users?.email,
+                        })}
               />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                   {...register("password")}
+                   {...register("password", {
+                          value: users?.password,
+                        })}
                   label="Password"
                   type="password"
                   id="password"
@@ -109,7 +119,9 @@ const Profile = () => {
                 <TextField
                   required
                   fullWidth
-                   {...register("confirm_password")}
+                   {...register("confirm_password", {
+                          value: users?.confirm_password,
+                        })}
                   label=" confirm Password"
                   type="password"
                   id="confirm_password"
@@ -121,44 +133,69 @@ const Profile = () => {
                 <input 
                   type="file"
                   multiple
-                  {...register("avatar")}
+                  {...register("avatar", {
+                          value: users?.avatar,
+                        })}
               />
               <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
               </Grid>
             </Grid>
             <Button
-            type="submit"
-            fullWidth
-           variant="outlined"
-            sx={{
-              height: "60px",
-              textTransform: "none",
-              borderRadius: "5px",
-              color: "gray",
-              fontSize: "25px",
-              marginTop: "20px",
-              borderColor: "gray",
-              mt: 3, mb: 2 ,
-              "&: hover": {
-                backgroundColor: "#162639",
-                color: "#ffFFFf",
+              type="submit"
+              fullWidth
+              variant="outlined"
+              sx={{
+                height: "60px",
+                textTransform: "none",
+                borderRadius: "5px",
+                color: "gray",
+                fontSize: "25px",
+                marginTop: "20px",
                 borderColor: "gray",
+                mt: 3, mb: 2 ,
+                "&: hover": {
+                  backgroundColor: "#162639",
+                  color: "#ffFFFf",
+                  borderColor: "gray",
 
-              },
-            }}
+                },
+              }}
             >
-              Sign Up
+             Update
             </Button>
-            {/* <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to={`/login?redirect=${redirect}`}>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
-          </Box>
-          )}
+        </Box>
+        <Card
+          sx={{
+          maxWidth: 340,
+          margin: '10px',
+          display: 'flex',
+          height: '200px',
+            }}
+          > 
+        <CardActionArea >
+        <CardMedia
+          component="img"
+          sx={{
+            width:"100px",
+            height: '100px',
+            borderRadius:'50%',
+            objectFit: 'cover',
+            ml:7
+          }}
+          image={users.avatar}
+        />
+        <CardContent>
+          <Typography variant="h6" component="div">{users.name}</Typography>
+          <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
+            <Typography  color="lightcoral">Email: {users.email} </Typography>
+          </Typography>
+          <Typography color="blue" variant="body1" component="div">Role: {users.role}</Typography>
+        </CardContent>
+      </CardActionArea>
+      </Card>
+    </Grid>
+    )}
     </Container>
   )
 }
