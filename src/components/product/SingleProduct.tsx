@@ -44,10 +44,8 @@ const SingleProduct = () => {
           display: 'block',
           height: 'auto',
       }}>
-        {!userInfo ? (
-           <>                 
-          <Card>
-            <CardActionArea >
+        <Card>
+          <CardActionArea >
               <CardMedia
                 component="img"
                 sx={{
@@ -72,49 +70,22 @@ const SingleProduct = () => {
             </CardActionArea>
           </Card>
           <Stack sx={{ m: 1, gap: 1 }} >
-              <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
-          </Stack>
+          {!userInfo ? (
+            <> 
+          <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
           </>
-        ) : (
-            <>
-            <Card>
-            <CardActionArea >
-              <CardMedia
-                component="img"
-                sx={{
-                  width: '100%',
-                  height: 'auto',
-                  maxWidth: '100%',
-                  objectFit: 'cover',
-                }}
-                image={products?.images[0]}
-              />
-              <CardContent>
-                <Typography variant="h5" component="div">{products?.title}</Typography>
-                <Typography variant="h6" sx={{ display: 'flex', gap: '5px' }} color="text.secondary">
-                  <Typography color="lightcoral">Category: {products?.category.name} </Typography>
-                </Typography>
-                <Typography color="blue" variant="body2">Price: {products?.price}€</Typography>
-                <Typography variant="subtitle2" color="green" sx={{ display: 'flex', gap: '5px' }}>
-                  <Typography>Description:</Typography>
-                  <Typography color="text.secondary">{products?.description}</Typography>
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-          <Stack sx={{ m: 1, gap: 1 }} >
-              <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
+          ) : (
+          <>
+          <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
+          <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={onAdd}>
+            Add to cart
+          </Button>
+          <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={updateHandler}>
+            Update
+          </Button>
+          </>
+            )}
           </Stack>
-            <Stack sx={{ m: 1, gap: 1 }} >
-            <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={onAdd}>
-              Add to cart
-            </Button>
-            <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={updateHandler}>
-              Update
-            </Button>
-              </Stack>
-              </>
-        )}
         </Card>   
     </Container>
   )

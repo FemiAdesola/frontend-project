@@ -100,7 +100,12 @@ When the user signs in, the user can perform activities such as create product, 
 
 The total of 13 test were performed on the product, category and user
 ![TestResult](/img/TestResult.png)
-##
+
+### Mobile Responiveness
+
+![Mobile](/img/Mobile.png)
+## Project structure
+
 ```shell
 .
 ├── README.md

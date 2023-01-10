@@ -28,7 +28,7 @@ import {reset} from '../redux/reducers/cartReducer'
 interface Props {
   window?: () => Window;
 }
-const drawerWidth = 240;
+const drawerWidth = 100;
 
 const Header = (props: Props) => {
     const dispatch = useAppDispatch();
@@ -66,7 +66,7 @@ const Header = (props: Props) => {
     const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
         <Typography variant="h6" sx={{ my: 2 }}>
-           Logo
+           <HomeOutlinedIcon sx={{fontSize:"50px"}} />
         </Typography>
         <Divider />
         <List>
@@ -80,11 +80,16 @@ const Header = (props: Props) => {
                     Products
                 </ListItemButton>
                 </ListItem>
+                {!userInfo ? (
+                <>            
             <ListItem disablePadding>
-                <ListItemButton component={Link} to="signup"  sx={{ textAlign: 'center' }}>
-                    Signup
+                <ListItemButton component={Link} to="login"  sx={{ textAlign: 'center' }}>
+                    login
                 </ListItemButton>
                 </ListItem>
+                </>
+                ) : (
+                <>
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="create" sx={{ textAlign: 'center' }}>
                   CreateProduct
@@ -101,7 +106,14 @@ const Header = (props: Props) => {
                     <AddShoppingCartIcon />    
                 </Badge>
                 </ListItemButton>
-            </ListItem>    
+                </ListItem> 
+            <ListItem disablePadding>
+                <ListItemButton onClick={onLogout} sx={{ textAlign: 'center' }}>
+                    logout
+                </ListItemButton>
+            </ListItem> 
+             </>
+            )} 
         </List>
     </Box>
   );
