@@ -48,7 +48,8 @@ const CreateProducts = () => {
             marginBottom:"20px",
             padding:"0 60px"
           }}
-         component="form" onSubmit={handleSubmit(onsubmit)} 
+          component="form"
+          onSubmit={handleSubmit(onsubmit)} 
         >
           <Typography 
             component="span"
@@ -107,36 +108,33 @@ const CreateProducts = () => {
             marginTop={2}
             >Upload images:
           </Typography>
-          <Typography component="div" sx={{margin:"20px"}}>
-        <input 
-          type="file"
-          multiple
-              // {...register("productCreate.images")}
-              {...register("images")}
+          <Typography component="div" sx={{ margin: "20px" }}>
+            <TextField
+          variant="outlined"
+          InputLabelProps={{  style: { fontSize: 30, borderColor:"none" }, shrink: true }}
+          fullWidth
+          margin="normal"
+              type="file" 
+             {...register("productCreate.images")}
+          sx={{
+            "& label.Mui-focused": {
+              display: "none",
+            },
+            "& legend": {
+              display: "none",
+            }
+          }}
         />
       </Typography>
           <Typography component="div" variant="body2" color="red">{errors.images?.message}</Typography>
           <Button 
             type="submit"
-            sx={{
-                width: "180px",
-                height: "50px",
-                textTransform: "none",
-                backgroundColor: "gray",
-                borderRadius: "5px",
-                color: "white",
-                fontSize:"25px",
-                marginTop:"30px",
-                "&: hover": {
-                  backgroundColor: "#162639",
-                  color: "#ffFFFf"
-                },
-            }}
+            variant="outlined"
+            sx={{ ml: 2,  width: '90%'}} 
           >Add Product</Button> 
-          <Button  component="form" onSubmit={handleSubmit(onsubmit)} variant="outlined" sx={{ ml: 2,  width: '90%' }} onClick={updateHandler}>
-         Update
-        </Button>  
-        </Box>
+      </Box>
+        <Button component="form" onSubmit={handleSubmit(onsubmit)} variant="outlined" sx={{ ml: -2, width: '72%' }} onClick={updateHandler}>
+          Update</Button>
       </Grid>
     </Container>
   )

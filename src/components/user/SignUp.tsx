@@ -95,13 +95,24 @@ const SignUp = (role:UserForm) =>  {
               />
               <Typography component="div" variant="body2" color="red">{errors.confirm_password?.message}</Typography>
               </Grid>
-              <Grid item xs={12}>
-                <input 
-                  type="file"
-                  multiple
-                  {...register("avatar")}
-              />
-              <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
+            <Grid item xs={12}>
+              <TextField
+          variant="outlined"
+          InputLabelProps={{  style: { fontSize: 30, borderColor:"none" }, shrink: true }}
+          fullWidth
+          margin="normal"
+                type="file" 
+                {...register("avatar")}
+          sx={{
+            "& label.Mui-focused": {
+              display: "none",
+            },
+            "& legend": {
+              display: "none",
+            }
+          }}
+        />
+            <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
               </Grid>
             </Grid>
             <Button

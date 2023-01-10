@@ -28,7 +28,6 @@ const Categories = () => {
             <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {categories.slice(page * rowsPerPage -1, page * rowsPerPage).map((category) => (
             <CategoryCard
-            key={category.id}
             image={category.image}
             name={category.name}
             id={category.id}            

@@ -8,7 +8,7 @@ import { CardActionArea } from '@mui/material';
 
 import { CategoryType } from '../../types/category';
 
-const CategoryCard = ({name,image}: CategoryType) => {
+const CategoryCard = ({name,image, id}: CategoryType) => {
   return (
     <Card
       sx={{
