@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useDeferredValue } from 'react'
+import React, { useEffect, useState, useDeferredValue, useMemo } from 'react'
 import Grid from '@mui/material/Grid';
 import { Box, Button, Container, CssBaseline, MenuItem, Select, TablePagination} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import debouce from "lodash.debounce";
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { sortByName, sortByPrice} from '../../redux/reducers/productReducer';
@@ -14,23 +15,37 @@ const Products = () => {
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
-  const deferredQuery = useDeferredValue(search);
   const [rowsPerPage, setRowsPerPage] = useState(20);
-  let products = useAppSelector(state => state.productReducer.filter(item => {
-    return item.title.toLowerCase().includes(deferredQuery.toLowerCase())
-  }))
+  let products = useAppSelector(state => state.productReducer)
+  const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setSearch(e.target.value);
+  };
+  if (search !== "") {
+    products = products.filter(item => {
+    return item.title.toLowerCase().includes(search.toLowerCase())
+    })
+  }
+  const debouncedResults = useMemo(() => {
+      return debouce(handleChange, 1000);
+  }, []);
+
+  useEffect(() => {
+      return () => {
+        debouncedResults.cancel();
+      };
+  });
    const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
-  ) => {
-    setPage(newPage);
+    ) => {
+      setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    ) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
   };
   const [filteredValue, setFilteredValue] = useState("");
   const categories = useAppSelector(state => state.categoryReducer)
@@ -52,7 +67,6 @@ const Products = () => {
   } else{
   products.map(option=>(option.category.name.toLowerCase().includes(filteredValue)))
   }
-
   return (
       <Container maxWidth="xl">
       <CssBaseline />
@@ -67,9 +81,7 @@ const Products = () => {
             <StyledInputBase
                   placeholder="Type your search here..."
                   inputProps={{ 'aria-label': 'search'}}
-              value={search}
-             
-                  onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setSearch(e.target.value)}  
+              onChange={debouncedResults}
             />
           </SearchMenu>
           <Select

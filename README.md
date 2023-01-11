@@ -54,6 +54,7 @@ profile page is only available when user logins, and user can chekout from there
 5. Check the website from [here](https://femi-frontend.netlify.app/)
 6. Theme was used for light and dark mode 
 7. Pagination was created
+8. Debounce was setup for search input
 
 ## Getting started
 ### Home page
