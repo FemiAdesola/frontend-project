@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Pagination, TablePagination } from '@mui/material'
+import { Box, Container, Grid, TablePagination } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook'
@@ -9,7 +9,7 @@ import Loading from '../loading/Loading';
 const Categories = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
-   const [rowsPerPage, setRowsPerPage] = useState(3);
+  const [rowsPerPage, setRowsPerPage] = useState(3);
   const categories = useAppSelector(state => state.categoryReducer)
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,

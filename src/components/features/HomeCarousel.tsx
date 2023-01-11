@@ -9,42 +9,14 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-
+import { useAppSelector } from '../../hooks/reduxHook';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const images = [
-  {
-    label: 'Shoes',
-    imgPath:
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
-  },
-  {
-    label: 'Electronics',
-    imgPath:
-      'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
-  },
-  {
-    label: 'Clothes',
-    imgPath:
-      'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80',
-  },
-  {
-    label: 'Change title: Furniture',
-    imgPath:
-      'https://plus.unsplash.com/premium_photo-1663013668671-d453f319544f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
-    },
-  {
-    label: 'Others',
-    imgPath:
-      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80',
-  },
-];
-
 const HomeCarousel = () => {
     const theme = useTheme();
     const [activeStep, setActiveStep] = useState(0);
-    const maxSteps = images.length;
+     const categories = useAppSelector(state => state.categoryReducer)
+    const maxSteps = categories.length;
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -55,31 +27,33 @@ const HomeCarousel = () => {
         setActiveStep(step);
     };
     return (
-        <Box sx={{ maxWidth: 600, flexGrow: 1, mt:5}}>
+        <Box sx={{ maxWidth: 700, flexGrow: 1, mt:5}}>
         <AutoPlaySwipeableViews
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
             index={activeStep}
             onChangeIndex={handleStepChange}
             enableMouseEvents
-        >
-            {images.map((step, index) => (
-            <Typography key={step.label}>
+            >
+            {Array.isArray(categories)
+                ?
+            categories.map((step, index) => (
+            <Typography key={step?.name}>
                 {Math.abs(activeStep - index) <= 2 ? (
                 <Box
                     component="img"
                     sx={{
                     height: 400,
                     display: 'block',
-                    maxWidth: 600,
+                    maxWidth: 700,
                     overflow: 'hidden',
-                    width: '700px',
+                    width: '800px',
                     }}
-                    src={step.imgPath}
-                    alt={step.label}
+                    src={step.image}
+                    alt={step.name}
                 />
                 ) : null}
             </Typography>
-            ))}
+            )):null}
             </AutoPlaySwipeableViews>
             <Paper
             square
@@ -92,7 +66,7 @@ const HomeCarousel = () => {
             bgcolor: 'background.default',
             }}
         >
-            <Typography>{images[activeStep].label}</Typography>
+            <Typography>{categories[activeStep]?.name}</Typography>
         </Paper>
         <MobileStepper
             steps={maxSteps}
