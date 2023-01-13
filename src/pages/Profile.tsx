@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import Avatar from '@mui/material/Avatar';
@@ -22,6 +22,7 @@ import Loading from '../components/loading/Loading';
 
 const Profile = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate();
   const { id } = useParams();
   const [refresh, setRefresh] = useState<boolean>(false);
   const  users = useAppSelector((state) => state.userReducer.currentUser);
@@ -44,7 +45,8 @@ const Profile = () => {
    }
   
    useEffect(() => {
-     dispatch(getUserBydId(id));
+    //  dispatch(getUserBydId(id));
+     navigate(`/profile/${id}`);
    }, [dispatch, id, refresh])
   return (
     <Container component="main" maxWidth="xs">

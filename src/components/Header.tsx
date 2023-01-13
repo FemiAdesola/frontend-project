@@ -24,7 +24,6 @@ import { toggleTheme } from '../redux/reducers/darkLightReducer';
 import { userLogout } from '../redux/reducers/userReducer';
 import {reset} from '../redux/reducers/cartReducer'
 
-
 interface Props {
   window?: () => Window;
 }
@@ -44,14 +43,11 @@ const Header = (props: Props) => {
     const colorToggle = (theme: { darkTheme  : boolean; }) => {
         return theme.darkTheme   ? "#303b47" : "gray";
     };
-
     const onLogout = () => { 
         dispatch(userLogout())
         dispatch(reset());
         navigate('/login');
     }
-
-
     const ToggleSwitch = () => {
         const dispatch = useAppDispatch();
         return (
@@ -177,7 +173,6 @@ const Header = (props: Props) => {
                             "&:hover": {
                                 color: (theme) => theme.palette.common.white,
                             }
-                            
                         }}>
                     <Typography sx={{mt:1}}>Products</Typography>
                     <ShoppingBasketIcon sx={{fontSize:"30px"}}/>
@@ -196,7 +191,6 @@ const Header = (props: Props) => {
                             <AddShoppingCartIcon />    
                         </Badge>
                     </Box>
-
                         {!userInfo ? (
                             <>
                                 <Box
@@ -252,11 +246,9 @@ const Header = (props: Props) => {
                                         display: { xs: 'none', sm: 'flex' },
                                         color: (theme) => theme.palette.common.white,
                                         fontWeight: 'bold',
-                                       
-                            
                                     }}>
-                                        {/* <Avatar sx={{ mt: -1}} alt="Profile Picture" src={userInfo.avatar} />
-                                        <Typography sx={{mt:-2}} >{userInfo.name}</Typography> */}
+                                        <Avatar sx={{ mt: -1}} alt="Profile Picture" src={userInfo.avatar} />
+                                        <Typography sx={{mt:-2}} >{userInfo.name}</Typography>
                                     </Box>
                                     <Button
                                    onClick={onLogout}

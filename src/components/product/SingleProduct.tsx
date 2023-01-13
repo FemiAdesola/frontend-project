@@ -34,7 +34,7 @@ const SingleProduct = () => {
   singleProductDetails();
   }, [id]);
   const updateHandler = () => {
-    navigate(`products/${id}`);
+    navigate(`update`);
   };
   return (
     <Container component="main" maxWidth="xs">
