@@ -37,7 +37,7 @@ const HomeCarousel = () => {
             {Array.isArray(categories)
                 ?
             categories.map((step, index) => (
-            <Typography key={step?.name}>
+            <Typography key={step?.id}>
                 {Math.abs(activeStep - index) <= 2 ? (
                 <Box
                     component="img"
@@ -66,7 +66,12 @@ const HomeCarousel = () => {
             bgcolor: 'background.default',
             }}
         >
-            <Typography>{categories[activeStep]?.name}</Typography>
+        <Typography 
+            fontFamily="cursive"
+            textAlign="center"
+            variant="h4" 
+            component="div"
+        >{categories[activeStep]?.name}</Typography>
         </Paper>
         <MobileStepper
             steps={maxSteps}

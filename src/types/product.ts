@@ -1,3 +1,4 @@
+import { SetStateAction } from 'react';
 import { CategoryType} from './category';
 
 export interface ProductType {
@@ -14,13 +15,16 @@ export interface CreateProductType {
     description: string
     price: number
     categoryId: number 
-    images: File[] 
+    images: string[] 
 }
 
 export interface CreateProductWithImages{
-    images: File[],
+    images:  File[]
     productCreate: CreateProductType
+
 }
+
+
 export interface UpdateProductType{
     id: number
     update:Partial<ProductType>

@@ -64,9 +64,7 @@ const Products = () => {
     products = products.filter((item) => {
       return item.category.name.toLowerCase().includes(filteredValue)
     })
-  } else{
-  products.map(option=>(option.category.name.toLowerCase().includes(filteredValue)))
-  }
+  } 
   return (
       <Container maxWidth="xl">
       <CssBaseline />
@@ -106,7 +104,7 @@ const Products = () => {
       {isLoading && <Loading/>}{
         !isLoading && (
           <Grid container pt="50px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((product) => (
+            {Array.isArray(products) ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((product) => (
           <Grid  key={product.id}>
             <ProductCard
               images={product.images}
@@ -117,7 +115,7 @@ const Products = () => {
               id={product.id}
                 />
           </Grid>
-        ))}
+        )):null}
       </Grid>
         )
       }

@@ -4,7 +4,7 @@ import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
 import {  sortByName } from "../../redux/reducers/productReducer"
 import { getAllProducts, createProduct, updateProduct, createProductWithImages } from '../../redux/methods/productMethod';
 import { createStore, RootState } from "../../redux/store"
-import { CreateProductType} from "../../types/product"
+import { CreateProductType, CreateProductWithImages } from '../../types/product';
 
 import productServer from "../shared/productServer";
 
@@ -76,7 +76,7 @@ describe("Test all the products actions", () => {
     test("should create product with form and images", async () => {
         const image1: File = {
             lastModified: 0,
-            name: "test for image",
+            name: "test for image1",
             webkitRelativePath: "",
             size: 0,
             type: "",
@@ -95,7 +95,7 @@ describe("Test all the products actions", () => {
         }
          const image2: File = {
             lastModified: 0,
-            name: "test for image",
+            name: "test for image2",
             webkitRelativePath: "",
             size: 0,
             type: "",
@@ -112,12 +112,12 @@ describe("Test all the products actions", () => {
                 throw new Error("Function not implemented.")
             }
         }
-        const productCreate: CreateProductType = {
+        const productCreate: CreateProductType= {
             title: "Test for createProductWithImages",
             price: 1000,
             description: "Test create product",
             categoryId: 2,
-            images: []
+            images:[]
         }
         await store.dispatch(createProductWithImages({images:[image1, image2], productCreate }))
         expect(store.getState().productReducer[0].images.length).toBe(2)

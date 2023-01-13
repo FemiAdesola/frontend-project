@@ -1,39 +1,59 @@
-import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import {yupResolver} from "@hookform/resolvers/yup"
+import React, { useState, useEffect } from 'react'
 import {
   TextField,
   Box,
   Button,
   CssBaseline,
-  Typography, 
   Container,
   Grid,
+  Typography,
 } from '@mui/material';
 
-import { createProductWithImages} from '../../redux/methods/productMethod';
+import { createProduct } from '../../redux/methods/productMethod';
 import { useAppDispatch} from '../../hooks/reduxHook';
-import {  CreateProductWithImages } from '../../types/product';
-import { productSchema } from '../../formvalidation/productSchema';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+import axiosInstance from '../../common/axiosInstance';
 
 const CreateProducts = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-   let { id } = useParams()
-  const { handleSubmit, register, formState: { errors } } = useForm<CreateProductWithImages>({
-    resolver: yupResolver(productSchema)
-  })
-   const onsubmit: SubmitHandler<CreateProductWithImages> = data => {
-    dispatch(createProductWithImages(data))
-   }
-  const updateHandler = () => {
-    navigate(`products/${id}`);
+  const [productTitle, setProductTitle] = useState("")
+  const [productDescription, setProductDescription]= useState("")
+  const [productPrice, setProductPrice]= useState<number>(0)
+  const [productCategoryId, setProductCategoryId] = useState<number>(0)
+  const [productImages, setProductImages] = useState<string>("")
+  const [getUrlImages, setGetUrlImages]= useState<FileList | null>(null);
+  const [message, setMessage] = useState("")
+
+  const createProductHandler = (e:React.FormEvent<HTMLFormElement>) => {
+     e.preventDefault();
+     dispatch(createProduct(
+      {   title: productTitle,    
+          price: productPrice,
+          description: productDescription,
+          categoryId: productCategoryId,
+          images:  [productImages]
+     })).then((data) => {
+      if ("error" in data) {
+        setMessage("Failed to create  new Product data (Invalid Data");
+      } else {
+        navigate("/products");
+      }
+    });
   };
+  useEffect(() => {
+    if (getUrlImages) {
+      axiosInstance.post("files/upload", {
+        file: getUrlImages[0]
+      }, { headers: { "Content-Type": "multipart/form-data" } })
+        .then(response => setProductImages(response.data.location))} 
+  }, [getUrlImages])
+  
   return (
     <Container maxWidth="sm">
      <CssBaseline />
       <Typography 
+        fontFamily="cursive"
         component="h3" 
         variant="h3" 
         marginBottom={3}
@@ -49,73 +69,74 @@ const CreateProducts = () => {
             padding:"0 60px"
           }}
           component="form"
-          onSubmit={handleSubmit(onsubmit)} 
+          onSubmit={createProductHandler} 
         >
-          <Typography 
+          <Grid 
             component="span"
             marginTop={2}
             display= "block"
             >Product title:
-          </Typography>
+          </Grid>
               <TextField
-             
+             value={productTitle}
+            onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setProductTitle(e.target.value)}
                 type="text" 
-                 {...register("productCreate.title")}
                 fullWidth
           />
-           <Typography component="div" variant="body2" color="red">{errors.productCreate?.title?.message}</Typography>
-          <Typography 
+          <Grid 
             component="span"
             marginTop={2}
             display= "block"
             >Price:
-          </Typography>
+          </Grid>
           <TextField
             type="number" 
-            {...register("productCreate.price")}
+              value={productPrice }
+            onChange={(e: { target: { value: string; }; }) => setProductPrice(parseInt(e.target.value))}// {...register("productCreate.price")}
             fullWidth
           />
-          <Typography component="div" variant="body2" color="red">{errors.productCreate?.price?.message}</Typography>
-          <Typography 
+          <Grid 
             component="span"
             marginTop={3}
             display= "block"
             >Product Description:
-          </Typography>
-          
+          </Grid>
               <TextField
-             
-               {...register("productCreate.description")}
+               value={productDescription}
+            onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setProductDescription(e.target.value)} //  {...register("productCreate.description")}
                 multiline
                 rows={4}
                 fullWidth
           />
-           <Typography component="div" variant="body2" color="red">{errors.productCreate?.description?.message}</Typography>
-          <Typography 
+          <Grid 
             component="span"
             marginTop={2}
             display= "block"
             >CategoryId:
-          </Typography>
+          </Grid>
               <TextField
                 required 
-                type="number" 
-                {...register("productCreate.categoryId")}
+            type="number" 
+              value={productCategoryId | 0}
+            onChange={(e: { target: { value: string; }; }) => setProductCategoryId(parseInt(e.target.value))}  
                 fullWidth
               />
-          <Typography 
+          <Grid 
             component="span"
             marginTop={2}
+            display= "block"
             >Upload images:
-          </Typography>
-          <Typography component="div" sx={{ margin: "20px" }}>
+          </Grid>
+          <Grid component="div">
             <TextField
           variant="outlined"
           InputLabelProps={{  style: { fontSize: 30, borderColor:"none" }, shrink: true }}
           fullWidth
           margin="normal"
-              type="file" 
-             {...register("productCreate.images")}
+             type="file"
+              name="file"
+              inputProps={{multiple: true}}
+               onChange={(e: React. ChangeEvent<HTMLInputElement>)=>setGetUrlImages(e.currentTarget.files)}
           sx={{
             "& label.Mui-focused": {
               display: "none",
@@ -125,16 +146,14 @@ const CreateProducts = () => {
             }
           }}
         />
-      </Typography>
-          <Typography component="div" variant="body2" color="red">{errors.images?.message}</Typography>
+      </Grid>
           <Button 
             type="submit"
             variant="outlined"
-            sx={{ ml: 2,  width: '90%'}} 
+            sx={{ ml: 2, width: '90%' }}
           >Add Product</Button> 
       </Box>
-        <Button component="form" onSubmit={handleSubmit(onsubmit)} variant="outlined" sx={{ ml: -2, width: '72%' }} onClick={updateHandler}>
-          Update</Button>
+        {message}
       </Grid>
     </Container>
   )

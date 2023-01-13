@@ -9,10 +9,11 @@ import Layout from './pages/Layout';
 import Cart from './components/cart/Cart';
 import Login from './components/user/Login';
 import SignUp from './components/user/SignUp';
-import CreateProducts from './components/product/CreateProduct';
+
 import UserList from './components/user/UserList';
 import Profile from './pages/Profile';
 import UpdateProduct from './components/product/UpdateProduct';
+import CreateProducts from './components/product/CreateProduct';
 
 const router = createBrowserRouter([
   {

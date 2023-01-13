@@ -31,7 +31,11 @@ const CategoryCard = ({name,image}: CategoryType) => {
           image={image}
         />
         <CardContent>
-          <Typography variant="h5" component="div">{name}</Typography>
+          <Typography 
+            fontFamily="cursive"
+            textAlign="center"
+            variant="h4" component="div"
+          >{name}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

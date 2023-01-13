@@ -197,7 +197,7 @@ const Header = (props: Props) => {
                         </Badge>
                     </Box>
 
-                        {!userInfo ? (
+                        {/* {!userInfo ? ( */}
                             <>
                                 <Box
                                     component={Link}
@@ -213,7 +213,7 @@ const Header = (props: Props) => {
                                     login
                                 </Box>
                             </>
-                                ) : ( 
+                                {/* // ) : (  */}
                             <>
                                 <Box
                                     component={Link}
@@ -255,8 +255,8 @@ const Header = (props: Props) => {
                                        
                             
                                     }}>
-                                        <Avatar sx={{ mt: -1}} alt="Profile Picture" src={userInfo.avatar} />
-                                        <Typography sx={{mt:-2}} >{userInfo.name}</Typography>
+                                        {/* <Avatar sx={{ mt: -1}} alt="Profile Picture" src={userInfo.avatar} />
+                                        <Typography sx={{mt:-2}} >{userInfo.name}</Typography> */}
                                     </Box>
                                     <Button
                                    onClick={onLogout}
@@ -266,7 +266,7 @@ const Header = (props: Props) => {
                                     Logout
                                 </Button>
                             </>
-                         )}     
+                        {/* //  )}      */}
                 </Box>     
             </Toolbar>
                

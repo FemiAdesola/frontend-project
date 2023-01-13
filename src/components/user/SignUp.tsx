@@ -97,21 +97,21 @@ const SignUp = (role:UserForm) =>  {
               </Grid>
             <Grid item xs={12}>
               <TextField
-          variant="outlined"
-          InputLabelProps={{  style: { fontSize: 30, borderColor:"none" }, shrink: true }}
-          fullWidth
-          margin="normal"
-                type="file" 
-                {...register("avatar")}
-          sx={{
-            "& label.Mui-focused": {
-              display: "none",
-            },
-            "& legend": {
-              display: "none",
-            }
-          }}
-        />
+                variant="outlined"
+                InputLabelProps={{  style: { fontSize: 30, borderColor:"none" }, shrink: true }}
+                fullWidth
+                margin="normal"
+                      type="file" 
+                      {...register("avatar")}
+                sx={{
+                  "& label.Mui-focused": {
+                    display: "none",
+                  },
+                  "& legend": {
+                    display: "none",
+                  }
+                }}
+             />
             <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
               </Grid>
             </Grid>

@@ -2,7 +2,6 @@ import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { CreateProductType, ProductType, CreateProductWithImages, UpdateProductType } from '../../types/product';
 import axiosInstance from "../../common/axiosInstance";
-import { response } from 'msw';
 
 export const getAllProducts = createAsyncThunk(
     "getAllProducts",
@@ -57,8 +56,8 @@ export const createProductWithImages = createAsyncThunk(
     async ({ images, productCreate }: CreateProductWithImages) => {
        let imageLocations: string[] = []
         try {
-            for (let i = 0; i < images.length; i++) { 
-                const response = await axiosInstance.post("files/upload", images[i])
+                for (let i = 0; i < images.length; i++) { 
+                const response = await axiosInstance.post("files/upload", {files:images[i]})
                 const data = response.data.location
                 imageLocations.push(data)
             }
@@ -75,8 +74,7 @@ export const createProductWithImages = createAsyncThunk(
                 return(`Error from request: ${error.message}`)
             } else {
                 return(error.config)
-            }
-            
+            }  
         } 
     }
 )
@@ -84,16 +82,12 @@ export const createProduct = createAsyncThunk(
     "createProduct",
     async (product: CreateProductType) => {
         try {
-            const response: AxiosResponse<ProductType, any> = await axiosInstance.post("products", product)
-            return response.data
+            const response: AxiosResponse<ProductType, any> = await axiosInstance.post("products", product )
+            const data:ProductType = response.data
+            return data
         } catch (err) {
             const error = err as AxiosError
-            if (error.status) {
-                console.log(error.status)
-            }else if (error.request) {
-            } else {
-               console.log(error.config)
-            }
+            throw new Error(error.message)
         }
     }
 )

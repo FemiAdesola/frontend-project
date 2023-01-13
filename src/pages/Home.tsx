@@ -13,8 +13,9 @@ const Home = () => {
     <CssBaseline />
     <Box>
         <Typography
+        fontFamily="cursive"
         textAlign="center"
-        variant="h5" component="div"
+        variant="h3" component="div"
       >These are the categories of product we have in our store
       </Typography>
       <Grid container pt="20px"
