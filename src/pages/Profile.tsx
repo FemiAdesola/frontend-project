@@ -123,13 +123,25 @@ const Profile = () => {
               <Typography component="div" variant="body2" color="red">{errors.confirm_password?.message}</Typography>
               </Grid>
               <Grid item xs={12}>
-                <input 
+                <TextField
+                  variant="outlined"
+                  InputLabelProps={{  style: { fontSize: 30, borderColor:"none" }, shrink: true }}
+                  fullWidth
+                  margin="normal"
                   type="file"
-                  multiple
-                  {...register("avatar", {
+                  inputProps={{multiple: true}}
+                    {...register("avatar", {
                           value: users?.avatar,
                         })}
-              />
+                  sx={{
+                    "& label.Mui-focused": {
+                      display: "none",
+                    },
+                    "& legend": {
+                      display: "none",
+                    }
+                  }}
+                />
               <Typography component="div" variant="body2" color="red">{errors.avatar?.message}</Typography>
               </Grid>
             </Grid>

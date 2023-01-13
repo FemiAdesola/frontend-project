@@ -87,7 +87,7 @@ export const createUserWithSignUp = createAsyncThunk(
         } catch (err) {
             const error = err as AxiosError
             if (error.response) {
-                return(`Error from response: ${error.message}`)
+               alert("Function check email or password")
             } else if (error.request) {
                 return(`Error from request: ${error.request}`)
             } else {

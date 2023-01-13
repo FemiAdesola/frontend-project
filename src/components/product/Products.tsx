@@ -69,7 +69,6 @@ const Products = () => {
       <Container maxWidth="xl">
       <CssBaseline />
       <Box  justifyContent="center"  alignItems="center" textAlign="center"  sx={{ '& button': { m: 1 } }}>
-        
           <Button onClick={() => { sortName() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Name</Button>
           <Button onClick={() => { sortByProductPriceN() }} variant="contained" component="label" sx={{ m: 1 }}>Sort by Price</Button>
           <SearchMenu >
@@ -81,16 +80,19 @@ const Products = () => {
                   inputProps={{ 'aria-label': 'search'}}
               onChange={debouncedResults}
             />
-          </SearchMenu>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+        </SearchMenu>
+        <Button sx={{height:"40px"}} variant="contained" component="label">
+          Select category
+        <Select
+          variant="outlined"
+          labelId="demo-simple-select-label"
             value={filteredValue} onChange={(e) => setFilteredValue(e.target.value)}
             label="products"
+            sx={{height:"40px"}}
           >
             {categories.map(option => (
               <MenuItem value={option.name.toLowerCase() } key={option.id}>{option.name.toLowerCase()}</MenuItem>   ))}
-          </Select>
+          </Select></Button>
       </Box>
       <TablePagination
           rowsPerPageOptions={[5, 10, 20, 50, 100]}

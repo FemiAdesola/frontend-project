@@ -197,7 +197,7 @@ const Header = (props: Props) => {
                         </Badge>
                     </Box>
 
-                        {/* {!userInfo ? ( */}
+                        {!userInfo ? (
                             <>
                                 <Box
                                     component={Link}
@@ -213,7 +213,7 @@ const Header = (props: Props) => {
                                     login
                                 </Box>
                             </>
-                                {/* // ) : (  */}
+                                 ) : ( 
                             <>
                                 <Box
                                     component={Link}
@@ -266,7 +266,7 @@ const Header = (props: Props) => {
                                     Logout
                                 </Button>
                             </>
-                        {/* //  )}      */}
+                        )}  
                 </Box>     
             </Toolbar>
                
