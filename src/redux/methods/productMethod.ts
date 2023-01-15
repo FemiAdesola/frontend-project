@@ -92,11 +92,38 @@ export const createProduct = createAsyncThunk(
     }
 )
 
+// export const updateProduct = createAsyncThunk(
+//     "updateProduct",
+//     async ({id, update}: UpdateProductType) => { 
+//         try {
+//             const response: AxiosResponse<ProductType, any> = await axiosInstance.put(`products/${id}`, update)
+//             return response.data
+//         } catch (err) {
+//             const error = err as AxiosError
+//             if (error.response) {
+//                 console.log(error.response.data)
+//             } else if (error.request) {
+//                 console.log(`Error from request: ${error.request}`)
+//             } else {
+//                 console.log(error.config)
+//             }
+//         }
+//     }
+
+// )
+
+
 export const updateProduct = createAsyncThunk(
     "updateProduct",
-    async (update: UpdateValueType) => { 
+    async (item: UpdateValueType) => { 
         try {
-            const response: AxiosResponse<ProductType, any> = await axiosInstance.put(`products/${update.id}`, update)
+            const response: AxiosResponse<ProductType, any> = await axiosInstance.put(`products/` + item.id,
+                {
+                title: item.title,
+                    price: item.price,
+                    description: item.description,
+            }
+            )
             return response.data
         } catch (err) {
             const error = err as AxiosError

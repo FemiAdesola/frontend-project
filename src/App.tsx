@@ -47,7 +47,7 @@ const router = createBrowserRouter([
 
        {
         path: 'products/:id',
-        element: <UpdateProduct id={undefined} previousTitle={undefined} previousDescription={undefined} previousPrice={undefined} previousImage={undefined}/>
+        element: <UpdateProduct id={undefined} previousTitle={undefined} previousDescription={undefined} previousPrice={undefined} previousImage={undefined} />
       },
 
       {

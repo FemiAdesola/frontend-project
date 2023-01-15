@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CssBaseline, Grid, Stack, Paper } from '@mui/material';
+import { Box, Button, CardActionArea, CssBaseline, Grid, Stack, Paper } from '@mui/material';
 
 import { Container} from '@mui/system';
 import axiosInstance from '../../common/axiosInstance';
@@ -38,12 +38,14 @@ const SingleProduct = () => {
     <Container component="main" maxWidth="xl">
       <CssBaseline />
       <Paper elevation={0} sx={{
-        height: 'auto',
-        display: "block"
-      }}>
-        <Grid container pt="20px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Card sx={{
+          display: 'flexGrow',
+          height: 'auto',
+        }}>
+          <Grid sx={{display:"flex"}} container pt="20px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid>
+              <Card sx={{
                 maxWidth: 450,
+                display: 'block',
                 height: 'auto',
                 }}>
                 <CardActionArea >
@@ -68,26 +70,35 @@ const SingleProduct = () => {
                       <Typography color="text.secondary">{products?.description}</Typography>
                     </Typography>
                   </CardContent>
-            </CardActionArea>
-             <Stack sx={{ m: 1, gap: 1 }} >
+                </CardActionArea>
+            </Card>
+          </Grid>
+          
+              {!userInfo ? (
+              <Stack sx={{ m: 1, gap: 1 }} >
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={onAdd}>Add to cart</Button> 
               </Stack>
-            </Card>
-          {!userInfo ? (
-            null
-             ) : ( 
-              <Grid sx={{ ml: 10, display:"flex"}}>
+             
+           
+            ) : ( 
+                
+                <><>
+                  <Stack sx={{ m: 1, gap: 1 }}>
+                    <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
+                    <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={onAdd}>Add to cart</Button>
+                  </Stack>
+                </><Grid sx={{ ml: 10 }}>
                     <UpdateProduct
                       id={products?.id}
                       previousTitle={products?.title}
                       previousDescription={products?.description}
                       previousPrice={products?.price}
                       previousImage={products?.images} />
-             
-            </Grid>
+                  </Grid></>
+         
            )} 
-          </Grid> 
+          </Grid>
         </Paper> 
     </Container>
   )

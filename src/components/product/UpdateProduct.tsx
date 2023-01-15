@@ -8,19 +8,19 @@ import {
   Container,
   Grid,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../hooks/reduxHook';
-import { updateProduct } from '../../redux/methods/productMethod';
-import { useNavigate} from 'react-router-dom';
-import axiosInstance from '../../common/axiosInstance';
 import { UpdateProductProps, UpdateValueType } from '../../types/product';
+import { updateProduct } from '../../redux/methods/productMethod';
+import axiosInstance from '../../common/axiosInstance';
 
-const UpdateProduct = ({id, previousImage, previousPrice, previousTitle, previousDescription}: UpdateProductProps) => {
+const UpdateProduct = ({id, previousTitle, previousDescription, previousImage, previousPrice}:UpdateProductProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [productTitle, setProductTitle] = useState(previousTitle)
   const [productDescription, setProductDescription]= useState(previousDescription)
-  const [productPrice, setProductPrice] = useState<number>(Number(previousPrice))
+  const [productPrice, setProductPrice] = useState<number>(previousPrice)
   const [previousValue, setPreviousValue] = useState(false)
   const [productImages, setProductImages] = useState<string>(previousImage)
   const [getUrlImages, setGetUrlImages]= useState<FileList | null>(null);
@@ -60,15 +60,16 @@ const UpdateProduct = ({id, previousImage, previousPrice, previousTitle, previou
       }, { headers: { "Content-Type": "multipart/form-data" } })
         .then(response => setProductImages(response.data.location))} 
   }, [getUrlImages])
+  
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="sm">
      <CssBaseline />
       <Typography 
         fontFamily="cursive"
         component="h3" 
         variant="h3" 
         marginBottom={3}
-       sx={{ml:5}}
+       textAlign="center"
         >Update product
       </Typography>
       <Grid container pt="20px" justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -89,8 +90,8 @@ const UpdateProduct = ({id, previousImage, previousPrice, previousTitle, previou
             >Product title:
           </Grid>
           <TextField
-             value={productTitle?productTitle:previousTitle}
-            onChange={(e: { target: { value: React.SetStateAction<string | undefined>; }; }) => setProductTitle(e.target.value)}
+             value={productTitle? productTitle : previousTitle}
+            onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setProductTitle(e.target.value)}
                 type="text" 
                 fullWidth
           />
@@ -102,7 +103,7 @@ const UpdateProduct = ({id, previousImage, previousPrice, previousTitle, previou
           </Grid>
           <TextField
             type="number" 
-              value={productPrice?productPrice:previousPrice}
+            value={productPrice?productPrice:previousPrice}
             onChange={(e: { target: { value: string; }; }) => setProductPrice(parseInt(e.target.value))}
             fullWidth
           />
@@ -113,9 +114,8 @@ const UpdateProduct = ({id, previousImage, previousPrice, previousTitle, previou
             >Product Description:
           </Grid>
           <TextField
-              value={productDescription?productDescription:previousDescription}
-            onChange={(e: { target: { value: React.SetStateAction<string | undefined>; }; }) => setProductDescription(e.target.value)} 
-                multiline
+          value={productDescription?productDescription:previousDescription}
+          onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setProductDescription(e.target.value)} 
                 rows={4}
                 fullWidth
           />
@@ -133,8 +133,8 @@ const UpdateProduct = ({id, previousImage, previousPrice, previousTitle, previou
           margin="normal"
              type="file"
               name="file"
-              inputProps={{ multiple: true }}
-               onChange={(e: React. ChangeEvent<HTMLInputElement>)=>setGetUrlImages(e.currentTarget.files)}
+              inputProps={{multiple: true}}
+              onChange={(e: React. ChangeEvent<HTMLInputElement>)=>setGetUrlImages(e.currentTarget.files)}
           sx={{
             "& label.Mui-focused": {
               display: "none",
