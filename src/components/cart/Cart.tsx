@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   CardContent,
+  CardMedia,
   Container,
   CssBaseline,
   Grid,
@@ -24,7 +25,7 @@ const Cart = () => {
   const { cartItems } = useAppSelector((state) => state.cartReducer);
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <CssBaseline />
       {
         cartItems.length === 0 ? (
@@ -39,16 +40,48 @@ const Cart = () => {
                 cartItems.map((cartItem) => (
                   <Box key={cartItem.id} sx={{width:"100%", pl:5}} >
                   <List key={cartItem.id} sx={{display:"flex"}}>
-                    <ImageListItem sx={{ width: 100, height: 100, mr: 4}} >
-                      <img src={cartItem.images[0]} alt={cartItem.title }/>
+                      <ImageListItem sx={{ width: 300, height: 250, mr: 4 }} >
+                      <CardMedia
+                        component="img"
+                        sx={{
+                          width: '100%',
+                          height: 'auto',
+                          maxWidth: '100%',
+                          objectFit: 'cover',
+                        }}
+                        image={cartItem.images[0]}
+                        />
+                        <Box sx={{display:"flex"}}>
+                        <CardMedia
+                        component="img"
+                        sx={{
+                          width: '50%',
+                          height: 'auto',
+                          maxWidth: '100%',
+                          objectFit: 'cover',
+                        }}
+                        image={cartItem.images[1]}
+                        />
+                         <CardMedia
+                        component="img"
+                        sx={{
+                          width: '50%',
+                          height: 'auto',
+                          maxWidth: '100%',
+                          objectFit: 'cover',
+                        }}
+                        image={cartItem.images[2]}
+                        />
+                        </Box>
                     </ImageListItem>
-                    <List  key={cartItem.id} sx={{display:"block"}}>
-                    <ListItem disablePadding>Title: {cartItem.title}</ListItem>
+                    <List  key={cartItem.id} sx={{display:"block", fontSize:"20px"}}>
+                        <ListItem sx={{fontSize:"30px" }} disablePadding>Name: {cartItem.title}</ListItem>
                       <ListItem disablePadding>
                         Quantity: {cartItem.amount}
                         <AddCircleIcon sx={{color:"green"}} onClick={() => dispatch(addToCart(cartItem))} />
                         <RemoveCircleIcon sx={{color:"red"}} onClick={() => dispatch(removeFromCart(cartItem))} />
-                      </ListItem>
+                        </ListItem>
+                        <ListItem disablePadding>Price: {cartItem.price } €</ListItem>
                       <ListItem disablePadding>Total price: {(cartItem.price * cartItem.amount).toLocaleString()} €</ListItem>
                     </List>
                     </List>
