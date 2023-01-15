@@ -46,8 +46,8 @@ const router = createBrowserRouter([
       },
 
        {
-        path: 'products/:id/update',
-        element: <UpdateProduct/>
+        path: 'products/:id',
+        element: <UpdateProduct id={undefined} previousTitle={undefined} previousDescription={undefined} previousPrice={undefined} previousImage={undefined}/>
       },
 
       {

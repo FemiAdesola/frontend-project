@@ -20,7 +20,7 @@ export const darkTheme = createTheme({
       paper: "#000000",
     },
     text: {
-      primary: "#fff",
+      primary: "#ffffff",
       secondary: grey[500],
     },
   },

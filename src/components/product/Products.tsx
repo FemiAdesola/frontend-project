@@ -10,6 +10,7 @@ import { getAllProducts, } from '../../redux/methods/productMethod';
 import ProductCard from './ProductCard';
 import { SearchIconWrapper, SearchMenu, StyledInputBase } from '../features/SearchInput';
 import Loading from '../loading/Loading';
+import UpdateProduct from './UpdateProduct';
 
 const Products = () => {
   const [search, setSearch] = useState("")

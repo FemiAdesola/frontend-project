@@ -41,7 +41,7 @@ const Header = (props: Props) => {
         setMobileOpen((prevState) => !prevState);
     };
     const colorToggle = (theme: { darkTheme  : boolean; }) => {
-        return theme.darkTheme   ? "#303b47" : "gray";
+        return theme.darkTheme   ? "#303b47" : "#000000";
     };
     const onLogout = () => { 
         dispatch(userLogout())

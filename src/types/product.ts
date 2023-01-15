@@ -1,4 +1,3 @@
-import { SetStateAction } from 'react';
 import { CategoryType} from './category';
 
 export interface ProductType {
@@ -15,7 +14,8 @@ export interface CreateProductType {
     description: string
     price: number
     categoryId: number 
-    images: string[] 
+    images: string[]
+    id?: number
 }
 
 export interface CreateProductWithImages{
@@ -23,16 +23,25 @@ export interface CreateProductWithImages{
     productCreate: CreateProductType
 
 }
-
-
 export interface UpdateProductType{
-    id: number
-    update:Partial<ProductType>
+    id:number | string
+    update: Partial<ProductType>
 }
 
-export interface Error{
-    Error:string
-}
 export interface CartProductType extends ProductType{
     amount: number
+}
+export interface UpdateValueType {
+    title?: string 
+    description?: string 
+    price?: number
+    id: number |string
+    images: string[]
+}
+export interface UpdateProductProps {
+  id: number|any
+  previousTitle: string | undefined |any
+  previousDescription: string | undefined |any
+  previousPrice: number | any
+  previousImage: string |any
 }

@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node"
 import jwt from "jsonwebtoken"
-import { CreateProductType, ProductType } from "../../types/product";
+import { CreateProductType, ProductType, UpdateProductType } from '../../types/product';
 
 const productApi = [
                     {
@@ -74,9 +74,9 @@ const handler = [
         )
     }),
     rest.put("https://api.escuelajs.co/api/v1/products/:id", async (req, res, context) => {
-        const update: Partial<ProductType> = await req.json()
-        const { id } = req.params as any
-        const foundProduct = productApi.find(product => product.id === parseInt(id))
+        const update:CreateProductType= await req.json()
+        const { id } = req.params 
+        const foundProduct = productApi.find(product => product.id === Number(id))
         if (foundProduct) {
             return res(
                 context.json({

@@ -1,6 +1,6 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { CreateProductType, ProductType, CreateProductWithImages, UpdateProductType } from '../../types/product';
+import { CreateProductType, ProductType, CreateProductWithImages, UpdateProductType, UpdateValueType } from '../../types/product';
 import axiosInstance from "../../common/axiosInstance";
 
 export const getAllProducts = createAsyncThunk(
@@ -94,9 +94,9 @@ export const createProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
     "updateProduct",
-    async ({ id, update }: UpdateProductType) => { 
+    async (update: UpdateValueType) => { 
         try {
-            const response: AxiosResponse<ProductType, any> = await axiosInstance.put(`products/${id}`, update)
+            const response: AxiosResponse<ProductType, any> = await axiosInstance.put(`products/${update.id}`, update)
             return response.data
         } catch (err) {
             const error = err as AxiosError

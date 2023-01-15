@@ -49,7 +49,7 @@ const Profile = () => {
      navigate(`/profile/${id}`);
    }, [dispatch, id, refresh])
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xl">
       <CssBaseline />
       { !users ? (
         <Loading />
@@ -173,10 +173,10 @@ const Profile = () => {
         </Box>
         <Card
           sx={{
-          maxWidth: 340,
+          maxWidth: 400,
           margin: '10px',
           display: 'flex',
-          height: '200px',
+          height: 'auto',
             }}
           > 
         <CardActionArea >
