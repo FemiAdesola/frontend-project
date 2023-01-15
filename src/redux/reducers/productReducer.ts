@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { ProductType } from "../../types/product";
-import { updateProduct } from '../methods/productMethod';
+import { deleteProduct, updateProduct } from '../methods/productMethod';
 import {
     getAllProducts,
     sortByTitle,
@@ -20,7 +20,6 @@ const productSlice = createSlice({
         sortByName: sortByTitle,
         sortByCategory: sortByCategoryName,
         sortByPrice: sortProductByPrice,
-        
     },
     extraReducers: (build) => {
         build.addCase(getAllProducts.fulfilled, (state, action) => {
@@ -63,6 +62,20 @@ const productSlice = createSlice({
                 return state
             })
             .addCase(updateProduct.pending, (state, action) => {
+                return state
+            })
+            .addCase(deleteProduct.fulfilled, (state, action) => { 
+                return state.filter(item => {
+                    if (item.id !== action.payload?.id) {
+                        return action.payload
+                    }
+                    return state
+                })
+            })
+            .addCase(deleteProduct.rejected, (state, action) => {
+                return state
+            })
+            .addCase(deleteProduct.pending, (state, action) => {
                 return state
             })
     }

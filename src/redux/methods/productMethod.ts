@@ -118,3 +118,22 @@ export const updateProduct = createAsyncThunk(
     }
 
 )
+
+export const deleteProduct = createAsyncThunk(
+    "deletedProduct",
+    async (id:string|undefined) => {
+        try {
+            const response: AxiosResponse<ProductType, any> = await axiosInstance.delete(`products/${id}`)
+            return response.data
+        } catch (err) {
+            const error = err as AxiosError
+            if (error.response) {
+                console.log(error.response.data)
+            } else if (error.request) {
+                console.log(`Error from request: ${error.request}`)
+            } else {
+                console.log(error.config)
+            }
+        }
+    }
+)

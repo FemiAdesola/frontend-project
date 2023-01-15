@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Box, Button, CardActionArea, CssBaseline, Grid, Stack, Paper } from '@mui/material';
+import {Button, CardActionArea, CssBaseline, Grid, Stack, Paper } from '@mui/material';
 
 import { Container} from '@mui/system';
 import axiosInstance from '../../common/axiosInstance';
@@ -12,6 +12,7 @@ import { CartProductType, ProductType } from '../../types/product';
 import { addToCart } from '../../redux/reducers/cartReducer';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import UpdateProduct from './UpdateProduct';
+import { deleteProduct } from '../../redux/methods/productMethod';
 
 const SingleProduct = () => {
   let { id } = useParams()
@@ -34,6 +35,12 @@ const SingleProduct = () => {
     };
   singleProductDetails();
   }, [id]);
+   const deleteProductHandler = () => {
+        dispatch(deleteProduct(id))
+        
+        navigate("/products")
+
+    }
   return (
     <Container component="main" maxWidth="xl">
       <CssBaseline />
@@ -72,9 +79,14 @@ const SingleProduct = () => {
                   </CardContent>
                 </CardActionArea>
             </Card>
-             <Stack sx={{ m: 1, gap: 1 }} >
+            <Stack sx={{ m: 1, gap: 1 }} >
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={onAdd}>Add to cart</Button> 
+              {userInfo ? (    
+              <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={deleteProductHandler}>Delete product</Button>
+                 ) : (  
+                 null
+                )} 
               </Stack>
           </Grid>
               {!userInfo ? (

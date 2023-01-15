@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState} from 'react'
 import {  useForm } from 'react-hook-form'
 import {yupResolver} from "@hookform/resolvers/yup"
 import {
@@ -28,7 +28,7 @@ const Login = () => {
   }
   useEffect(() => {
     if (userInfo)
-    { return navigate('/') };
+    { return navigate('/') }
   }, [navigate, userInfo]);
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/signup";
