@@ -102,7 +102,6 @@ export const updateProduct = createAsyncThunk(
                 title: update.title,
                 price: update.price,
                 description: update.description,
-                images: update.images,
                 }
             )
             return response.data
