@@ -1,7 +1,7 @@
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit"
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
 
-import {  sortByName } from "../../redux/reducers/productReducer"
+import { sortByName } from "../../redux/reducers/productReducer"
 import { getAllProducts, createProduct, updateProduct, createProductWithImages } from '../../redux/methods/productMethod';
 import { createStore, RootState } from "../../redux/store"
 import { CreateProductType, CreateProductWithImages } from '../../types/product';
@@ -26,7 +26,7 @@ describe("Test all the products actions", () => {
     test("Should return initial product state", () => {
         expect(store.getState().productReducer.length).toBe(0)
     })
-    test("Shou get all products", async () => {
+    test("Should get all products", async () => {
         await store.dispatch(getAllProducts())
         expect(store.getState().productReducer.length).toBe(3)
     })

@@ -1,11 +1,10 @@
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit"
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
 
-import { createStore, RootState } from "../../redux/store"
+import { createStore,  RootState } from "../../redux/store"
 import { createCategory, getAllCategories } from '../../redux/methods/categoryMethod';
 import categoryServer from "../shared/categoryServer";
 import { CreateCategoryType } from '../../types/category';
-
 
 let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 
@@ -25,7 +24,7 @@ describe("Test all the categories actions", () => {
     test("Should return initial category state", () => {
         expect(store.getState().categoryReducer.length).toBe(0)
     })
-    test("Shou get all products", async () => {
+    test("Should get all products category", async () => {
         await store.dispatch(getAllCategories())
         expect(store.getState().categoryReducer.length).toBe(4)
     })
