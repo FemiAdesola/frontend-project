@@ -72,31 +72,22 @@ const SingleProduct = () => {
                   </CardContent>
                 </CardActionArea>
             </Card>
-          </Grid>
-          
-              {!userInfo ? (
-              <Stack sx={{ m: 1, gap: 1 }} >
+             <Stack sx={{ m: 1, gap: 1 }} >
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
               <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={onAdd}>Add to cart</Button> 
               </Stack>
-             
-           
+          </Grid>
+              {!userInfo ? (
+             null
             ) : ( 
-                
-                <><>
-                  <Stack sx={{ m: 1, gap: 1 }}>
-                    <Button variant="outlined" sx={{ ml: 2, width: '90%' }} component={Link} to={{ pathname: "/products" }}>Back to productlist</Button>
-                    <Button variant="outlined" sx={{ ml: 2, width: '90%' }} onClick={onAdd}>Add to cart</Button>
-                  </Stack>
-                </><Grid sx={{ ml: 10 }}>
-                    <UpdateProduct
-                      id={products?.id}
-                      previousTitle={products?.title}
-                      previousDescription={products?.description}
-                      previousPrice={products?.price}
-                      previousImage={products?.images} />
-                  </Grid></>
-         
+              <Grid sx={{ ml: 10 }}>
+                <UpdateProduct
+                  id={products?.id}
+                  previousTitle={products?.title}
+                  previousDescription={products?.description}
+                  previousPrice={products?.price}
+                  previousImage={products?.images} />
+                </Grid>
            )} 
           </Grid>
         </Paper> 
