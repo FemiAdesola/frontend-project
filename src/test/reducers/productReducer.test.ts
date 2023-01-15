@@ -2,9 +2,9 @@ import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit"
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore"
 
 import { sortByName } from "../../redux/reducers/productReducer"
-import { getAllProducts, createProduct, updateProduct, createProductWithImages } from '../../redux/methods/productMethod';
+import { getAllProducts, createProduct,createProductWithImages, updateProduct } from '../../redux/methods/productMethod';
 import { createStore, RootState } from "../../redux/store"
-import { CreateProductType, CreateProductWithImages } from '../../types/product';
+import { CreateProductType} from '../../types/product';
 
 import productServer from "../shared/productServer";
 
@@ -59,22 +59,22 @@ describe("Test all the products actions", () => {
         expect(store.getState().productReducer[1].title).toBe("Incredible Rubber Ball")
         expect(store.getState().productReducer[2].title).toBe("Luxurious Concrete Soap")
     })
-    // test("should update available product", async () => {
-    //     await store.dispatch(getAllProducts())
-    //     await store.dispatch(updateProduct(
-    //         {   id:1,
-    //             update: {
-    //                 title: "Luxurious Concrete",
-    //             price: 500,
-    //             description: "Test update",
-    //             images: [],
-    //            }
-    //         }
-    //     ))
-    //     expect(store.getState().productReducer.find(product => product.id === 1)?.title).toBe("Luxurious Concrete")
-    //     expect(store.getState().productReducer.find(product => product.id === 1)?.price).toBe(500)
-    //     expect(store.getState().productReducer.find(product => product.id === 1)?.description).toBe("Test update")
-    // })
+    test("should update available product", async () => {
+        await store.dispatch(getAllProducts())
+        await store.dispatch(updateProduct(
+            {   id:1,
+              
+                    title: "Luxurious Concrete",
+                price: 500,
+                description: "Test update",
+                images: [],
+               
+            }
+        ))
+        expect(store.getState().productReducer.find(product => product.id === 1)?.title).toBe("Luxurious Concrete")
+        expect(store.getState().productReducer.find(product => product.id === 1)?.price).toBe(500)
+        expect(store.getState().productReducer.find(product => product.id === 1)?.description).toBe("Test update")
+    })
     test("should create product with form and images", async () => {
         const image1: File = {
             lastModified: 0,

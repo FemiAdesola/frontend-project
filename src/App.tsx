@@ -1,6 +1,7 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import "./App.css"
+
 import Home from './pages/Home';
 import SingleProduct from './components/product/SingleProduct';
 import Products from './components/product/Products';
@@ -9,7 +10,6 @@ import Layout from './pages/Layout';
 import Cart from './components/cart/Cart';
 import Login from './components/user/Login';
 import SignUp from './components/user/SignUp';
-
 import UserList from './components/user/UserList';
 import Profile from './pages/Profile';
 import UpdateProduct from './components/product/UpdateProduct';

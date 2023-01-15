@@ -51,7 +51,7 @@ const UpdateProduct = ({id, previousTitle, previousDescription, previousImage, p
           navigate("/products");
         }
     });
-   navigate("/products")
+   navigate(`/products`)
   }
   useEffect(() => {
     if (getUrlImages) {

@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node"
 import jwt from "jsonwebtoken"
-import { CreateProductType, ProductType, UpdateProductType } from '../../types/product';
+import { CreateProductType} from '../../types/product';
 
 const productApi = [
                     {

@@ -16,8 +16,6 @@ import { UserForm } from '../../types/user';
 import { SignUpSchema } from '../../formvalidation/signUpSchema';
 import { createUserWithSignUp } from '../../redux/methods/userMethod';
 
-
-
 const SignUp = (role:UserForm) =>  {
   const dispatch = useAppDispatch()
   const navigate = useNavigate();
@@ -150,4 +148,5 @@ const SignUp = (role:UserForm) =>  {
     </Container>
   );
 }
+
 export default SignUp

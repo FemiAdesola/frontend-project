@@ -49,13 +49,13 @@ const Profile = () => {
      navigate(`/profile/${id}`);
    }, [dispatch, id, refresh])
   return (
-    <Container component="main" maxWidth="xl">
+    <Container component="main" maxWidth="md">
       <CssBaseline />
       { !users ? (
         <Loading />
         ) : (
-        <Grid container justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <Box
+        <Grid sx={{display:"flex"}}  container justifyContent="center" alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Box
             sx={{
               marginTop: 8,
               display: 'flex',
@@ -170,11 +170,11 @@ const Profile = () => {
              Update
             </Button>
           </Box>
-        </Box>
+            </Box>
+            <Box sx={{ml:10, mt:20}}>
         <Card
           sx={{
-          maxWidth: 400,
-          margin: '10px',
+          maxWidth: 600,
           display: 'flex',
           height: 'auto',
             }}
@@ -183,26 +183,26 @@ const Profile = () => {
         <CardMedia
           component="img"
           sx={{
-            width:"100px",
-            height: '100px',
-            borderRadius:'50%',
+            width:"100%",
+            height: 'auto',
             objectFit: 'cover',
-            ml:7
           }}
           image={users.avatar}
         />
         <CardContent>
-          <Typography variant="h6" component="div">{users.name}</Typography>
-          <Typography variant="subtitle1" sx={{display:'flex', gap:'5px'}} color="text.secondary">
+          <Typography variant="h3" component="div">{users.name}</Typography>
+          <Typography  sx={{display:'flex', gap:'5px', fontSize:'50px'}} color="text.secondary">
             <Typography  color="lightcoral">Email: {users.email} </Typography>
           </Typography>
           <Typography color="blue" variant="body1" component="div">Role: {users.role}</Typography>
         </CardContent>
       </CardActionArea>
       </Card>
+    </Box>
     </Grid>
-    )}
-    </Container>
+
+  )}
+  </Container>
   )
 }
 

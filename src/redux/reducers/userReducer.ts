@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
-import { UserLogout, UserReducer} from '../../types/user'; 
+import { UserReducer} from '../../types/user'; 
 import { createUserWithSignUp, getAllUsers, getUserBydId, loginUser, userAuthentication } from "../methods/userMethod";
 
 const initialState: UserReducer = {
@@ -12,8 +12,6 @@ const userSlice = createSlice({
     name: "userSlice",
     initialState,
     reducers: {
-        // userLogout: (state: UserLogout) => {
-        //  state.userInfo = null;
          userLogout: (state) => {
             state = initialState
             return state

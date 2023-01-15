@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useDeferredValue, useMemo } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import Grid from '@mui/material/Grid';
 import { Box, Button, Container, CssBaseline, MenuItem, Select, TablePagination} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,7 +10,7 @@ import { getAllProducts, } from '../../redux/methods/productMethod';
 import ProductCard from './ProductCard';
 import { SearchIconWrapper, SearchMenu, StyledInputBase } from '../features/SearchInput';
 import Loading from '../loading/Loading';
-import UpdateProduct from './UpdateProduct';
+
 
 const Products = () => {
   const [search, setSearch] = useState("")

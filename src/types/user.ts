@@ -5,8 +5,7 @@ export interface UserType  extends UserForm{
     avatar: string
     confirm_password: undefined
 }
-
-export interface UserReducer extends UserLogout{
+export interface UserReducer{
     userList: UserType[]
     currentUser?: UserType
     access_token?: string
@@ -28,7 +27,6 @@ export interface CreateUser{
     role: Role
     avatar: string
 }
-
 export interface UserForm{
     email: string
     password: string
@@ -36,8 +34,4 @@ export interface UserForm{
     confirm_password?: string
     avatar: File[] | string
     role: Role
-}
-
-export interface UserLogout{
-    userInfo?: UserType | null
 }

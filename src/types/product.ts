@@ -1,5 +1,4 @@
 import { CategoryType} from './category';
-
 export interface ProductType {
     id: number | string;
     title: string;
@@ -8,7 +7,6 @@ export interface ProductType {
     category: CategoryType; 
     images: string[]
 }
-
 export interface CreateProductType {
     title: string
     description: string
@@ -17,7 +15,6 @@ export interface CreateProductType {
     images: string[]
     id?: number
 }
-
 export interface CreateProductWithImages{
     images:  File[]
     productCreate: CreateProductType
@@ -27,7 +24,6 @@ export interface UpdateProductType{
     id:number | string
     update: Partial<ProductType>
 }
-
 export interface CartProductType extends ProductType{
     amount: number
 }

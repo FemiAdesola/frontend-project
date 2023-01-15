@@ -1,6 +1,6 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { CreateProductType, ProductType, CreateProductWithImages, UpdateProductType, UpdateValueType } from '../../types/product';
+import { CreateProductType, ProductType, CreateProductWithImages, UpdateValueType } from '../../types/product';
 import axiosInstance from "../../common/axiosInstance";
 
 export const getAllProducts = createAsyncThunk(
@@ -49,8 +49,6 @@ export const sortProductByPrice = (state:ProductType[], action:PayloadAction<"as
     }
 }
 
-
-
 export const createProductWithImages = createAsyncThunk(
     "createProductWithImages",
     async ({ images, productCreate }: CreateProductWithImages) => {
@@ -91,7 +89,6 @@ export const createProduct = createAsyncThunk(
         }
     }
 )
-
 
 export const updateProduct = createAsyncThunk(
     "updateProduct",
