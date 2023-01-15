@@ -10,12 +10,6 @@ import { AsyncThunkAction, Dispatch, AnyAction } from '@reduxjs/toolkit';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const UserCard = ({ email, name, role, avatar }: UserType) => {
-  //  const navigate = useNavigate();
-  // const { id } = useParams();
-  //  useEffect(() => {
-  //    dispatch(getUserBydId(id));
-  //   //  navigate(`/users/${id}`);
-  //  }, [dispatch, id])
   return (
      <Card sx={{
           maxWidth: 340,

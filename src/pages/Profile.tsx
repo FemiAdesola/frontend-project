@@ -45,7 +45,7 @@ const Profile = () => {
    }
   
    useEffect(() => {
-    //  dispatch(getUserBydId(id));
+     dispatch(getUserBydId(id));
      navigate(`/profile/${id}`);
    }, [dispatch, id, refresh])
   return (

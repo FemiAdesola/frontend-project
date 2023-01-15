@@ -12,9 +12,12 @@ const userSlice = createSlice({
     name: "userSlice",
     initialState,
     reducers: {
-        userLogout: (state: UserLogout) => {
-         state.userInfo = null;
-    },
+        // userLogout: (state: UserLogout) => {
+        //  state.userInfo = null;
+         userLogout: (state) => {
+            state = initialState
+            return state
+        }
     },
     extraReducers: (build) => {
         build.addCase(getAllUsers.fulfilled, (state, action) => {

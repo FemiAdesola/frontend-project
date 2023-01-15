@@ -47,7 +47,7 @@ profile page is only available when user logins, and user can chekout from there
 3. Redux store were created for following features:
     - product reducer: get all products, find a single products, sort products by
     categories, sort products by price. 
-    - Create, update  a product and update features only for admin of the webapp. 
+    - CRUD [Create, read, update, delete]  a product and update features only for admin of the webapp. 
     - user reducer: Register and Login
     - cart reducer: add product to cart, remove products, update products's quantity in cart
 4.  Routes to the following are private: route to user profile page is not accessible if user has not logged in.
@@ -55,6 +55,7 @@ profile page is only available when user logins, and user can chekout from there
 6. Theme was used for light and dark mode 
 7. Pagination was created
 8. Debounce was setup for search input
+9. Creates Redux persistent store for storing data in Redux
 
 ## Getting started
 ### Home page
@@ -96,6 +97,10 @@ When the user signs in, the user can perform activities such as create product, 
 
 - User's profile
 ![UserProfile](/img/Profile.png)
+
+### Update and Delete 
+- Login users is able to update their profile, delete products and update product
+![UpdateProfile](/img/Update.png)
 
 ### Reducer Test result
 
