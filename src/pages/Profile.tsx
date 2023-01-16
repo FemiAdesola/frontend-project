@@ -37,7 +37,7 @@ const Profile = () => {
       avatar : data.avatar
     };
     axiosInstance
-      .put(`/users/${users?.id}`, update)
+      .put(`/users/${users}`, update)
       .then((res) => {
         setRefresh((prev) => (prev = !prev));
       })
@@ -46,8 +46,8 @@ const Profile = () => {
   
    useEffect(() => {
      dispatch(getUserBydId(id));
-     navigate(`/profile/${id}`);
-   }, [dispatch, id, refresh])
+     navigate(`/profile/${users?.id}`);
+   }, [dispatch, users, refresh])
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />

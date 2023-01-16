@@ -28,7 +28,9 @@ const Login = () => {
   }
   useEffect(() => {
     if (userInfo)
-    { return navigate('/') }
+    {
+      return navigate('/')
+    }
   }, [navigate, userInfo]);
   const redirectInUrl = new URLSearchParams().get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/signup";

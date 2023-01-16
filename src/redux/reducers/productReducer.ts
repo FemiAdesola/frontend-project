@@ -32,7 +32,7 @@ const productSlice = createSlice({
             return action.payload
              })
             .addCase(createProduct.fulfilled, (state, action) => {
-            if (action.payload instanceof AxiosError) {
+            if (action.payload) {
                 state.push(action.payload)
             } else {
                 return state

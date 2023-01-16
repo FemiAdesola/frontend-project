@@ -8,7 +8,7 @@ import { CreateProductType} from '../../types/product';
 
 import productServer from "../shared/productServer";
 
-let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
+let store: ToolkitStore<RootState, AnyAction,  [ThunkMiddleware<RootState, AnyAction, undefined>]>
 
 beforeAll(() => {
     productServer.listen()
