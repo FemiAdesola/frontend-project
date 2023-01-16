@@ -41,7 +41,7 @@ const Header = (props: Props) => {
         setMobileOpen((prevState) => !prevState);
     };
     const colorToggle = (theme: { darkTheme  : boolean; }) => {
-        return theme.darkTheme   ? "#303b47" : "#000000";
+        return theme.darkTheme   ?   "#000000": "#1b1b1b";
     };
     const onLogout = () => { 
         dispatch(userLogout())
@@ -117,16 +117,16 @@ const Header = (props: Props) => {
     return (
     <Box
         sx={{
-          height: "92px",
+          height: "200px",
           justifyContent: "left",
           alignItems: "left",
           paddingLeft: "57px",
-                paddingTop: "7px",
+          paddingTop: "7px",
            bgcolor: 'background.paper' 
         }}
         >
-        <AppBar component="nav" sx={{backgroundColor: colorToggle(theme)}}>   
-            <Toolbar>       
+        <AppBar component="nav" sx={{backgroundColor: colorToggle(theme), height:'150px'}}>   
+            <Toolbar sx={{marginTop:"40px", fontSize:20}}>       
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
