@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 
 import { CategoryType } from "../../types/category";
 import { createCategory, getAllCategories } from '../methods/categoryMethod';
@@ -11,18 +12,12 @@ const categorySlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getAllCategories.fulfilled, (state, action) => {
-            if (action.payload && "message" in action.payload) {
+            if (action.payload instanceof AxiosError) {
                 return state
             } else if (!action.payload) {
                 return state
             }
                 return action.payload
-            })
-            .addCase(getAllCategories.rejected, (state, action) => {
-                return state
-            })
-            .addCase(getAllCategories.pending, (state, action) => {
-                return state
             })
             .addCase(createCategory.fulfilled, (state, action) => {
                 if (action.payload) {

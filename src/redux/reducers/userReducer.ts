@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+
 import { UserReducer} from '../../types/user'; 
 import { createUserWithSignUp, getAllUsers, getUserBydId, loginUser, userAuthentication } from "../methods/userMethod";
 

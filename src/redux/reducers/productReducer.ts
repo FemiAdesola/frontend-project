@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 
 import { ProductType } from "../../types/product";
 import { deleteProduct, updateProduct } from '../methods/productMethod';
@@ -23,21 +24,15 @@ const productSlice = createSlice({
     },
     extraReducers: (build) => {
         build.addCase(getAllProducts.fulfilled, (state, action) => {
-            if (action.payload && "message" in action.payload) {
+            if (action.payload instanceof AxiosError) {
                 return state
             } else if (!action.payload) {
                 return state
             }
             return action.payload
              })
-            .addCase(getAllProducts.rejected, (state, action) => {
-                return state
-            })
-            .addCase(getAllProducts.pending, (state, action) => {
-                return state
-            })
             .addCase(createProduct.fulfilled, (state, action) => {
-            if (action.payload) {
+            if (action.payload instanceof AxiosError) {
                 state.push(action.payload)
             } else {
                 return state
@@ -58,12 +53,6 @@ const productSlice = createSlice({
                 return product
                 })
             })
-            .addCase(updateProduct.rejected, (state, action) => {
-                return state
-            })
-            .addCase(updateProduct.pending, (state, action) => {
-                return state
-            })
             .addCase(deleteProduct.fulfilled, (state, action) => { 
                 return state.filter(item => {
                     if (item.id !== action.payload?.id) {
@@ -71,12 +60,6 @@ const productSlice = createSlice({
                     }
                     return state
                 })
-            })
-            .addCase(deleteProduct.rejected, (state, action) => {
-                return state
-            })
-            .addCase(deleteProduct.pending, (state, action) => {
-                return state
             })
     }
 

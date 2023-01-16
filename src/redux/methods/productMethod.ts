@@ -1,5 +1,6 @@
 import { createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axios, { AxiosError, AxiosResponse } from "axios";
+
 import { CreateProductType, ProductType, CreateProductWithImages, UpdateValueType } from '../../types/product';
 import axiosInstance from "../../common/axiosInstance";
 
