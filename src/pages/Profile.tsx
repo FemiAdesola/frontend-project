@@ -23,7 +23,7 @@ import Loading from '../components/loading/Loading';
 const Profile = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate();
-  const { id } = useParams();
+  // const { id } = useParams();
   const [refresh, setRefresh] = useState<boolean>(false);
   const  users = useAppSelector((state) => state.userReducer.currentUser);
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
@@ -45,8 +45,8 @@ const Profile = () => {
    }
   
    useEffect(() => {
-     dispatch(getUserBydId(id));
-     navigate(`/profile/${users?.id}`);
+    //  dispatch(getUserBydId(id));
+     navigate(`/profile`);
    }, [dispatch, users, refresh])
   return (
     <Container component="main" maxWidth="md">

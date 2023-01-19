@@ -95,7 +95,12 @@ const Header = (props: Props) => {
                 <ListItemButton component={Link} to="users" sx={{ textAlign: 'center' }}>
                   Users
                 </ListItemButton>
-            </ListItem>
+                </ListItem>
+                <ListItem disablePadding>
+                <ListItemButton component={Link} to="profile" sx={{ textAlign: 'center' }}>
+                 Profile
+                </ListItemButton>
+                </ListItem>
             <ListItem disablePadding>
                 <ListItemButton component={Link} to="cart" sx={{ textAlign: 'center' }}>
                   <Badge color="secondary" badgeContent={cartItems.length}>
@@ -239,7 +244,7 @@ const Header = (props: Props) => {
                                 </Box>
                                 <Box
                                     component={Link}
-                                    to={{ pathname: `/profile/${userInfo?.id}` }}
+                                    to={{ pathname: `profile` }}
                                     marginRight={5}
                                     sx={{
                                         textDecoration: 'none',
@@ -253,7 +258,6 @@ const Header = (props: Props) => {
                                     <Button
                                    onClick={onLogout}
                                     sx={{mt:-1, color:"inherit"}}
-                                    
                                     >
                                     Logout
                                 </Button>
