@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, Link, Container, Grid, List, ListItem, Paper, TextField, Typography, Divider, CssBaseline } from '@mui/material'
+import { Box, Link, Container, Grid, List, ListItem, Paper, TextField, Typography, CssBaseline } from '@mui/material'
 
 const Footer = () => {
   return (

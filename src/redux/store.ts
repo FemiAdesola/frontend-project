@@ -24,9 +24,23 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const createStore = () => {
   return configureStore({
-    reducer: persistedReducer
+    reducer: persistedReducer,
+    // middleware: (getDefaultMiddleware) =>
+    // getDefaultMiddleware({
+    //   serializableCheck: false,
+    // }),
   })
 }
+
+  // const store = configureStore({
+  //   reducer: persistedReducer,
+  //   middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: false,
+  //   }),
+  // })
+
+
 const store = createStore()
 export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;

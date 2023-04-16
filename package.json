@@ -40,11 +40,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "compile": "sass --watch src/scss/App.scss:src/App.css",
-    "deploy": "npm run build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "jest": {
     "transformIgnorePatterns": [

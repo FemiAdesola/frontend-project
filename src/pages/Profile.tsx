@@ -23,7 +23,7 @@ import Loading from '../components/loading/Loading';
 const Profile = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate();
-  // const { id } = useParams();
+  const { id } = useParams();
   const [refresh, setRefresh] = useState<boolean>(false);
   const  users = useAppSelector((state) => state.userReducer.currentUser);
   const { handleSubmit, register, formState: { errors } } = useForm<UserForm>({
@@ -37,16 +37,17 @@ const Profile = () => {
       avatar : data.avatar
     };
     axiosInstance
-      .put(`/users/${users}`, update)
+      .put(`/users/${users?.id}`, update)
       .then((res) => {
         setRefresh((prev) => (prev = !prev));
       })
       .catch((err) => (console.log(err)));
+      navigate(`/users`);
    }
   
    useEffect(() => {
-    //  dispatch(getUserBydId(id));
-     navigate(`/profile`);
+     dispatch(getUserBydId(id));
+     navigate(`/profile/`);
    }, [dispatch, users, refresh])
   return (
     <Container component="main" maxWidth="md">
